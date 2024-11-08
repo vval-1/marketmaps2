@@ -1,3 +1,4 @@
 app.py 
 vish/
 *.DS_store
+__pycache__/

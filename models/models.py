@@ -38,3 +38,24 @@ class Users(db.Model):
         self.username = username
         self.password = password
         self.userID = userID
+
+class Clients(db.Model):
+    __tablename__ = 'clients'
+
+    id = db.Column(db.Integer, primary_key = True)
+    contact = db.Column(db.String, nullable=False)
+    city = db.Column(db.String(30), nullable=False)
+    state = db.Column(db.String(30), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    bedrooms = db.Column(db.Float, nullable=False)
+    bathrooms = db.Column(db.Float, nullable=False)
+    comments = db.Column(db.Text, nullable=True) 
+
+    def __init__(self, contact, city, state, price, bedrooms, bathrooms, comments=None):
+        self.contact = contact
+        self.city = city
+        self.state = state
+        self.price = price
+        self.bedrooms = bedrooms
+        self.bathrooms = bathrooms
+        self.comments = comments
