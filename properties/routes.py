@@ -11,6 +11,7 @@ def addproperties():
         address2 = request.form.get('address2')
         city = request.form.get('city')
         state = request.form.get('state')
+        zipcode = float(request.form.get('zipcode'))
         price = float(request.form.get('price'))
         bedrooms = float(request.form.get('bedrooms'))
         bathrooms = float(request.form.get('bathrooms'))
@@ -21,6 +22,7 @@ def addproperties():
             address2 = address2,
             city = city,
             state = state,
+            zipcode = zipcode,
             price = price,
             bedrooms = bedrooms,
             bathrooms = bathrooms,
@@ -29,7 +31,7 @@ def addproperties():
 
         db.session.add(new_property)
         db.session.commit()
-        return redirect(url_for('search'))
+        return render_template('search.html')
     return render_template('addproperty.html')
 
 @properties.route('/addclient', methods=['GET', 'POST'])
@@ -55,9 +57,19 @@ def addclients():
 
         db.session.add(new_client)
         db.session.commit()
-        return redirect(url_for('search'))
+        return redirect(render_template('search.html'))
     return render_template('addclient.html')
 
-@properties.route('/portfolio', methods=['GET', 'POST'])
-def portflio():
-    return "This is your Portfolio!", 200
+@properties.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        city = request.form.get('city')
+        zipcode = request.form.get('zipcode')
+        # price = request.form.get('price')
+        bedrooms = request.form.get('bedrooms')
+        bathrooms = request.form.get('bathrooms')
+
+        results = properties.query.all()
+        print(results)
+    
+    return render_template('search.html')

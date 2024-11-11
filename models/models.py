@@ -9,16 +9,18 @@ class Properties(db.Model):
     address2 = db.Column(db.String(100), nullable=True)
     city = db.Column(db.String(30), nullable=False)
     state = db.Column(db.String(30), nullable=False)
+    zipcode = db.Column(db.Float, nullable=False)
     price = db.Column(db.Float, nullable=False)
     bedrooms = db.Column(db.Float, nullable=False)
     bathrooms = db.Column(db.Float, nullable=False)
     comments = db.Column(db.Text, nullable=True)
     
-    def __init__(self, address1, city, state, price, bedrooms, bathrooms, address2=None, comments=None):
+    def __init__(self, address1, city, state, zipcode, price, bedrooms, bathrooms, address2=None, comments=None):
         self.address1 = address1
         self.address2 = address2
         self.city = city
         self.state = state
+        self.zipcode = zipcode
         self.price = price
         self.bedrooms = bedrooms
         self.bathrooms = bathrooms

@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Property Submission</title>
+</head>
+<body>
+    {% include 'navbar.html' %}
+</body>
     <style>
-        /* Uniform styling */
+        /* Uniform styling */ 
         * {
             box-sizing: border-box;
             margin: 0;
@@ -14,7 +18,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0; /* Light gray background */
+            background-color: #8bb2dc; 
         }
 
         form {
@@ -68,19 +72,21 @@
             -webkit-appearance: textfield; /* For Safari */
         }
     </style>
-</head>
-<body>
+
+<div>
     <form action="/addproperty" method="post">
         <h2 style="text-align: center; margin-bottom: 20px;">New Property Submission</h2>
         <input type="text" id="address1" name="address1" placeholder="Address Line 1" required>
         <input type="text" id="address2" name="address2" placeholder="Address Line 2 (optional)">
         <input type="text" id="city" name="city" placeholder="City" required>
         <input type="text" id="state" name="state" placeholder="State" required>
+        <input type="number" id="zipcode" name="zipcode" placeholder="Zip Code" required>
         <input type="number" id="price" name="price" placeholder="Enter property price" required>
         <input type="number" id="bedrooms" name="bedrooms" placeholder="Enter number of bedrooms" required>
         <input type="number" id="bathrooms" name="bathrooms" placeholder="Enter number of bathrooms" required>
         <textarea id="description" name="comments" placeholder="Enter property description" ></textarea>
         <input type="submit" value="Submit Property" style="display: block; margin: 0 auto;">
     </form>
-</body>
-</html>
+</div>
+
+  

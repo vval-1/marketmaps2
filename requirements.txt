@@ -1,3 +1,4 @@
+# to enter the virtual environment on macOS (zsh) - source virtual/bin/activate
 flask
 sqlalchemy
 psycopg2-binary
