@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login</title>
+  <title>Signup</title>
   <!-- Custom CSS -->
   <style>
-    /* Same CSS as before */
+    /* Same CSS as login.html */
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
     * {
       margin: 0;
@@ -53,14 +53,6 @@
     .form input:focus {
       box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
     }
-    .form a {
-      font-size: 16px;
-      color: #8bb2dc;
-      text-decoration: none;
-    }
-    .form a:hover {
-      text-decoration: underline;
-    }
     .form input.button {
       color: #fff;
       background: #8bb2dc;
@@ -88,18 +80,19 @@
   </style>
 </head>
 <body>
-  {% include 'navbar.html'%}
+    {% include 'navbar.html' %}
   <div class="container">
     <div class="form">
-      <header>Login</header>
-      <form action="/login" method="POST">
+      <header>Signup</header>
+      <form action="/register" method="POST">
         {{ form.hidden_tag()}}
         {{ form.email(class="input", placeholder="Enter your email")}}
-        {{ form.password(class="input", placeholder="Enter your password")}}
+        {{ form.username(class="input", placeholder="Create your username")}}
+        {{ form.password(class="input", placeholder="Create your password")}}
         {{ form.submit }}
       </form>
       <div class="signup">
-        <span>Don't have an account? <a href="/register">Signup</a></span>
+        <span>Already have an account? <a href="/login">Login</a></span>
       </div>
     </div>
   </div>

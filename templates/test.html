@@ -3,115 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Search</title>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #8bb2dc;
-            height: 100vh;
-            margin: 0;
-        }
-        
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 25vh;
-        } 
-        
-        .search-container {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 0px; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 100%;
-            margin-top: 0px;
-        } 
-        
-        .search-form {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            border-radius: 50px; /* Circular border */
-            background-color: #f9f9f9;
-        }
-        
-        .form-group {
-            display: flex;
-            width: 100%;
-        }
-        
-        .form-group input[type="text"],
-        .form-group input[type="number"] {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            width: 25%; /* Equal width for each field */
-            margin-right: 10px;
-        }
-        
-        .form-group select {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            width: 25%; /* Equal width for each field */
-            margin-right: 10px;
-        }
-        
-        .form-group button[type="submit"] {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .form-group button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    <link rel = 'stylesheet' type="text/css" href="{{url_for('static', filename='test.css')}}">
+    <title>My Portfolio</title>
 </head>
 <body>
-    {% include 'navbar.html' %}
-    <div class="container">
-        <div class="search-container">
-            <form class="search-form">
-                <div class="form-group">
-                    <input type="text" id="city" name="city" placeholder="City">
-                    <input type="text" id="zipcode" name="zipcode" placeholder="Zip Code">
-                    <select id="price" name="price">
-                        <option value="">Select Price</option>
-                        <option value="0-20000">$0 - $20,000</option>
-                        <option value="20000-40000">$20,000 - $40,000</option>
-                        <option value="40000-60000">$40,000 - $60,000</option>
-                    </select>                 
-                    <select id="bedrooms" name="bedrooms">
-                        <option value="">Bedrooms</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4+">4+</option>
-                    </select>    
-                    <select id="bathrooms" name="bathrooms">
-                        <option value="">Bathrooms</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4+">4+</option>
-                    </select>
-                    <button type="submit">Search</button>
-                </div>
-            </form>
+
+<div class="container">
+    <!-- Header Section -->
+    <div class="header">
+        <h1>My Portfolio</h1>
+        <div class="buttons">
+            <button class="match-btn">Match Properties</button>
+            <button class="delete-btn">Delete</button>
         </div>
     </div>
+
+    <!-- Property Listing (Example with 1 property) -->
+    <div class="property-card">
+        <h2>Property Address: 123 Main St, City, State</h2>
+        <div class="property-details">
+            <p><strong>Price:</strong> $500,000</p>
+            <p><strong>Type:</strong> Residential</p>
+            <p><strong>Features:</strong> 3 Bed, 2 Bath, 1,800 sq ft</p>
+        </div>
+        <div class="property-actions">
+            <button class="delete-btn">Delete Property</button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
+

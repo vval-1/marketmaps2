@@ -1,10 +1,12 @@
-from flask import render_template, request, Blueprint, redirect, url_for
+from flask import render_template, request, Blueprint, redirect, url_for, session
 from models import db
 from models.models import Properties, Clients, Users
+from flask_login import LoginManager, login_required
 
 properties = Blueprint("properties", __name__, static_folder="static", template_folder="templates")
     
 @properties.route('/addproperty', methods=['GET', 'POST'])
+@login_required
 def addproperties():
     if request.method == 'POST':
         address1 = request.form.get('address1')
@@ -26,15 +28,16 @@ def addproperties():
             price = price,
             bedrooms = bedrooms,
             bathrooms = bathrooms,
-            comments = comments
+            comments = comments,
+            user_id = session['user_id']
         )
-
         db.session.add(new_property)
         db.session.commit()
         return render_template('search.html')
     return render_template('addproperty.html')
 
 @properties.route('/addclient', methods=['GET', 'POST'])
+@login_required
 def addclients():
     if request.method == 'POST':
         contact = request.form.get('contact')
@@ -52,7 +55,8 @@ def addclients():
             price = price,
             bedrooms = bedrooms,
             bathrooms = bathrooms,
-            comments = comments
+            comments = comments,
+            user_id = session['user_id']
         )
 
         db.session.add(new_client)
@@ -65,11 +69,10 @@ def search():
     if request.method == 'POST':
         city = request.form.get('city')
         zipcode = request.form.get('zipcode')
-        # price = request.form.get('price')
+        price = request.form.get('price')
         bedrooms = request.form.get('bedrooms')
         bathrooms = request.form.get('bathrooms')
-
-        results = properties.query.all()
-        print(results)
+        results = Properties.query.all()
+        return render_template('search.html', results = results)
     
     return render_template('search.html')

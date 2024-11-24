@@ -1,9 +1,64 @@
-from flask import render_template, request, Blueprint, redirect, url_for
+from flask import render_template, request, Blueprint, redirect, url_for, session 
 from models import db
 from models.models import Users
+from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import InputRequired, Length, ValidationError
+from flask_bcrypt import Bcrypt
 
 authentication = Blueprint("authentication", __name__, static_folder="static", template_folder="templates")
 
+
+class RegisterForm(FlaskForm):
+    email = StringField(validators=[InputRequired()])
+    username = StringField(validators=[InputRequired()])
+    password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)])
+    submit = SubmitField("Register")
+        
+class LoginForm(FlaskForm):
+    email = StringField(validators=[InputRequired()])
+    password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)])
+    submit = SubmitField("Login")
+
 @authentication.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    from app import bcrypt #Fix circular import when possible 
+    if form.validate_on_submit():
+        user = Users.query.filter_by(email=form.email.data).first()
+        if user:
+            if bcrypt.check_password_hash(user.password, form.password.data):
+                login_user(user)
+                session['user_id'] = user.id
+                session['user_username'] = user.username
+                return redirect('/home')
+    return render_template('login.html', form=form)
+
+@authentication.route('/register', methods=['GET', 'POST'])
+def register():
+    form = RegisterForm()
+    from app import bcrypt #Fix circular import when possible 
+    if form.validate_on_submit():
+        existing_user_email = Users.query.filter_by(email=form.email.data).first()
+        if existing_user_email:
+            return redirect('/login')
+        hashed_password = bcrypt.generate_password_hash(form.password.data)
+        decoded_password = hashed_password.decode('utf-8') if isinstance(hashed_password, bytes) else hashed_password
+        new_user = Users(email=form.email.data, username=form.username.data, password=decoded_password)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect('/login')
+    return render_template('register.html', form=form)
+
+@authentication.route('/logout')
+@login_required
+def logout():
+    session.clear() 
+    logout_user()
+    return redirect('/')
+
+@authentication.route('/home')
+@login_required
+def home():
+    return render_template('home.html')

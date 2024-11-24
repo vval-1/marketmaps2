@@ -3,3 +3,8 @@ flask
 sqlalchemy
 psycopg2-binary
 flask-sqlalchemy
+flask-login
+flask-bcrypt
+flask-wtf
+wtforms
+email-validator
