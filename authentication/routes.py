@@ -32,7 +32,7 @@ def login():
                 login_user(user)
                 session['user_id'] = user.id
                 session['user_username'] = user.username
-                return redirect('/home')
+                return redirect('/auth/home')
     return render_template('login.html', form=form)
 
 @authentication.route('/register', methods=['GET', 'POST'])
@@ -42,13 +42,13 @@ def register():
     if form.validate_on_submit():
         existing_user_email = Users.query.filter_by(email=form.email.data).first()
         if existing_user_email:
-            return redirect('/login')
+            return redirect('/auth/login')
         hashed_password = bcrypt.generate_password_hash(form.password.data)
         decoded_password = hashed_password.decode('utf-8') if isinstance(hashed_password, bytes) else hashed_password
         new_user = Users(email=form.email.data, username=form.username.data, password=decoded_password)
         db.session.add(new_user)
         db.session.commit()
-        return redirect('/login')
+        return redirect('/auth/login')
     return render_template('register.html', form=form)
 
 @authentication.route('/logout')

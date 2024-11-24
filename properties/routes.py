@@ -3,9 +3,9 @@ from models import db
 from models.models import Properties, Clients, Users
 from flask_login import LoginManager, login_required
 
-properties = Blueprint("properties", __name__, static_folder="static", template_folder="templates")
+properties = Blueprint("properties", __name__, template_folder="templates", static_folder="static")
     
-@properties.route('/addproperty', methods=['GET', 'POST'])
+@properties.route('/add-property', methods=['GET', 'POST'])
 @login_required
 def addproperties():
     if request.method == 'POST':
@@ -36,7 +36,7 @@ def addproperties():
         return render_template('search.html')
     return render_template('addproperty.html')
 
-@properties.route('/addclient', methods=['GET', 'POST'])
+@properties.route('/add-client', methods=['GET', 'POST'])
 @login_required
 def addclients():
     if request.method == 'POST':

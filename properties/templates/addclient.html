@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='addclient.css')}}">
     <div id = "navbar"></div>
     <title>New Client Submission</title>
     <body>
@@ -10,67 +11,7 @@
     </body>
     <style>
         /* Uniform styling */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #8bb2dc;
-        }
-
-        form {
-            width: 50%;
-            margin: 40px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff; /* White form background */
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px; /* Larger font size */
-        }
-
-        input[type="submit"] {
-            background-color: #000; /* Black button background */
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px; /* Larger font size */
-        }
-
-        input[type="submit"]:hover {
-            background-color: #333; /* Darker hover effect */
-        }
-
-        /* Placeholder text styling */
-        ::placeholder {
-            color: #999;
-            font-size: 16px;
-        }
-
-        /* Remove spinner for number inputs */
-        input[type="number"]::-webkit-inner-spin-button,
-        input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-
-        input[type="number"] {
-            appearance: textfield;
-            -webkit-appearance: textfield; /* For Safari */
-        }
+        
     </style>
 <div>
     <form action="/addclient" method="post">
