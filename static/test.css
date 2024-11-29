@@ -1,70 +1,62 @@
-body {
-    font-family: Arial, sans-serif;
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #f4f4f9;
 }
-.container {
-    width: 90%;
-    max-width: 800px;
-    margin: auto;
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #8bb2dc;
 }
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+
+section {
+    width: 70%;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff; /* White form background */
+}
+
+input, textarea {
+    width: 100%;
     padding: 10px;
-    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px; /* Larger font size */
 }
-.header h1 {
-    font-size: 24px;
+
+input[type="submit"] {
+    background-color: #000; /* Black button background */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px; /* Larger font size */
+}
+
+input[type="submit"]:hover {
+    background-color: #333; /* Darker hover effect */
+}
+
+/* Placeholder text styling */
+::placeholder {
+    color: #999;
+    font-size: 16px;
+}
+
+/* Remove spinner for number inputs */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
     margin: 0;
 }
-.header .buttons {
-    display: flex;
-    gap: 10px;
+
+input[type="number"] {
+    appearance: textfield;
+    -webkit-appearance: textfield; /* For Safari */
 }
-.header button {
-    padding: 8px 12px;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-}
-.delete-btn {
-    background-color: #e63946;
-}
-.match-btn {
-    background-color: #457b9d;
-}
-.property-card {
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-bottom: 15px;
-}
-.property-details {
-    margin: 10px 0;
-    font-size: 16px;
-    color: #333;
-}
-.property-actions {
-    display: flex;
-    justify-content: flex-end;
-}
-.property-actions button {
-    padding: 6px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #e63946;
-    color: #fff;
-    font-size: 14px;
-}
+.hidden { display: none; }

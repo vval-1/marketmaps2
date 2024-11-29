@@ -9,30 +9,30 @@ properties = Blueprint("properties", __name__, template_folder="templates", stat
 @login_required
 def addproperties():
     if request.method == 'POST':
-        address1 = request.form.get('address1')
-        address2 = request.form.get('address2')
-        city = request.form.get('city')
-        state = request.form.get('state')
-        zipcode = float(request.form.get('zipcode'))
-        price = float(request.form.get('price'))
-        bedrooms = float(request.form.get('bedrooms'))
-        bathrooms = float(request.form.get('bathrooms'))
-        comments = request.form.get('comments')
+        # address1 = request.form.get('address1')
+        # address2 = request.form.get('address2')
+        # city = request.form.get('city')
+        # state = request.form.get('state')
+        # zipcode = float(request.form.get('zipcode'))
+        # price = float(request.form.get('price'))
+        # bedrooms = float(request.form.get('bedrooms'))
+        # bathrooms = float(request.form.get('bathrooms'))
+        # comments = request.form.get('comments')
 
-        new_property = Properties(
-            address1 = address1,
-            address2 = address2,
-            city = city,
-            state = state,
-            zipcode = zipcode,
-            price = price,
-            bedrooms = bedrooms,
-            bathrooms = bathrooms,
-            comments = comments,
-            user_id = session['user_id']
-        )
-        db.session.add(new_property)
-        db.session.commit()
+        # new_property = Properties(
+        #     address1 = address1,
+        #     address2 = address2,
+        #     city = city,
+        #     state = state,
+        #     zipcode = zipcode,
+        #     price = price,
+        #     bedrooms = bedrooms,
+        #     bathrooms = bathrooms,
+        #     comments = comments,
+        #     user_id = session['user_id']
+        # )
+        # db.session.add(new_property)
+        # db.session.commit()
         return render_template('search.html')
     return render_template('addproperty.html')
 
