@@ -27,9 +27,8 @@ class Properties(db.Model):
     purpose = db.Column(db.String(30), nullable=True)
     agent_name = db.Column(db.String(30), nullable=True)
     agent_phone = db.Column(db.Float, nullable=True)
-    comments = db.Column(db.Text, nullable=True)
     agent_role = db.Column(db.String(30), nullable=True)
-    user_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, nullable=True)
 
     def __init__(
         self,
@@ -75,9 +74,7 @@ class Properties(db.Model):
         self.agent_phone = agent_phone
         self.agent_role = agent_role
         self.user_id = user_id
-        self.comments = comments
-
-
+        
 class Users(db.Model, UserMixin):
     __tablename__ = "users"
 
@@ -116,3 +113,19 @@ class Clients(db.Model):
         self.bathrooms = bathrooms
         self.comments = comments
         self.user_id = user_id
+
+class MatchView(db.Model):
+    __tablename__ = "match_view"
+    __table_args__ = {'extend_existing': True}
+
+    id = db.Column(db.BigInteger, primary_key=True) # Assuming 'id' is a primary key
+    property_id = db.Column(db.Integer, nullable=True)
+    property_type = db.Column(db.VARCHAR(20), nullable=True)
+    address1 = db.Column(db.String, nullable=True)
+    min_price = db.Column(db.Float, nullable=True)
+    max_price = db.Column(db.Float, nullable=True)
+    bedrooms = db.Column(db.Numeric, nullable=True)
+    bathrooms = db.Column(db.Integer, nullable=True)
+    user_id = db.Column(db.Integer, nullable=True)  # Assuming a users table exists
+    match_count = db.Column(db.BigInteger, nullable=True)
+    

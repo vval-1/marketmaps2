@@ -1,6 +1,6 @@
 from flask import render_template, request, Blueprint, redirect, url_for, session
 from models import db
-from models.models import Properties, Clients, Users
+from models.models import Properties, Clients, Users, MatchView
 from flask_login import LoginManager, login_required
 
 properties = Blueprint("properties", __name__, template_folder="templates", static_folder="static")
@@ -76,3 +76,12 @@ def search():
         return render_template('search.html', results = results)
     
     return render_template('search.html')
+
+@properties.route('/dashboard', methods = ['GET', 'POST'])
+@login_required
+def dashboard():
+    user_ID = session['user_id']
+    results = MatchView.query.filter_by(user_id=user_ID).all()
+    # if request.method == 'POST':
+    #     pass
+    return render_template('dashboard.html' , results = results)
