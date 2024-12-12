@@ -2,343 +2,126 @@
 <html>
 <head>
     <title>Dynamic Property Form</title>
-    <link rel='stylesheet' type='text/css' href="{{url_for('static', filename='test.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('properties.static', filename='addproperty.css')}}">
     <style>
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; }
         .form-group input, .form-group select { width: 100%; padding: 8px; }
+        .hidden { display: none; }
     </style>
     <script>
         function showFields(propertyType) {
-            // Hide all field groups first
-            document.querySelectorAll('.field-group').forEach(group => group.classList.add('hidden'));
-            
-            // Show relevant field groups
-            const selectedFields = document.querySelectorAll(`.field-group[data-type='${propertyType}']`);
-            selectedFields.forEach(group => group.classList.remove('hidden'));
+            // Hide all dynamic fields
+            document.querySelectorAll('.dynamic-field-group').forEach(group => group.classList.add('hidden'));
+
+            // Show fields specific to the selected property type
+            if (propertyType) {
+                const fieldsToShow = document.querySelector(`.dynamic-field-group[data-type='${propertyType}']`);
+                if (fieldsToShow) {
+                    fieldsToShow.classList.remove('hidden');
+                }
+            }
         }
     </script>
-     <body>
-        {% include 'navbar.html' %}
-    </body>
 </head>
 <body>
+    {% include 'navbar.html' %}
     <section>
         <h1 style="text-align: center; margin-top: 2%; margin-bottom: 2%;">New Property Submission</h1>
-        <div class="form-group">
-            <label for="propertyType">Select Property Type:</label>
-            <select id="propertyType" name="propertyType" onchange="showFields(this.value)">
-                <option value="">-- Select --</option>
-                <option value="Apartment">Apartment</option>
-                <option value="Villa">Villa</option>
-                <option value="Land">Land</option>
-                <option value="Plot">Plot</option>
-                <option value="Commercial">Commercial</option>
-            </select>
-        </div>
 
-<div class="form-group field-group hidden" data-type="Apartment">
-    <form action="/property/add-property" method="post">
-        <label for="Property ID">Property ID:</label>
-        <input type="text" id="Property ID" name="Property ID" />
-
-        <label for="Property TYPE (Commercial,Apartement, Villa, Land, Plot)">Property TYPE (Commercial,Apartement, Villa, Land, Plot):</label>
-        <input type="text" id="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" name="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" />
-
-        <label for="Project Name (Pull from Table)">Project Name (Pull from Table):</label>
-        <input type="text" id="Project Name (Pull from Table)" name="Project Name (Pull from Table)" />
-
-        <label for="BHK (2,3,4,5)">BHK (2,3,4,5):</label>
-        <input type="text" id="BHK (2,3,4,5)" name="BHK (2,3,4,5)" />
-
-        <label for="Facing (common to all)">Facing (common to all):</label>
-        <input type="text" id="Facing (common to all)" name="Facing (common to all)" />
-
-        <label for="Min SiZE (SFT)">Min SiZE (SFT):</label>
-        <input type="text" id="Min SiZE (SFT)" name="Min SiZE (SFT)" />
-
-        <label for="Max Size (SFT)">Max Size (SFT):</label>
-        <input type="text" id="Max Size (SFT)" name="Max Size (SFT)" />
-
-        <label for="Multiple Units (YES/NO)">Multiple Units (YES/NO):</label>
-        <input type="text" id="Multiple Units (YES/NO)" name="Multiple Units (YES/NO)" />
-
-        <label for="Price per SFT">Price per SFT:</label>
-        <input type="text" id="Price per SFT" name="Price per SFT" />
-
-        <label for="Min Price">Min Price:</label>
-        <input type="text" id="Min Price" name="Min Price" />
-
-        <label for="Max Price">Max Price:</label>
-        <input type="text" id="Max Price" name="Max Price" />
-
-        <label for="Location (pull from Table)">Location (pull from Table):</label>
-        <input type="text" id="Location (pull from Table)" name="Location (pull from Table)" />
-
-        <label for="Pocession (Ready to Move, Under Construction, RESALE)">Pocession (Ready to Move, Under Construction, RESALE):</label>
-        <input type="text" id="Pocession (Ready to Move, Under Construction, RESALE)" name="Pocession (Ready to Move, Under Construction, RESALE)" />
-
-        <label for="Gated (YES/NO)">Gated (YES/NO):</label>
-        <input type="text" id="Gated (YES/NO)" name="Gated (YES/NO)" />
-
-        <label for="UDS">UDS:</label>
-        <input type="text" id="UDS" name="UDS" />
-
-        <label for="OwnerShip (Builder, Land Owner, ReSeller)">OwnerShip (Builder, Land Owner, ReSeller):</label>
-        <input type="text" id="OwnerShip (Builder, Land Owner, ReSeller)" name="OwnerShip (Builder, Land Owner, ReSeller)" />
-
-        <label for="Purpose (Sale,Rent)">Purpose (Sale,Rent):</label>
-        <input type="text" id="Purpose (Sale,Rent)" name="Purpose (Sale,Rent)" />
-
-        <label for="Listed Agent Name">Listed Agent Name:</label>
-        <input type="text" id="Listed Agent Name" name="Listed Agent Name" />
-
-        <label for="Listed Agent Phone">Listed Agent Phone:</label>
-        <input type="text" id="Listed Agent Phone" name="Listed Agent Phone" />
-
-        <label for="Agent Role (Buyer/Seller)">Agent Role (Buyer/Seller):</label>
-        <input type="text" id="Agent Role (Buyer/Seller)" name="Agent Role (Buyer/Seller)" />
-
-        <label for="Property ID">Property ID:</label>
-        <input type="text" id="Property ID" name="Property ID" />
-
-        <input type="submit" value="Submit Property" style="display: block; margin: 2% auto;">
-    </form>        
-</div>
-
-    <div class="form-group field-group hidden" data-type="Villa">
-     <form action="/property/add-property" method="post">
-        <label for="Property TYPE (Commercial,Apartement, Villa, Land, Plot)">Property TYPE (Commercial,Apartement, Villa, Land, Plot):</label>
-        <input type="text" id="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" name="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" />
-
-        <label for="Project Name (Pull from Table)">Project Name (Pull from Table):</label>
-        <input type="text" id="Project Name (Pull from Table)" name="Project Name (Pull from Table)" />
-
-        <label for="BHK (2,3,4,5)">BHK (2,3,4,5):</label>
-        <input type="text" id="BHK (2,3,4,5)" name="BHK (2,3,4,5)" />
-
-        <label for="Facing (common to all)">Facing (common to all):</label>
-        <input type="text" id="Facing (common to all)" name="Facing (common to all)" />
-
-        <label for="Min SiZE (SFT)">Min SiZE (SFT):</label>
-        <input type="text" id="Min SiZE (SFT)" name="Min SiZE (SFT)" />
-
-        <label for="Max Size (SFT)">Max Size (SFT):</label>
-        <input type="text" id="Max Size (SFT)" name="Max Size (SFT)" />
-
-        <label for="Multiple Units (YES/NO)">Multiple Units (YES/NO):</label>
-        <input type="text" id="Multiple Units (YES/NO)" name="Multiple Units (YES/NO)" />
-
-        <label for="Price per SFT">Price per SFT:</label>
-        <input type="text" id="Price per SFT" name="Price per SFT" />
-
-        <label for="Min Price">Min Price:</label>
-        <input type="text" id="Min Price" name="Min Price" />
-
-        <label for="Max Price">Max Price:</label>
-        <input type="text" id="Max Price" name="Max Price" />
-
-        <label for="Location (pull from Table)">Location (pull from Table):</label>
-        <input type="text" id="Location (pull from Table)" name="Location (pull from Table)" />
-
-        <label for="Pocession (Ready to Move, Under Construction, RESALE)">Pocession (Ready to Move, Under Construction, RESALE):</label>
-        <input type="text" id="Pocession (Ready to Move, Under Construction, RESALE)" name="Pocession (Ready to Move, Under Construction, RESALE)" />
-
-        <label for="Gated (YES/NO)">Gated (YES/NO):</label>
-        <input type="text" id="Gated (YES/NO)" name="Gated (YES/NO)" />
-
-        <label for="UDS">UDS:</label>
-        <input type="text" id="UDS" name="UDS" />
-
-        <label for="Plot Size">Plot Size:</label>
-        <input type="text" id="Plot Size" name="Plot Size" />
-
-        <label for="OwnerShip (Builder, Land Owner, ReSeller)">OwnerShip (Builder, Land Owner, ReSeller):</label>
-        <input type="text" id="OwnerShip (Builder, Land Owner, ReSeller)" name="OwnerShip (Builder, Land Owner, ReSeller)" />
-
-        <label for="Purpose (Sale,Rent)">Purpose (Sale,Rent):</label>
-        <input type="text" id="Purpose (Sale,Rent)" name="Purpose (Sale,Rent)" />
-
-        <label for="Listed Agent Name">Listed Agent Name:</label>
-        <input type="text" id="Listed Agent Name" name="Listed Agent Name" />
-
-        <label for="Listed Agent Phone">Listed Agent Phone:</label>
-        <input type="text" id="Listed Agent Phone" name="Listed Agent Phone" />
-
-        <label for="Agent Role (Buyer/Seller)">Agent Role (Buyer/Seller):</label>
-        <input type="text" id="Agent Role (Buyer/Seller)" name="Agent Role (Buyer/Seller)" />
-
-        <input type="submit" value="Submit Property" style="display: block; margin: 2% auto;">
-    </form>    
-    </div>
-
-    <div class="form-group field-group hidden" data-type="Land">
-      <form action="/property/add-property" method="post">  
-        <label for="Property ID">Property ID:</label>
-        <input type="text" id="Property ID" name="Property ID" />
-
-        <label for="Property TYPE (Commercial,Apartement, Villa, Land, Plot)">Property TYPE (Commercial,Apartement, Villa, Land, Plot):</label>
-        <input type="text" id="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" name="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" />
-
-        <label for="Facing (common to all)">Facing (common to all):</label>
-        <input type="text" id="Facing (common to all)" name="Facing (common to all)" />
-
-        <label for="Min Price">Min Price:</label>
-        <input type="text" id="Min Price" name="Min Price" />
-
-        <label for="Max Price">Max Price:</label>
-        <input type="text" id="Max Price" name="Max Price" />
-
-        <label for="Location (pull from Table)">Location (pull from Table):</label>
-        <input type="text" id="Location (pull from Table)" name="Location (pull from Table)" />
-
-        <label for="Pocession (Ready to Move, Under Construction, RESALE)">Pocession (Ready to Move, Under Construction, RESALE):</label>
-        <input type="text" id="Pocession (Ready to Move, Under Construction, RESALE)" name="Pocession (Ready to Move, Under Construction, RESALE)" />
-
-        <label for="Land Size (acres)">Land Size (acres):</label>
-        <input type="text" id="Land Size (acres)" name="Land Size (acres)" />
-
-        <label for="Price Per Acre">Price Per Acre:</label>
-        <input type="text" id="Price Per Acre" name="Price Per Acre" />
-
-        <label for="OwnerShip (Builder, Land Owner, ReSeller)">OwnerShip (Builder, Land Owner, ReSeller):</label>
-        <input type="text" id="OwnerShip (Builder, Land Owner, ReSeller)" name="OwnerShip (Builder, Land Owner, ReSeller)" />
-
-        <label for="Purpose (Sale,Rent)">Purpose (Sale,Rent):</label>
-        <input type="text" id="Purpose (Sale,Rent)" name="Purpose (Sale,Rent)" />
-
-        <label for="Listed Agent Name">Listed Agent Name:</label>
-        <input type="text" id="Listed Agent Name" name="Listed Agent Name" />
-
-        <label for="Listed Agent Phone">Listed Agent Phone:</label>
-        <input type="text" id="Listed Agent Phone" name="Listed Agent Phone" />
-
-        <label for="Agent Role (Buyer/Seller)">Agent Role (Buyer/Seller):</label>
-        <input type="text" id="Agent Role (Buyer/Seller)" name="Agent Role (Buyer/Seller)" />
-
-        <input type="submit" value="Submit Property" style="display: block; margin: 2% auto;">
-    </form>
-    </div>
-
-    <div class="form-group field-group hidden" data-type="Plot">
-      <form action="/property/add-property" method="post">  
-        <label for="Property ID">Property ID:</label>
-        <input type="text" id="Property ID" name="Property ID" />
-
-        <label for="Property TYPE (Commercial,Apartement, Villa, Land, Plot)">Property TYPE (Commercial,Apartement, Villa, Land, Plot):</label>
-        <input type="text" id="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" name="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" />
-
-        <label for="Project Name (Pull from Table)">Project Name (Pull from Table):</label>
-        <input type="text" id="Project Name (Pull from Table)" name="Project Name (Pull from Table)" />
-
-        <label for="Facing (common to all)">Facing (common to all):</label>
-        <input type="text" id="Facing (common to all)" name="Facing (common to all)" />
-
-        <label for="Min Price">Min Price:</label>
-        <input type="text" id="Min Price" name="Min Price" />
-
-        <label for="Max Price">Max Price:</label>
-        <input type="text" id="Max Price" name="Max Price" />
-
-        <label for="Location (pull from Table)">Location (pull from Table):</label>
-        <input type="text" id="Location (pull from Table)" name="Location (pull from Table)" />
-
-        <label for="Pocession (Ready to Move, Under Construction, RESALE)">Pocession (Ready to Move, Under Construction, RESALE):</label>
-        <input type="text" id="Pocession (Ready to Move, Under Construction, RESALE)" name="Pocession (Ready to Move, Under Construction, RESALE)" />
-
-        <label for="Gated (YES/NO)">Gated (YES/NO):</label>
-        <input type="text" id="Gated (YES/NO)" name="Gated (YES/NO)" />
-
-        <label for="UDS">UDS:</label>
-        <input type="text" id="UDS" name="UDS" />
-
-        <label for="Plot Size">Plot Size:</label>
-        <input type="text" id="Plot Size" name="Plot Size" />
-
-        <label for="Price Per Yard">Price Per Yard:</label>
-        <input type="text" id="Price Per Yard" name="Price Per Yard" />
-
-        <label for="OwnerShip (Builder, Land Owner, ReSeller)">OwnerShip (Builder, Land Owner, ReSeller):</label>
-        <input type="text" id="OwnerShip (Builder, Land Owner, ReSeller)" name="OwnerShip (Builder, Land Owner, ReSeller)" />
-
-        <label for="Purpose (Sale,Rent)">Purpose (Sale,Rent):</label>
-        <input type="text" id="Purpose (Sale,Rent)" name="Purpose (Sale,Rent)" />
-
-        <label for="Listed Agent Name">Listed Agent Name:</label>
-        <input type="text" id="Listed Agent Name" name="Listed Agent Name" />
-
-        <label for="Listed Agent Phone">Listed Agent Phone:</label>
-        <input type="text" id="Listed Agent Phone" name="Listed Agent Phone" />
-
-        <label for="Agent Role (Buyer/Seller)">Agent Role (Buyer/Seller):</label>
-        <input type="text" id="Agent Role (Buyer/Seller)" name="Agent Role (Buyer/Seller)" />
-
-        <input type="submit" value="Submit Property" style="display: block; margin: 2% auto;">
-    </form>
-    </div>
-
-    <div class="form-group field-group hidden" data-type="Commercial">
-      <form action="/property/add-property" method="post"> 
-        <label for="Property ID">Property ID:</label>
-        <input type="text" id="Property ID" name="Property ID" />
-
-        <label for="Property TYPE (Commercial,Apartement, Villa, Land, Plot)">Property TYPE (Commercial,Apartement, Villa, Land, Plot):</label>
-        <input type="text" id="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" name="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" />
-
-        <label for="Project Name (Pull from Table)">Project Name (Pull from Table):</label>
-        <input type="text" id="Project Name (Pull from Table)" name="Project Name (Pull from Table)" />
-
-        <label for="Facing (common to all)">Facing (common to all):</label>
-        <input type="text" id="Facing (common to all)" name="Facing (common to all)" />
-
-        <label for="Min SiZE (SFT)">Min SiZE (SFT):</label>
-        <input type="text" id="Min SiZE (SFT)" name="Min SiZE (SFT)" />
-
-        <label for="Max Size (SFT)">Max Size (SFT):</label>
-        <input type="text" id="Max Size (SFT)" name="Max Size (SFT)" />
-
-        <label for="Multiple Units (YES/NO)">Multiple Units (YES/NO):</label>
-        <input type="text" id="Multiple Units (YES/NO)" name="Multiple Units (YES/NO)" />
-
-        <label for="Price per SFT">Price per SFT:</label>
-        <input type="text" id="Price per SFT" name="Price per SFT" />
-
-        <label for="Min Price">Min Price:</label>
-        <input type="text" id="Min Price" name="Min Price" />
-
-        <label for="Max Price">Max Price:</label>
-        <input type="text" id="Max Price" name="Max Price" />
-
-        <label for="Location (pull from Table)">Location (pull from Table):</label>
-        <input type="text" id="Location (pull from Table)" name="Location (pull from Table)" />
-
-        <label for="Pocession (Ready to Move, Under Construction, RESALE)">Pocession (Ready to Move, Under Construction, RESALE):</label>
-        <input type="text" id="Pocession (Ready to Move, Under Construction, RESALE)" name="Pocession (Ready to Move, Under Construction, RESALE)" />
-
-        <label for="UDS">UDS:</label>
-        <input type="text" id="UDS" name="UDS" />
-
-        <label for="Plot Size">Plot Size:</label>
-        <input type="text" id="Plot Size" name="Plot Size" />
-
-        <label for="OwnerShip (Builder, Land Owner, ReSeller)">OwnerShip (Builder, Land Owner, ReSeller):</label>
-        <input type="text" id="OwnerShip (Builder, Land Owner, ReSeller)" name="OwnerShip (Builder, Land Owner, ReSeller)" />
-
-        <label for="Purpose (Sale,Rent)">Purpose (Sale,Rent):</label>
-        <input type="text" id="Purpose (Sale,Rent)" name="Purpose (Sale,Rent)" />
-
-        <label for="Listed Agent Name">Listed Agent Name:</label>
-        <input type="text" id="Listed Agent Name" name="Listed Agent Name" />
-
-        <label for="Listed Agent Phone">Listed Agent Phone:</label>
-        <input type="text" id="Listed Agent Phone" name="Listed Agent Phone" />
-
-        <label for="Agent Role (Buyer/Seller)">Agent Role (Buyer/Seller):</label>
-        <input type="text" id="Agent Role (Buyer/Seller)" name="Agent Role (Buyer/Seller)" />
-        <input type="submit" value="Submit Property" style="display: block; margin: 2% auto;">
-    </form>
-    </div>
+        <form action="/property/add-property" method="post">
+            <!-- Common Fields -->
+            <div class="form-group">
+                <label for="property_type">Select Property Type:</label>
+                <select id="property_type" name="property_type" onchange="showFields(this.value)">
+                    <option value="">-- Select --</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Villa">Villa</option>
+                    <option value="Land">Land</option>
+                    <option value="Plot">Plot</option>
+                    <option value="Commercial">Commercial</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required />
+            </div>
+            <div class="form-group">
+                <label for="min_price">Minimum Price:</label>
+                <input type="number" id="min_price" name="min_price" />
+            </div>
+            <div class="form-group">
+                <label for="max_price">Maximum Price:</label>
+                <input type="number" id="max_price" name="max_price" />
+            </div>
+            <div class="form-group">
+                <label for="agent_name">Listed Agent Name:</label>
+                <input type="text" id="agent_name" name="agent_name" />
+            </div>
+            <div class="form-group">
+                <label for="agent_phone">Listed Agent Phone:</label>
+                <input type="text" id="agent_phone" name="agent_phone" />
+            </div>
+
+            <!-- Dynamic Fields -->
+            <div class="dynamic-field-group hidden" data-type="Apartment">
+                <div class="form-group">
+                    <label for="bedrooms">Number of Bedrooms:</label>
+                    <input type="number" id="bedrooms" name="bedrooms" />
+                </div>
+                <div class="form-group">
+                    <label for="bathrooms">Number of Bathrooms:</label>
+                    <input type="number" id="bathrooms" name="bathrooms" />
+                </div>
+                <div class="form-group">
+                    <label for="facing_direction">Facing Direction:</label>
+                    <input type="text" id="facing_direction" name="facing_direction" />
+                </div>
+            </div>
+
+            <div class="dynamic-field-group hidden" data-type="Villa">
+                <div class="form-group">
+                    <label for="plot_size">Plot Size:</label>
+                    <input type="text" id="plot_size" name="plot_size" />
+                </div>
+                <div class="form-group">
+                    <label for="gated">Gated (YES/NO):</label>
+                    <input type="text" id="gated" name="gated" />
+                </div>
+            </div>
+
+            <div class="dynamic-field-group hidden" data-type="Land">
+                <div class="form-group">
+                    <label for="land_size">Land Size (acres):</label>
+                    <input type="text" id="land_size" name="land_size" />
+                </div>
+                <div class="form-group">
+                    <label for="price_per_acre">Price Per Acre:</label>
+                    <input type="text" id="price_per_acre" name="price_per_acre" />
+                </div>
+            </div>
+
+            <div class="dynamic-field-group hidden" data-type="Plot">
+                <div class="form-group">
+                    <label for="plot_size">Plot Size:</label>
+                    <input type="text" id="plot_size" name="plot_size" />
+                </div>
+                <div class="form-group">
+                    <label for="price_per_yard">Price Per Yard:</label>
+                    <input type="text" id="price_per_yard" name="price_per_yard" />
+                </div>
+            </div>
+
+            <div class="dynamic-field-group hidden" data-type="Commercial">
+                <div class="form-group">
+                    <label for="commercial_use">Intended Use:</label>
+                    <input type="text" id="commercial_use" name="commercial_use" />
+                </div>
+            </div>
+
+            <input type="submit" value="Submit Property" style="display: block; margin: 2% auto;">
+        </form>
+    </section>
 </body>
-</section>
 </html>
-

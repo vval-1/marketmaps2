@@ -26,8 +26,8 @@
     <section>
         <h1 style="text-align: center; margin-top: 2%; margin-bottom: 2%;">New Property Submission</h1>
         <div class="form-group">
-            <label for="propertyType">Select Property Type:</label>
-            <select id="propertyType" name="propertyType" onchange="showFields(this.value)">
+            <label for="property_type">Select Property Type:</label>
+            <select id="property_type" name="property_type" onchange="showFields(this.value)">
                 <option value="">-- Select --</option>
                 <option value="Apartment">Apartment</option>
                 <option value="Villa">Villa</option>
@@ -39,68 +39,62 @@
 
 <div class="form-group field-group hidden" data-type="Apartment">
     <form action="/property/add-property" method="post">
-        <label for="Property ID">Property ID:</label>
-        <input type="text" id="Property ID" name="Property ID" />
+        <label for="Address">Address:</label>
+        <input type="text" id="address1" name="Property ID" />
 
-        <label for="Property TYPE (Commercial,Apartement, Villa, Land, Plot)">Property TYPE (Commercial,Apartement, Villa, Land, Plot):</label>
-        <input type="text" id="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" name="Property TYPE (Commercial,Apartement, Villa, Land, Plot)" />
+        <label for="bedrooms">How Many Bedrooms?:</label>
+        <input type="number" id="BHK (2,3,4,5)" name="bedrooms" />
 
-        <label for="Project Name (Pull from Table)">Project Name (Pull from Table):</label>
-        <input type="text" id="Project Name (Pull from Table)" name="Project Name (Pull from Table)" />
+        <label for="bathrooms">How Many Bathrooms?:</label>
+        <input type="number" id="BHK (2,3,4,5)" name="bathrooms" />
 
-        <label for="BHK (2,3,4,5)">BHK (2,3,4,5):</label>
-        <input type="text" id="BHK (2,3,4,5)" name="BHK (2,3,4,5)" />
+        <label for="facing_direction">Facing Direction</label>
+        <input type="text" id="facing_direction" name="facing_direction" />
 
-        <label for="Facing (common to all)">Facing (common to all):</label>
-        <input type="text" id="Facing (common to all)" name="Facing (common to all)" />
+        <label for="min_sqft">Minimum Sqft:</label>
+        <input type="number" id="min_sqft" name="min_sqft" />
 
-        <label for="Min SiZE (SFT)">Min SiZE (SFT):</label>
-        <input type="text" id="Min SiZE (SFT)" name="Min SiZE (SFT)" />
-
-        <label for="Max Size (SFT)">Max Size (SFT):</label>
-        <input type="text" id="Max Size (SFT)" name="Max Size (SFT)" />
+        <label for="max_sqft">Maximum Sqft:</label>
+        <input type="number" id="max_sqft" name="max_sqft" />
 
         <label for="Multiple Units (YES/NO)">Multiple Units (YES/NO):</label>
         <input type="text" id="Multiple Units (YES/NO)" name="Multiple Units (YES/NO)" />
 
-        <label for="Price per SFT">Price per SFT:</label>
-        <input type="text" id="Price per SFT" name="Price per SFT" />
+        <label for="price_per_sqft">Price Per Sqft:</label>
+        <input type="number" id="price_per_sqft" name="price_per_sqft" />
 
-        <label for="Min Price">Min Price:</label>
-        <input type="text" id="Min Price" name="Min Price" />
+        <label for="min_price">Minimum Price:</label>
+        <input type="number" id="min_price" name="min_price" />
 
-        <label for="Max Price">Max Price:</label>
-        <input type="text" id="Max Price" name="Max Price" />
+        <label for="max_price">Maximum Price:</label>
+        <input type="number" id="max_price" name="max_price" />
 
         <label for="Location (pull from Table)">Location (pull from Table):</label>
         <input type="text" id="Location (pull from Table)" name="Location (pull from Table)" />
 
-        <label for="Pocession (Ready to Move, Under Construction, RESALE)">Pocession (Ready to Move, Under Construction, RESALE):</label>
-        <input type="text" id="Pocession (Ready to Move, Under Construction, RESALE)" name="Pocession (Ready to Move, Under Construction, RESALE)" />
+        <label for="pocession">Pocession (Ready to Move, Under Construction, RESALE):</label>
+        <input type="text" id="pocession" name="pocession" />
 
-        <label for="Gated (YES/NO)">Gated (YES/NO):</label>
-        <input type="text" id="Gated (YES/NO)" name="Gated (YES/NO)" />
+        <label for="is_gated">Gated (YES/NO):</label>
+        <input type="text" id="is_gated" name="is_gated" />
 
-        <label for="UDS">UDS:</label>
-        <input type="text" id="UDS" name="UDS" />
+        <label for="uds">UDS:</label>
+        <input type="number" id="uds" name="uds" />
 
-        <label for="OwnerShip (Builder, Land Owner, ReSeller)">OwnerShip (Builder, Land Owner, ReSeller):</label>
-        <input type="text" id="OwnerShip (Builder, Land Owner, ReSeller)" name="OwnerShip (Builder, Land Owner, ReSeller)" />
+        <label for=" type_of_ownership">OwnerShip Type (Builder, Land Owner, ReSeller):</label>
+        <input type="text" id=" type_of_ownership" name="type_of_ownership" />
 
-        <label for="Purpose (Sale,Rent)">Purpose (Sale,Rent):</label>
-        <input type="text" id="Purpose (Sale,Rent)" name="Purpose (Sale,Rent)" />
+        <label for="purpose">Purpose (Sale,Rent):</label>
+        <input type="text" id="purpose" name="purpose" />
 
-        <label for="Listed Agent Name">Listed Agent Name:</label>
-        <input type="text" id="Listed Agent Name" name="Listed Agent Name" />
+        <label for="agent_name">Listed Agent Name:</label>
+        <input type="text" id="agent_name" name="agent_name" />
 
-        <label for="Listed Agent Phone">Listed Agent Phone:</label>
-        <input type="text" id="Listed Agent Phone" name="Listed Agent Phone" />
+        <label for="agent_phone">Listed Agent Phone:</label>
+        <input type="number" id="agent_phone" name="agent_phone" />
 
-        <label for="Agent Role (Buyer/Seller)">Agent Role (Buyer/Seller):</label>
-        <input type="text" id="Agent Role (Buyer/Seller)" name="Agent Role (Buyer/Seller)" />
-
-        <label for="Property ID">Property ID:</label>
-        <input type="text" id="Property ID" name="Property ID" />
+        <label for="agent_role">Agent Role (Buyer/Seller):</label>
+        <input type="text" id="agent_role" name="agent_role" />
 
         <input type="submit" value="Submit Property" style="display: block; margin: 2% auto;">
     </form>        

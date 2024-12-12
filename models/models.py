@@ -15,9 +15,9 @@ class Properties(db.Model):
     bedrooms = db.Column(db.Float, nullable=True)
     bathrooms = db.Column(db.Float, nullable=True)
     facing_direction = db.Column(db.String(10), nullable=True)
+    possession = db.Column(db.String(30), nullable=True)
     min_sqft = db.Column(db.Float, nullable=True)
     max_sqft = db.Column(db.Float, nullable=True)
-    possession = db.Column(db.String(30), nullable=True)
     is_gated = db.Column(db.String(10), nullable=True)
     uds = db.Column(db.Float, nullable=True)
     plot_size = db.Column(db.Float, nullable=True)
@@ -41,6 +41,8 @@ class Properties(db.Model):
         bathrooms=None,
         facing_direction=None,
         possession=None,
+        min_sqft=None,
+        max_sqft=None,
         is_gated=None,
         uds=None,
         plot_size=None,
@@ -52,7 +54,6 @@ class Properties(db.Model):
         agent_phone=None,
         agent_role=None,
         user_id=None,
-        comments=None,
     ):
         self.address1 = address1
         self.property_type = property_type
@@ -63,6 +64,8 @@ class Properties(db.Model):
         self.bathrooms = bathrooms
         self.facing_direction = facing_direction
         self.possession = possession
+        self.min_sqft = min_sqft
+        self.max_sqft = max_sqft
         self.is_gated = is_gated
         self.uds = uds
         self.plot_size = plot_size
@@ -74,7 +77,8 @@ class Properties(db.Model):
         self.agent_phone = agent_phone
         self.agent_role = agent_role
         self.user_id = user_id
-        
+
+
 class Users(db.Model, UserMixin):
     __tablename__ = "users"
 
@@ -114,11 +118,12 @@ class Clients(db.Model):
         self.comments = comments
         self.user_id = user_id
 
+
 class MatchView(db.Model):
     __tablename__ = "match_view"
-    __table_args__ = {'extend_existing': True}
+    __table_args__ = {"extend_existing": True}
 
-    id = db.Column(db.BigInteger, primary_key=True) # Assuming 'id' is a primary key
+    id = db.Column(db.BigInteger, primary_key=True)  # Assuming 'id' is a primary key
     property_id = db.Column(db.Integer, nullable=True)
     property_type = db.Column(db.VARCHAR(20), nullable=True)
     address1 = db.Column(db.String, nullable=True)
@@ -128,4 +133,3 @@ class MatchView(db.Model):
     bathrooms = db.Column(db.Integer, nullable=True)
     user_id = db.Column(db.Integer, nullable=True)  # Assuming a users table exists
     match_count = db.Column(db.BigInteger, nullable=True)
-    

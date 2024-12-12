@@ -4,7 +4,7 @@ from models.models import Users
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
+from wtforms.validators import InputRequired, Length, Email
 from flask_bcrypt import Bcrypt
 
 authentication = Blueprint("authentication", __name__, static_folder="static", template_folder="templates")
