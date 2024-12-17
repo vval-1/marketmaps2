@@ -179,7 +179,7 @@
         </tr>
         {% for result in results %}
         <tr>
-            <td>{{ result.id }}</td>
+            <td>{{ loop.index }}</td>
             <td>{{ result.address1 }}</td>
             <td>{{ result.city }}</td>
             <td>{{ result.zipcode }}</td>

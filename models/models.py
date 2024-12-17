@@ -1,6 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy
 from . import db
 from flask_login import UserMixin
+import datetime
 
 
 class Properties(db.Model):
@@ -29,6 +29,7 @@ class Properties(db.Model):
     agent_phone = db.Column(db.Float, nullable=True)
     agent_role = db.Column(db.String(30), nullable=True)
     user_id = db.Column(db.Integer, nullable=True)
+    date_added = db.Column(db.DateTime, default=datetime.datetime.now(), nullable=True)
 
     def __init__(
         self,
@@ -54,6 +55,7 @@ class Properties(db.Model):
         agent_phone=None,
         agent_role=None,
         user_id=None,
+        date_added=None,
     ):
         self.address1 = address1
         self.property_type = property_type
@@ -77,7 +79,7 @@ class Properties(db.Model):
         self.agent_phone = agent_phone
         self.agent_role = agent_role
         self.user_id = user_id
-
+        self.date_added = date_added
 
 class Users(db.Model, UserMixin):
     __tablename__ = "users"
@@ -86,11 +88,13 @@ class Users(db.Model, UserMixin):
     email = db.Column(db.String(100), nullable=False, unique=True)
     username = db.Column(db.String(20), nullable=False)
     password = db.Column(db.String(80), nullable=False)
+    date_added = db.Column(db.DateTime, default=datetime.datetime.now(), nullable=True)
 
-    def __init__(self, email, username, password):
+    def __init__(self, email, username, password, date_added=None):
         self.email = email
         self.username = username
         self.password = password
+        self.date_added = date_added
 
 
 class Clients(db.Model):

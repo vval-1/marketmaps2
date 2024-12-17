@@ -9,6 +9,13 @@
 <body>
   {% include 'navbar.html'%}
   <div class="container">
+  {% with messages = get_flashed_messages()%}
+    {% if messages%}
+      {% for message in messages%}
+           <p style="text-align: center;">{{message}}.</p>
+      {%endfor%}
+    {%endif%}
+  {%endwith%}
     <div class="form">
       <header>Login</header>
       <form action="/auth/login" method="POST">

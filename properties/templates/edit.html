@@ -1,9 +1,175 @@
+<!DOCTYPE html>
 <html>
-  <head></head>
-  <body>
-    <h3>Property To Edit </h3>
-    <p>
-      Seleted property ID to Edit: {{ property_id }}
-    </p>
-  </body>
+<head>
+    <title>Dynamic Property Form</title>
+    <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='addproperty.css')}}">
+    <style>
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; }
+        .form-group input, .form-group select { width: 100%; padding: 8px; }
+    </style>
+    <script>
+        function showFields(propertyType) {
+            // Hide all dynamic fields
+            document.querySelectorAll('.dynamic-field').forEach(field => field.classList.add('hidden'));
+
+            // Determine which fields to show based on property type
+            if (propertyType === 'Apartment' || propertyType === 'Villa') {
+                document.querySelectorAll('.address1, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .agent_name, .agent_phone, .submit').forEach(field => field.classList.remove('hidden'));
+            } else if (propertyType === 'Land') {
+                document.querySelector('.address').classList.remove('hidden');
+            } else if (propertyType === 'Commercial') {
+                document.querySelectorAll('.facing-direction, .bathrooms').forEach(field => field.classList.remove('hidden'));
+            }
+        }
+    </script>
+     <body>
+        {% include 'navbar.html' %}
+    </body>
+</head>
+<body>
+    <section>
+        <h1 style="text-align: center; margin-top: 2%; margin-bottom: 2%;">New Property Submission</h1>
+        <form action="/property/add-property" method="post">
+            <div class="form-group">
+                <label for="property_type">Select Property Type:</label>
+                <select id="property_type" name="property_type" onchange="showFields(this.value)">
+                    <option value="">-- Select --</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Villa">Villa</option>
+                    <option value="Land">Land</option>
+                    <option value="Plot">Plot</option>
+                    <option value="Commercial">Commercial</option>
+                </select>
+            </div>
+
+            <div class="form-group dynamic-field address1 hidden">
+                <label for="address1">Address:</label>
+                <input type="text" id="address1" name="address1" />
+            </div>
+
+            <div class="form-group dynamic-field city hidden">
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" />
+            </div>
+
+            <div class="form-group dynamic-field min_price hidden">
+                <label for="min_price">Minimum Price:</label>
+                <input type="number" id="min_price" name="min_price" />
+            </div>
+
+            <div class="form-group dynamic-field max_price hidden">
+                <label for="max_price">Maximum Price:</label>
+                <input type="number" id="max_price" name="max_price" />
+            </div>
+            
+            <div class="form-group dynamic-field bedrooms hidden">
+                <label for="bedrooms">How Many Bedrooms?:</label>
+                <input type="number" id="bedrooms" name="bedrooms" />
+            </div>
+
+            <div class="form-group dynamic-field bathrooms hidden">
+                <label for="bathrooms">How Many Bathrooms?:</label>
+                <input type="number" id="bathrooms" name="bathrooms" />
+            </div>
+
+            <div class="form-group dynamic-field min_sqft hidden">
+                <label for="min_sqft">Minimum Square Feet?:</label>
+                <input type="number" id="min_sqft" name="min_sqft" />
+            </div>
+
+            <div class="form-group dynamic-field max_sqft hidden">
+                <label for="max_sqft">Maximum Square Feet?:</label>
+                <input type="number" id="max_sqft" name="max_sqft" />
+            </div>
+
+            <div class="form-group dynamic-field facing_direction hidden">
+                <label for="facing_direction">What Direction?:</label>
+                <select id="facing_direction" name="facing_direction" >
+                    <option value="">-- Select --</option>
+                    <option value="NORTH">North</option>
+                    <option value="EAST">East</option>
+                    <option value="WEST">West</option>
+                    <option value="SOUTH">South</option> 
+                </select>
+            </div>
+
+            <div class="form-group dynamic-field possession hidden">
+                <label for="possession">Possession Status?:</label>
+                <select id="possession" name="possession" >
+                    <option value="">-- Select --</option>
+                    <option value="Under Construction">Under Construction</option>
+                    <option value="Ready to Move">Ready to Move</option>
+                    <option value="Resale">Resale</option>
+                </select>
+            </div>
+
+            <div class="form-group dynamic-field is_gated hidden">
+                <label for="is_gated">Is it gated?:</label>
+                <select id="is_gated" name="is_gated" >
+                    <option value="">-- Select --</option>
+                    <option value="TRUE">Yes</option>
+                    <option value="FALSE">No</option>
+                </select>
+            </div>
+
+            <div class="form-group dynamic-field uds hidden">
+                <label for="uds">How Much is the UDS?:</label>
+                <input type="number" id="uds" name="uds" />
+            </div>
+
+            <div class="form-group dynamic-field plot_size hidden">
+                <label for="plot_size">What is The Plot Size?:</label>
+                <input type="number" id="plot_size" name="plot_size" />
+            </div>
+
+            <div class="form-group dynamic-field land_size hidden">
+                <label for="land_size">What is The Land Size?:</label>
+                <input type="number" id="land_size" name="land_size" />
+            </div>
+
+            <div class="form-group dynamic-field price_per_acre hidden">
+                <label for="price_per_acre">Price Per Acre?:</label>
+                <input type="number" id="price_per_acre" name="price_per_acre" />
+            </div>
+
+            <div class="form-group dynamic-field type_of_ownership hidden">
+                <label for="type_of_ownership">Type of ownership?:</label>
+                <select id="type_of_ownership" name="type_of_ownership" >
+                    <option value="">-- Select --</option>
+                    <option value="Land Owner">Land Owner</option>
+                    <option value="Builder">Builder</option>
+                    <option value="ReSeller">Reseller</option>
+                </select>
+            </div>
+
+            <div class="form-group dynamic-field purpose hidden">
+                <label for="purpose">Purpose?:</label>
+                <select id="purpose" name="purpose" >
+                    <option value="">-- Select --</option>
+                    <option value="Sale">Sale</option>
+                    <option value="Rent">Rent</option>
+                </select>
+            </div>
+
+            <div class="form-group dynamic-field agent_name hidden">
+                <label for="agent_name">Agent's Name:</label>
+                <input type="text" id="agent_name" name="agent_name" />
+            </div>
+
+            <div class="form-group dynamic-field agent_phone hidden">
+                <label for="agent_phone">Agent's Phone Number:</label>
+                <input type="number" id="agent_phone" name="agent_phone" />
+            </div>
+
+            <div>
+            <input type="hidden" id="agent_role" name="agent_role" value="Seller">
+            </div>
+
+            <div class="form-group dynamic-field submit hidden">
+            <input type="submit" value="Submit Property" style="display: block; margin: 2% auto;">
+            </div>
+        </form>
+    </section>
+</body>
 </html>

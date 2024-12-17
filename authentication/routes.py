@@ -1,4 +1,4 @@
-from flask import render_template, request, Blueprint, redirect, url_for, session 
+from flask import render_template, request, Blueprint, redirect, url_for, session, flash 
 from models import db
 from models.models import Users
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
@@ -11,7 +11,7 @@ authentication = Blueprint("authentication", __name__, static_folder="static", t
 
 
 class RegisterForm(FlaskForm):
-    email = StringField(validators=[InputRequired()])
+    email = StringField(validators=[InputRequired(), Email(message="Invalid Email Address")])
     username = StringField(validators=[InputRequired()])
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)])
     submit = SubmitField("Register")
@@ -42,12 +42,14 @@ def register():
     if form.validate_on_submit():
         existing_user_email = Users.query.filter_by(email=form.email.data).first()
         if existing_user_email:
+            flash("This Account Already Exists. Please Log in!")
             return redirect('/auth/login')
         hashed_password = bcrypt.generate_password_hash(form.password.data)
         decoded_password = hashed_password.decode('utf-8') if isinstance(hashed_password, bytes) else hashed_password
         new_user = Users(email=form.email.data, username=form.username.data, password=decoded_password)
         db.session.add(new_user)
         db.session.commit()
+        flash("Account Successfully Created, Please Log in!")
         return redirect('/auth/login')
     return render_template('register.html', form=form)
 
@@ -56,7 +58,8 @@ def register():
 def logout():
     session.clear() 
     logout_user()
-    return redirect('/')
+    flash("You Have Been Successfully Logged Out!")
+    return redirect('/auth/login')
 
 @authentication.route('/home')
 @login_required
