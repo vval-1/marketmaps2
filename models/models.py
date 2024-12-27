@@ -8,6 +8,7 @@ class Properties(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     address1 = db.Column(db.String(100), nullable=True)
+    project_name = db.Column(db.String(100), nullable=True)
     property_type = db.Column(db.String(20), nullable=True)
     city = db.Column(db.String(30), nullable=True)
     min_price = db.Column(db.Float, nullable=True)
@@ -18,12 +19,14 @@ class Properties(db.Model):
     possession = db.Column(db.String(30), nullable=True)
     min_sqft = db.Column(db.Float, nullable=True)
     max_sqft = db.Column(db.Float, nullable=True)
+    price_per_sqft = db.Column(db.Float, nullable=True)
     is_gated = db.Column(db.String(10), nullable=True)
     uds = db.Column(db.Float, nullable=True)
     plot_size = db.Column(db.Float, nullable=True)
     land_size = db.Column(db.Float, nullable=True)
     price_per_acre = db.Column(db.Float, nullable=True)
     type_of_ownership = db.Column(db.String(30), nullable=True)
+    multiple_properties = db.Column(db.String(10), nullable=True)
     purpose = db.Column(db.String(30), nullable=True)
     agent_name = db.Column(db.String(30), nullable=True)
     agent_phone = db.Column(db.Float, nullable=True)
@@ -34,6 +37,7 @@ class Properties(db.Model):
     def __init__(
         self,
         address1=None,
+        project_name = None,
         property_type=None,
         city=None,
         min_price=None,
@@ -44,12 +48,14 @@ class Properties(db.Model):
         possession=None,
         min_sqft=None,
         max_sqft=None,
+        price_per_sqft=None,
         is_gated=None,
         uds=None,
         plot_size=None,
         land_size=None,
         price_per_acre=None,
         type_of_ownership=None,
+        multiple_properties=None,
         purpose=None,
         agent_name=None,
         agent_phone=None,
@@ -58,6 +64,7 @@ class Properties(db.Model):
         date_added=None,
     ):
         self.address1 = address1
+        self.project_name = project_name
         self.property_type = property_type
         self.city = city
         self.min_price = min_price
@@ -68,12 +75,14 @@ class Properties(db.Model):
         self.possession = possession
         self.min_sqft = min_sqft
         self.max_sqft = max_sqft
+        self.price_per_sqft = price_per_sqft
         self.is_gated = is_gated
         self.uds = uds
         self.plot_size = plot_size
         self.land_size = land_size
         self.price_per_acre = price_per_acre
         self.type_of_ownership = type_of_ownership
+        self.multiple_properties = multiple_properties
         self.purpose = purpose
         self.agent_name = agent_name
         self.agent_phone = agent_phone
@@ -86,14 +95,16 @@ class Users(db.Model, UserMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
-    username = db.Column(db.String(20), nullable=False)
     password = db.Column(db.String(80), nullable=False)
+    agent_name = db.Column(db.String(40), nullable=True)
+    agent_phone = db.Column(db.BigInteger, nullable=True)
     date_added = db.Column(db.DateTime, default=datetime.datetime.now(), nullable=True)
 
-    def __init__(self, email, username, password, date_added=None):
+    def __init__(self, email, password, agent_name=None, agent_phone=None, date_added=None):
         self.email = email
-        self.username = username
         self.password = password
+        self.agent_name = agent_name
+        self.agent_phone = agent_phone
         self.date_added = date_added
 
 
@@ -128,12 +139,13 @@ class MatchView(db.Model):
     __table_args__ = {"extend_existing": True}
 
     id = db.Column(db.BigInteger, primary_key=True)  # Assuming 'id' is a primary key
-    property_id = db.Column(db.Integer, nullable=True)
+    # property_id = db.Column(db.Integer, nullable=True)
     property_type = db.Column(db.VARCHAR(20), nullable=True)
     address1 = db.Column(db.String, nullable=True)
     min_price = db.Column(db.Float, nullable=True)
     max_price = db.Column(db.Float, nullable=True)
     bedrooms = db.Column(db.Numeric, nullable=True)
     bathrooms = db.Column(db.Integer, nullable=True)
+    agent_role = db.Column(db.String, nullable=True)
     user_id = db.Column(db.Integer, nullable=True)  # Assuming a users table exists
     match_count = db.Column(db.BigInteger, nullable=True)

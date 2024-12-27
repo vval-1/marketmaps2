@@ -66,6 +66,14 @@ input[type="number"] {
     -webkit-appearance: textfield; 
 }
 
+.text-danger {
+    color: red;
+  }
+  
+  .small {
+    font-size: 0.8rem;
+  }
+
 .hidden { 
     display: none;
 }  

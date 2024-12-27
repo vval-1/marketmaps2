@@ -1,54 +1,60 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+.form-group { 
+    margin-bottom: 16px; /* Increased uniform spacing between input groups */
+}
+
+.form-group label { 
+    display: block; 
+    margin-bottom: 8px; /* More consistent label spacing */
+    font-size: 16px; /* Consistent label font size */
+}
+
+.form-group input, 
+.form-group select { 
+    width: 100%; 
+    padding: 10px; /* Uniform padding */
+    box-sizing: border-box; /* Ensures padding doesn't expand the input width */
+    border: 1px solid #000000;
+    border-radius: 5px;
+    font-size: 16px; /* Consistent text size */
+    height: 45px; /* Uniform height for all input fields */
 }
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #8bb2dc;
+    background-color: #8bb2dc; 
 }
 
-form {
-    width: 50%;
+section {
+    width: 70%;
     margin: 40px auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff; /* White form background */
-}
-
-input, textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px; /* Larger font size */
+    background-color: #fff; 
 }
 
 input[type="submit"] {
-    background-color: #000; /* Black button background */
+    background-color: #000; 
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px; /* Larger font size */
+    font-size: 16px; 
 }
 
 input[type="submit"]:hover {
-    background-color: #333; /* Darker hover effect */
+    background-color: #333; 
 }
 
-/* Placeholder text styling */
 ::placeholder {
-    color: #999;
+    color: #ffffff;
     font-size: 16px;
 }
 
-/* Remove spinner for number inputs */
+
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -57,5 +63,16 @@ input[type="number"]::-webkit-outer-spin-button {
 
 input[type="number"] {
     appearance: textfield;
-    -webkit-appearance: textfield; /* For Safari */
+    -webkit-appearance: textfield; 
 }
+
+.text-danger {
+    color: red;
+}  
+.small {
+    font-size: 0.8rem;
+}
+
+.hidden { 
+    display: none;
+}  

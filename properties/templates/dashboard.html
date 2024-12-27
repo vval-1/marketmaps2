@@ -6,7 +6,7 @@
     <div id = "dashboard"></div>
     <title>Dashboard</title>
     <body>
-        {% include 'navbar.html' %}
+        {% include 'navbar2.html' %}
     </body>
 <div class = "results-box">
     <div class = results-title" style="font-size: 25px; font-weight: bold; text-align: right; margin-bottom: 16px;">My Properties</div>
@@ -43,19 +43,20 @@
         <td>{{ result.bedrooms }}</td>
         <td>{{ result.bathrooms }}</td>
         <td>
-            <a href = "meta.com/{{result.property_id}}" >
-            {{ result.match_count }} matches
-            </a>
+            <form action="dashboard/fetch" method="post">
+                <input type="hidden" id="property_id" name="property_id" value="{{result.id}}">
+                <button type="submit" " >{{ result.match_count }} matches</button>
+            </form>
         </td>
         <td>
             <form action="dashboard/edit" method="post">
-                <input type="hidden" id="property_id" name="property_id" value="{{result.property_id}}">
+                <input type="hidden" id="property_id" name="property_id" value="{{result.id}}">
                 <button type="submit" onclick="return checker()" >Edit</button>
             </form>
         </td>
         <td>
             <form action="dashboard/delete" method="post">
-                <input type="hidden" id="property_id" name="property_id" value="{{result.property_id}}">
+                <input type="hidden" id="property_id" name="property_id" value="{{result.id}}">
                 <button type="submit" onclick="return checker()" >Delete</button>
             </form>
         </td>

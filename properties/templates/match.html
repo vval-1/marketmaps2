@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div id = "dashboard"></div>
+    <title>Dashboard</title>
+    <body>
+        {% include 'navbar2.html' %}
+    </body>
+<div class = "results-box">
+    <div class = results-title" style="font-size: 25px; font-weight: bold; text-align: right; margin-bottom: 16px;">Matching Properties</div>
+    <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='dashboard.css')}}">
+    <style>
+        button[type="submit"] {
+          background-color: rgb(230, 105, 105);
+          color: #fff;
+          padding: 10px;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+      </style>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Property Type</th>
+        <th>Price</th>
+        <th>Bedrooms</th>
+        <th>Bathrooms</th>
+        <th>Agent Name</th>
+        <th>Agent Phone</th>
+    </tr>
+    {% for result in results %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ result.property_type }}</td>
+        <td>Rs.{{ result.min_price }}</td>
+        <td>{{ result.bedrooms }}</td>
+        <td>{{ result.bathrooms }}</td>
+        <td>{{ result.agent_name}}</td>
+        <td>{{result.agent_phone}}</td>
+    </tr>
+{% endfor %}
+</table>
+{% if not results %}
+<p>No Properties Yet!.</p>
+{% endif %}
+</div>

@@ -15,7 +15,8 @@
       <form action="/auth/register" method="POST">
         {{ form.hidden_tag()}}
         {{ form.email(class="input", placeholder="Enter your email")}}
-        {{ form.username(class="input", placeholder="Create your username")}}
+        {{ form.agent_name(class="input", placeholder="Agent full name")}}
+        {{ form.agent_phone(class="input", placeholder="Agent phone number")}}
         {{ form.password(class="input", placeholder="Create your password")}}
         {{ form.submit }}
       </form>

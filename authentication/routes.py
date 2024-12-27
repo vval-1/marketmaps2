@@ -4,7 +4,7 @@ from models.models import Users
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, Email
+from wtforms.validators import InputRequired, Length, Email, Regexp
 from flask_bcrypt import Bcrypt
 
 authentication = Blueprint("authentication", __name__, static_folder="static", template_folder="templates")
@@ -12,8 +12,9 @@ authentication = Blueprint("authentication", __name__, static_folder="static", t
 
 class RegisterForm(FlaskForm):
     email = StringField(validators=[InputRequired(), Email(message="Invalid Email Address")])
-    username = StringField(validators=[InputRequired()])
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)])
+    agent_name = StringField(validators=[InputRequired()])
+    agent_phone = StringField(validators=[InputRequired(), Length(min=10, max=10, message="Phone number must contain exactly 10 digits"), Regexp('^\d+$', message="Phone number must contain only digits")])
     submit = SubmitField("Register")
         
 class LoginForm(FlaskForm):
@@ -31,8 +32,9 @@ def login():
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
                 session['user_id'] = user.id
-                session['user_username'] = user.username
-                return redirect('/auth/home')
+                session['agent_name'] = user.agent_name
+                session['agent_phone'] = user.agent_phone
+                return redirect('/')
     return render_template('login.html', form=form)
 
 @authentication.route('/register', methods=['GET', 'POST'])
@@ -46,7 +48,7 @@ def register():
             return redirect('/auth/login')
         hashed_password = bcrypt.generate_password_hash(form.password.data)
         decoded_password = hashed_password.decode('utf-8') if isinstance(hashed_password, bytes) else hashed_password
-        new_user = Users(email=form.email.data, username=form.username.data, password=decoded_password)
+        new_user = Users(email=form.email.data, username=form.username.data, password=decoded_password, agent_name=form.agent_name.data, agent_phone=form.agent_phone.data)
         db.session.add(new_user)
         db.session.commit()
         flash("Account Successfully Created, Please Log in!")
@@ -60,8 +62,3 @@ def logout():
     logout_user()
     flash("You Have Been Successfully Logged Out!")
     return redirect('/auth/login')
-
-@authentication.route('/home')
-@login_required
-def home():
-    return render_template('home.html')
