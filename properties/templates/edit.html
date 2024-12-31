@@ -9,6 +9,14 @@
         .form-group input, .form-group select { width: 100%; padding: 8px; }
     </style>
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        const initialType = "{{ record.property_type }}"; // Pre-fill based on existing record
+        if (initialType) {
+            showFields(initialType);
+        } else {
+            document.querySelectorAll('.dynamic-field').forEach(field => field.classList.remove('hidden'));
+        }
+    });
        function showFields(propertyType) {
             // Hide all dynamic fields
             document.querySelectorAll('.dynamic-field').forEach(field => field.classList.add('hidden'));
@@ -17,13 +25,13 @@
             if (propertyType === 'Apartment') {
                 document.querySelectorAll('.address1, .project_name, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .agent_name, .agent_phone, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Villa') {
-                document.querySelectorAll('.address1, .project_name, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .is_gated, .uds, .plot_size, .type_of_ownership, .purpose, .agent_name, .agent_phone, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.address1, .project_name, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .is_gated, .uds, .min_land_size, .type_of_ownership, .purpose, .agent_name, .agent_phone, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Land') {
-                document.querySelectorAll('.address1, .min_price, .max_price, .land_size, .price_per_acre, .type_of_ownership, .purpose, .agent_name, .agent_phone, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.address1, .min_price, .max_price, .max_land_size, .price_per_acre, .type_of_ownership, .purpose, .agent_name, .agent_phone, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Plot') {
-                document.querySelectorAll('.address1, .project_name, .min_price, .max_price, .is_gated, .plot_size, .price_per_acre, .type_of_ownership, .purpose, .agent_name, .agent_phone, .submit').forEach(field => field.classList.remove('hidden'));  
+                document.querySelectorAll('.address1, .project_name, .min_price, .max_price, .is_gated, .min_land_size, .price_per_acre, .type_of_ownership, .purpose, .agent_name, .agent_phone, .submit').forEach(field => field.classList.remove('hidden'));  
             } else if (propertyType === 'Commercial') {
-                document.querySelectorAll('.address1, .project_name, .plot_size, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .agent_name, .agent_phone, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.address1, .project_name, .min_land_size, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .agent_name, .agent_phone, .submit').forEach(field => field.classList.remove('hidden'));
             }
         }
     </script>
@@ -134,14 +142,14 @@
                 <input type="number" id="uds" name="uds" value="{{ record.uds }}" />
             </div>
 
-            <div class="form-group dynamic-field plot_size hidden">
-                <label for="plot_size">What is The Plot Size?:</label>
-                <input type="number" id="plot_size" name="plot_size" value="{{ record.plot_size }}"/>
+            <div class="form-group dynamic-field min_land_size hidden">
+                <label for="min_land_size">What is The Plot Size?:</label>
+                <input type="number" id="min_land_size" name="min_land_size" value="{{ record.min_land_size }}"/>
             </div>
 
-            <div class="form-group dynamic-field land_size hidden">
-                <label for="land_size">What is The Land Size?:</label>
-                <input type="number" id="land_size" name="land_size" value="{{ record.land_size }}"/>
+            <div class="form-group dynamic-field max_land_size hidden">
+                <label for="max_land_size">What is The Land Size?:</label>
+                <input type="number" id="max_land_size" name="max_land_size" value="{{ record.max_land_size }}"/>
             </div>
 
             <div class="form-group dynamic-field price_per_acre hidden">

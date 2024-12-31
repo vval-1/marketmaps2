@@ -39,7 +39,7 @@
         <td>{{ result.bedrooms }}</td>
         <td>{{ result.bathrooms }}</td>
         <td>{{ result.agent_name}}</td>
-        <td>{{result.agent_phone}}</td>
+        <td>{{result.agent_phone | int }}</td>
     </tr>
 {% endfor %}
 </table>

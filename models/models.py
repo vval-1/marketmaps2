@@ -22,8 +22,8 @@ class Properties(db.Model):
     price_per_sqft = db.Column(db.Float, nullable=True)
     is_gated = db.Column(db.String(10), nullable=True)
     uds = db.Column(db.Float, nullable=True)
-    plot_size = db.Column(db.Float, nullable=True)
-    land_size = db.Column(db.Float, nullable=True)
+    min_land_size = db.Column(db.Float, nullable=True)
+    max_land_size = db.Column(db.Float, nullable=True)
     price_per_acre = db.Column(db.Float, nullable=True)
     type_of_ownership = db.Column(db.String(30), nullable=True)
     multiple_properties = db.Column(db.String(10), nullable=True)
@@ -51,8 +51,8 @@ class Properties(db.Model):
         price_per_sqft=None,
         is_gated=None,
         uds=None,
-        plot_size=None,
-        land_size=None,
+        min_land_size=None,
+        max_land_size=None,
         price_per_acre=None,
         type_of_ownership=None,
         multiple_properties=None,
@@ -78,8 +78,8 @@ class Properties(db.Model):
         self.price_per_sqft = price_per_sqft
         self.is_gated = is_gated
         self.uds = uds
-        self.plot_size = plot_size
-        self.land_size = land_size
+        self.min_land_size = min_land_size
+        self.max_land_size = max_land_size
         self.price_per_acre = price_per_acre
         self.type_of_ownership = type_of_ownership
         self.multiple_properties = multiple_properties

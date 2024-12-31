@@ -37,8 +37,8 @@ def add_properties():
             possession=clean_data["possession"],
             is_gated=clean_data["is_gated"],
             uds=clean_data["uds"],
-            plot_size=clean_data["plot_size"],
-            land_size=clean_data["land_size"],
+            min_land_size=clean_data["min_land_size"],
+            max_land_size=clean_data["max_land_size"],
             price_per_acre=clean_data["price_per_acre"],
             type_of_ownership=clean_data["type_of_ownership"],
             multiple_properties=clean_data["multiple_properties"],
@@ -73,8 +73,8 @@ def add_client():
             max_sqft=clean_data["max_sqft"],
             possession=clean_data["possession"],
             is_gated=clean_data["is_gated"],
-            plot_size=clean_data["plot_size"],
-            land_size=clean_data["land_size"],
+            min_land_size=clean_data["min_land_size"],
+            max_land_size=clean_data["max_land_size"],
             price_per_sqft=clean_data["price_per_sqft"],
             price_per_acre=clean_data["price_per_acre"],
             type_of_ownership=clean_data["type_of_ownership"],
@@ -109,14 +109,14 @@ def search():
 def dashboard():
     user_ID = session["user_id"]
     results = MatchView.query.filter_by(user_id=user_ID, agent_role='Seller').all()
-    return render_template("dashboard.html", results=results)
+    return render_template("dashboard-properties.html", results=results)
 
 @properties.route("/dashboard-clients", methods=["GET", "POST"])
 @login_required
 def dashboard1():
     user_ID = session["user_id"]
     results = MatchView.query.filter_by(user_id=user_ID, agent_role='Buyer').all()
-    return render_template("dashboard.html", results=results)
+    return render_template("dashboard-clients.html", results=results)
 
 @properties.route("/dashboard-test", methods=["GET", "POST"])
 @login_required
@@ -149,20 +149,38 @@ def fetch():
         Property_id = request.form.get("property_id")
         current_property = Properties.query.filter_by(id=Property_id).first()
         property_type = current_property.property_type
-        min_price = current_property.min_price  # Example: Adjusting price range dynamically
+        min_price = current_property.min_price 
         max_price = current_property.max_price 
+        min_sqft = current_property.min_sqft
+        max_sqft = current_property.max_sqft
         bedrooms = current_property.bedrooms
         bathrooms = current_property.bathrooms
+        min_land_size = current_property.min_land_size
+        max_land_size = current_property.max_land_size
         agent_role = current_property.agent_role
 
-        matching_properties = Properties.query.filter(
-            Properties.id != Property_id, 
-            Properties.property_type == property_type,
-            Properties.min_price >= min_price,
-            Properties.max_price <= max_price,
-            Properties.bedrooms == bedrooms,
-            Properties.bathrooms == bathrooms,
-            Properties.agent_role != agent_role,
-        ).all()
+        query = Properties.query.filter(
+        Properties.id != Property_id,
+        Properties.property_type == property_type,
+        Properties.min_price <= max_price,
+        Properties.max_price >= min_price,
+        Properties.agent_role != agent_role
+        )
+        if property_type in ["Apartment", "Villa"]:
+            query = query.filter(
+                Properties.bedrooms == bedrooms,
+                Properties.bathrooms == bathrooms
+            )
+        elif property_type in ["Plot", "Commercial"]:
+            query = query.filter(
+            Properties.min_sqft <= max_sqft,
+            Properties.max_sqft >= min_sqft
+            )
+        elif property_type == "Land":
+            query = query.filter(
+            Properties.min_land_size <= max_land_size,
+            Properties.max_land_size >= min_land_size
+            )
+        matching_properties = query.all()
         return render_template("match.html", results = matching_properties)
     
