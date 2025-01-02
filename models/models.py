@@ -139,13 +139,13 @@ class MatchView(db.Model):
     __table_args__ = {"extend_existing": True}
 
     id = db.Column(db.BigInteger, primary_key=True)  # Assuming 'id' is a primary key
-    # property_id = db.Column(db.Integer, nullable=True)
     property_type = db.Column(db.VARCHAR(20), nullable=True)
     address1 = db.Column(db.String, nullable=True)
     min_price = db.Column(db.Float, nullable=True)
     max_price = db.Column(db.Float, nullable=True)
     bedrooms = db.Column(db.Numeric, nullable=True)
     bathrooms = db.Column(db.Integer, nullable=True)
+    purpose = db.Column(db.String, nullable=True)
     agent_role = db.Column(db.String, nullable=True)
     user_id = db.Column(db.Integer, nullable=True)  # Assuming a users table exists
     match_count = db.Column(db.BigInteger, nullable=True)

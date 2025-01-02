@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div id = "dashboard"></div>
-    <title>Dashboard</title>
+    <title>Maahbi</title>
     <body>
         {% include 'navbar2.html' %}
     </body>
@@ -27,7 +27,6 @@
         <th>Property Type</th>
         <th>Price</th>
         <th>Bedrooms</th>
-        <th>Bathrooms</th>
         <th>Agent Name</th>
         <th>Agent Phone</th>
     </tr>
@@ -37,7 +36,6 @@
         <td>{{ result.property_type }}</td>
         <td>Rs.{{ result.min_price }}</td>
         <td>{{ result.bedrooms }}</td>
-        <td>{{ result.bathrooms }}</td>
         <td>{{ result.agent_name}}</td>
         <td>{{result.agent_phone | int }}</td>
     </tr>

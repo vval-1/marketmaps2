@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dynamic Property Form</title>
+    <title>Maahbi</title>
     <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='addproperty.css')}}">
     <style>
         .form-group { margin-bottom: 15px; }
@@ -11,10 +11,15 @@
     <script>
         function manageRequiredAttributes() {
             document.querySelectorAll('.dynamic-field').forEach(field => {
-                const input = field.querySelector('input, select'); // Target input/select/textarea elements
+                const input = field.querySelector('input, select');
                 if (field.classList.contains('hidden')) {
                     // Remove required attribute if the field is hidden
                     input && input.removeAttribute('required');
+                } else {
+                    // Add required attribute back if the field is visible and marked with a text-danger indicator
+                    if (field.querySelector('.text-danger')) {
+                        input && input.setAttribute('required', 'required');
+                    }
                 }
             });
         }

@@ -4,24 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div id = "dashboard"></div>
-    <title>Dashboard</title>
+    <title>Maahbi</title>
     <body>
         {% include 'navbar2.html' %}
     </body>
 <div class = "results-box">
     <div class = results-title" style="font-size: 25px; font-weight: bold; text-align: right; margin-bottom: 16px;">My Properties</div>
     <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='dashboard.css')}}">
-    <style>
-        button[type="submit"] {
-          background-color: rgb(230, 105, 105);
-          color: #fff;
-          padding: 10px;
-          border: none;
-          border-radius: 10px;
-          cursor: pointer;
-        }
-        
-      </style>
 <table>
     <tr>
         <th>ID</th>
@@ -29,7 +18,7 @@
         <th>Property Type</th>
         <th>Price</th>
         <th>Bedrooms</th>
-        <th>Bathrooms</th>
+        <th>Purpose</th>
         <th>Match Count</th>
         <th>Edit</th>
         <th>Delete</th>
@@ -40,8 +29,8 @@
         <td>{{ result.address1 }}</td>
         <td>{{ result.property_type }}</td>
         <td>Rs.{{ result.min_price }}</td>
-        <td>{{ result.bedrooms }}</td>
-        <td>{{ result.bathrooms }}</td>
+        <td>{{ result.bedrooms | int }}</td>
+        <td>{{ result.purpose }}</td>
         <td>
             <form action="dashboard/fetch" method="post">
                 <input type="hidden" id="property_id" name="property_id" value="{{result.id}}">

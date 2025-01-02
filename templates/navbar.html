@@ -39,6 +39,11 @@
         font-weight: 600;
     }
 
+    .logo-img {
+        width: 250px; /* Set desired width */
+        height: 50px; /* Maintain aspect ratio */
+    }
+
     /* Navbar Link Hover Effect */
     .navbar a:hover {
         color: #8bb2dc;
@@ -47,7 +52,7 @@
 </head>
 <div>
 <header class="header">
-    <a href="/" class="logo">Logo</a>
+    <a href="/" class="logo-img"><img src="{{ url_for('static', filename='company-logo.jpeg') }}" class="logo-img"></a>
     <nav class="navbar">
         <a href="/property/search">Search</a>
         <a href="/property/dashboard-properties">My Properties</a>

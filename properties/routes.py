@@ -12,7 +12,7 @@ def validate_data(data_dict):
         if value == "":
             data_dict[key] = None
         elif value.isdigit():
-            data_dict[key] = float(value)
+            data_dict[key] = int(value)
     return data_dict
 
 @properties.route("/add-property", methods=["GET", "POST"])
@@ -50,7 +50,7 @@ def add_properties():
         )
         db.session.add(new_property)
         db.session.commit()
-        return render_template("search.html")
+        return redirect("/property/dashboard-properties")
     return render_template("addproperty.html")
 
 
@@ -86,7 +86,7 @@ def add_client():
         )
         db.session.add(new_client)
         db.session.commit()
-        return render_template("search.html")
+        return redirect("/property/dashboard-clients")
     return render_template("addclient.html")
 
 
@@ -130,18 +130,58 @@ def dashboard2():
 def delete():
     if request.method == "POST":
         Property_id = request.form.get("property_id")
-    return render_template("delete.html", property_id=Property_id)
+        property_to_delete = Properties.query.get(Property_id)
+        if property_to_delete:
+            db.session.delete(property_to_delete)  # Delete the property
+            db.session.commit()
+            return redirect("/property/dashboard-properties")
+    else:   
+        return render_template("delete.html")
 
 
 @properties.route("/dashboard/edit", methods=["GET", "POST"])
-def edit():
+def edit_form():
+        Property_id = request.form.get("property_id")
+        record = Properties.query.filter_by(id=Property_id).first()
+        if record.agent_role == "Seller": 
+             return render_template("edit-properties.html", record=record)
+        elif record.agent_role == "Buyer": 
+            return render_template("edit-clients.html", record=record)
+
+@properties.route("/dashboard/update", methods=["POST"])
+def update():
     if request.method == "POST":
         Property_id = request.form.get("property_id")
         record = Properties.query.filter_by(id=Property_id).first()
-        if record: 
-             return render_template("edit.html", record=record)
-        else: 
-            return render_template("search.html")
+        edit_data = dict(request.form)
+        clean_data = validate_data(edit_data)
+        record.address1 = clean_data["address1"]
+        record.property_type = clean_data["property_type"]
+        record.city = clean_data["city"]
+        record.project_name = clean_data["project_name"]
+        record.min_price = clean_data["min_price"]
+        record.max_price = clean_data["max_price"]
+        record.bedrooms = clean_data["bedrooms"]
+        record.bathrooms = clean_data["bathrooms"]
+        record.facing_direction = clean_data["facing_direction"]
+        record.min_sqft = clean_data["min_sqft"]
+        record.max_sqft = clean_data["max_sqft"]
+        record.price_per_sqft = clean_data["price_per_sqft"]
+        record.possession = clean_data["possession"]
+        record.is_gated = clean_data["is_gated"]
+        record.uds = clean_data["uds"]
+        record.min_land_size = clean_data["min_land_size"]
+        record.max_land_size = clean_data["max_land_size"]
+        record.price_per_acre = clean_data["price_per_acre"]
+        record.type_of_ownership = clean_data["type_of_ownership"]
+        record.multiple_properties = clean_data["multiple_properties"]
+        record.purpose = clean_data["purpose"]
+        try:
+            db.session.commit()
+        except Exception as e:
+            db.session.rollback()
+            return f"Database update error: {e}", 500 
+        return redirect("/property/dashboard-properties")
    
 @properties.route("/dashboard/fetch", methods=["POST"])
 def fetch():
@@ -183,4 +223,7 @@ def fetch():
             )
         matching_properties = query.all()
         return render_template("match.html", results = matching_properties)
-    
+
+@properties.route("/testing")
+def testing():
+    return redirect("/property/dashboard-properties")

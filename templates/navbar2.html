@@ -1,60 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ID=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maahbi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 <style>
-    /* Import Google Fonts */
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-    /* Global Styles */
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-    }
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
 
-    body {
-        background-color: #8bb2dc;
-    }
+body {
+    background-color: #8bb2dc;
+}
 
-    /* Header Styling */
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 14px;
-        background-color: rgb(0, 0, 0);
-    }
+.navbar{
+    display: flex
+}
+/* Header Styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+    background-color: rgb(0, 0, 0);
+}
 
-    /* Logo Styling */
-    .logo {
-        font-size: 28px;
-        font-weight: 700;
-        color: #fffdfd;
-        text-decoration: none;
-    }
+/* Logo Styling */
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fffdfd;
+    text-decoration: none;
+}
 
-    /* Navbar Styling */
-    .navbar a {
-        margin: 0 20px;
-        color: #ffffff;
-        text-decoration: none;
-        font-weight: 600;
-    }
+.dropdown {
+            position: relative;
+        }
 
-    /* Navbar Link Hover Effect */
-    .navbar a:hover {
-        color: #8bb2dc;
+        .dropdown-icon {
+            /* cursor: pointer;
+            font-size: 1.5em; */
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-icon:hover {
+            background-color: #e9ecef;
+        }
+
+        .dropdown-content {
+        display: none;
+        position: absolute;
+        top: 100%; /* Position below the dropdown icon */
+        right: 0;
+        background-color: #000000; /* White background for better contrast */
+        min-width: 200px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Softer shadow for a natural feel */
+        border-radius: 4px; /* Slightly reduced radius for a sharper look */
+        z-index: 1000; /* Ensures it stays above other elements */
+        margin-top: 5px;
+        padding: 10px 0; /* Adds spacing inside the dropdown */
+        animation: fadeIn 0.2s ease-in-out;
+        }
+
+
+        .dropdown-content a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1em;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a i { 
+        margin-right: 10px; /* Adjust margin as needed */
+        }
+
+
+        .dropdown-content .icon {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .dropdown-icon-img {
+            width: 32px; /* adjust width */
+            height: 30px; /* ensure image doesn't exceed parent width */
+        }
+
+        .show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+/* Navbar Styling */
+.navbar a {
+    margin: 0 20px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-menu {
+    position: absolute;
+    top: 7%;
+    right: 0%;
+    width: 150px;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.logo-img {
+    width: 250px; /* Set desired width */
+    height: 50px; /* Maintain aspect ratio */
+}
+
+.sub-menu {
+    background-color: black;
+    padding: 10px; /* Reduced padding for better spacing */
+    margin: 0; /* Removed margin to prevent extra space */
+    border-radius: 5px; /* Added rounded corners */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Added a subtle shadow */
+}
+
+.sub-menu a {
+    display: block; /* Make links block elements */
+    color: white; /* Added white text color for contrast */
+    text-decoration: none; /* Remove underlines from links */
+    font-weight: bold;
+    padding: 5px 0; /* Add vertical padding to links */
+    text-align: center; /* Center the text */
+}
+
+.sub-menu hr {
+    border-top: 1px solid gray; /* Style the hr */
+    margin: 5px 0; /* Add margin to the hr */
+}
+
+/* Hover effect for the links */
+.sub-menu a:hover {
+    background-color: #333; /* Darker background on hover */
+}
+/* Navbar Link Hover Effect */
+.navbar a:hover {
+    color: #8bb2dc;
     }
 </style>
-</head>
-<div>
-<header class="header">
-    <a href="/" class="logo">Logo</a>
-    <nav class="navbar">
-        <a href="/property/search">Search</a>
-        <a href="/property/dashboard-properties">My Properties</a>
-        <a href="/property/dashboard-clients">My Clients</a>
-        <a href="/property/add-property">Add Property</a>
-        <a href="/property/add-client">Add Client</a>
-        <a href="/auth/logout">Log Out</a>
-    </nav>
-</header>
-</div>
+<body>
+    <header class="header">
+        <a href="/" class="logo-img"><img src="{{ url_for('static', filename='company-logo.jpeg') }}" class="logo-img"></a>
+        <nav class="navbar">
+            <a href="/property/search">Search</a>
+            <a href="/property/dashboard-properties">My Properties</a>
+            <a href="/property/dashboard-clients">My Clients</a>
+            <a href="/property/add-property">Add Property</a>
+            <a href="/property/add-client">Add Client</a>
+            <div class="dropdown">
+                <span class="dropdown-icon" onclick="toggleDropdown()">
+                    <img src="{{ url_for('static', filename='profile-icon.jpg') }}" alt="Menu Icon" class="dropdown-icon-img">
+                </span>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="/account"><i class="fa-solid fa-gear"></i>Settings</a>
+                    <a href="/support"><i class="fa-regular fa-envelope"></i>Support</a>
+                    <hr>
+                    <a href="/auth/logout"><i class="fa-solid fa-right-from-bracket"></i>Log Out</a>
+                </div>   
+            </div>
+        </nav>
+    </header>
+    <script>
+        function toggleDropdown() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.addEventListener('click', function(event) {
+        // Ensure that clicks outside of the dropdown will close it
+        if (!event.target.closest('.dropdown')) {
+            const dropdowns = document.getElementsByClassName("dropdown-content");
+            for (const dropdown of dropdowns) {
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        }
+    });
+    </script>
+</body>
+</html>

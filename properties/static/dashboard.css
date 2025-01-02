@@ -48,3 +48,11 @@ table {
     margin: 3% auto; /* Center the box on the page */
     width: 70%; /* Adjust as needed  */
 }
+button[type="submit"] {
+    background-color: rgb(230, 105, 105);
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    } 

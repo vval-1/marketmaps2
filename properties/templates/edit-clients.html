@@ -2,28 +2,22 @@
 <html>
 <head>
     <title>Maahbi</title>
-    <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='addclient.css')}}">
+    <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='addproperty.css')}}">
     <style>
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; }
         .form-group input, .form-group select { width: 100%; padding: 8px; }
     </style>
     <script>
-        function manageRequiredAttributes() {
-            document.querySelectorAll('.dynamic-field').forEach(field => {
-                const input = field.querySelector('input, select');
-                if (field.classList.contains('hidden')) {
-                    // Remove required attribute if the field is hidden
-                    input && input.removeAttribute('required');
-                } else {
-                    // Add required attribute back if the field is visible and marked with a text-danger indicator
-                    if (field.querySelector('.text-danger')) {
-                        input && input.setAttribute('required', 'required');
-                    }
-                }
-            });
+        document.addEventListener('DOMContentLoaded', function () {
+        const initialType = "{{ record.property_type }}"; // Pre-fill based on existing record
+        if (initialType) {
+            showFields(initialType);
+        } else {
+            document.querySelectorAll('.dynamic-field').forEach(field => field.classList.remove('hidden'));
         }
-        function showFields(propertyType) {
+    });
+    function showFields(propertyType) {
             // Hide all dynamic fields
             document.querySelectorAll('.dynamic-field').forEach(field => field.classList.add('hidden'));
 
@@ -39,7 +33,6 @@
             } else if (propertyType === 'Commercial') {
                 document.querySelectorAll('.project_name, .min_land_size, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             }
-            manageRequiredAttributes();
         }
     </script>
      <body>
@@ -48,13 +41,12 @@
 </head>
 <body>
     <section>
-        <h1 style="text-align: center; margin-top: 2%; margin-bottom: 2%;">New Client Submission</h1>
-        <h2><span class="text-danger"> *</span>Indicates Required Field</h2>
-        <form action="/property/add-client" method="post">
+        <h1 style="text-align: center; margin-top: 2%; margin-bottom: 2%;">Edit Client Form</h1>
+        <form action="/property/dashboard/update" method="post">
             <div class="form-group">
-                <label for="property_type">Select Client Type:</label>
+                <label for="property_type">Select Property Type:</label>
                 <select id="property_type" name="property_type" onchange="showFields(this.value)">
-                    <option value="">-- Select --</option>
+                    <option value="{{ record.property_type }}">{{ record.property_type }}</option>
                     <option value="Apartment">Apartment</option>
                     <option value="Villa">Villa</option>
                     <option value="Land">Land</option>
@@ -63,55 +55,60 @@
                 </select>
             </div>
 
+            <div class="form-group dynamic-field address1 hidden">
+                <label for="address1">Address:</label>
+                <input type="text" id="address1" name="address1" value="{{ record.address1 }}" />
+            </div>
+
             <div class="form-group dynamic-field project_name hidden">
                 <label for="project_name">Project Name (not seen by other users):</label>
-                <input type="text" id="project_name" name="project_name" />
+                <input type="text" id="project_name" name="project_name" value="{{ record.project_name }}"/>
             </div>
 
             <div class="form-group dynamic-field city hidden">
-                <label for="city">City:<span class="text-danger"> *</span></label>
-                <input type="text" id="city" name="city" required />
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" value="{{ record.city }}"/>
             </div>
 
             <div class="form-group dynamic-field min_price hidden">
-                <label for="min_price">Minimum Price:<span class="text-danger"> *</span></label>
-                <input type="number" id="min_price" name="min_price" required />
+                <label for="min_price">Minimum Price:</label>
+                <input type="number" id="min_price" name="min_price" value="{{ record.min_price }}"/>
             </div>
 
             <div class="form-group dynamic-field max_price hidden">
-                <label for="max_price">Maximum Price:<span class="text-danger"> *</span></label>
-                <input type="number" id="max_price" name="max_price" required />
+                <label for="max_price">Maximum Price:</label>
+                <input type="number" id="max_price" name="max_price" value="{{ record.max_price }}"/>
             </div>
             
             <div class="form-group dynamic-field bedrooms hidden">
-                <label for="bedrooms">How Many Bedrooms?:<span class="text-danger"> *</span></label>
-                <input type="number" id="bedrooms" name="bedrooms" required />
+                <label for="bedrooms">How Many Bedrooms?:</label>
+                <input type="number" id="bedrooms" name="bedrooms" value="{{ record.bedrooms }}"  />
             </div>
 
             <div class="form-group dynamic-field bathrooms hidden">
-                <label for="bathrooms">How Many Bathrooms?:<span class="text-danger"> *</span></label>
-                <input type="number" id="bathrooms" name="bathrooms" required />
+                <label for="bathrooms">How Many Bathrooms?:</label>
+                <input type="number" id="bathrooms" name="bathrooms" value="{{ record.bathrooms }}"/>
             </div>
 
             <div class="form-group dynamic-field min_sqft hidden">
-                <label for="min_sqft">Minimum Square Feet?:<span class="text-danger"> *</span></label>
-                <input type="number" id="min_sqft" name="min_sqft" required />
+                <label for="min_sqft">Minimum Square Feet?:</label>
+                <input type="number" id="min_sqft" name="min_sqft" value="{{ record.min_sqft }}"/>
             </div>
 
             <div class="form-group dynamic-field max_sqft hidden">
-                <label for="max_sqft">Maximum Square Feet?:<span class="text-danger"> *</span></label>
-                <input type="number" id="max_sqft" name="max_sqft" required />
+                <label for="max_sqft">Maximum Square Feet?:</label>
+                <input type="number" id="max_sqft" name="max_sqft" value="{{ record.max_sqft }}" />
             </div>
 
             <div class="form-group dynamic-field price_per_sqft hidden">
-                <label for="price_per_sqft">Price Per Sqft?:<span class="text-danger"> *</span></label>
-                <input type="number" id="price_per_sqft" name="price_per_sqft" required />
+                <label for="price_per_sqft">Price Per Sqft?</label>
+                <input type="number" id="price_per_sqft" name="price_per_sqft" value="{{ record.price_per_sqft }}" />
             </div>
 
             <div class="form-group dynamic-field facing_direction hidden">
-                <label for="facing_direction">What Direction?:<span class="text-danger"> *</span></label>
-                <select id="facing_direction" name="facing_direction" required >
-                    <option value="">-- Select --</option>
+                <label for="facing_direction">What Direction?:</label>
+                <select id="facing_direction" name="facing_direction" >
+                    <option value="{{ record.facing_direction }}">{{ record.facing_direction }}</option>
                     <option value="NORTH">North</option>
                     <option value="EAST">East</option>
                     <option value="WEST">West</option>
@@ -122,7 +119,7 @@
             <div class="form-group dynamic-field possession hidden">
                 <label for="possession">Possession Status?:</label>
                 <select id="possession" name="possession" >
-                    <option value="">-- Select --</option>
+                    <option value="{{ record.possession }}">{{ record.possession }}</option>
                     <option value="Under Construction">Under Construction</option>
                     <option value="Ready to Move">Ready to Move</option>
                     <option value="Resale">Resale</option>
@@ -132,52 +129,81 @@
             <div class="form-group dynamic-field is_gated hidden">
                 <label for="is_gated">Is it gated?:</label>
                 <select id="is_gated" name="is_gated" >
-                    <option value="">-- Select --</option>
+                    <option value="{{ record.is_gated }}">
+                        {% if record.is_gated == 'TRUE' %}Yes{% elif record.is_gated == 'FALSE' %}No{% endif %}
+                    </option>
                     <option value="TRUE">Yes</option>
                     <option value="FALSE">No</option>
                 </select>
             </div>
 
+            <div class="form-group dynamic-field uds hidden">
+                <label for="uds">How Much is the UDS?:</label>
+                <input type="number" id="uds" name="uds" value="{{ record.uds }}" />
+            </div>
+
             <div class="form-group dynamic-field min_land_size hidden">
                 <label for="min_land_size">What is The Plot Size?:</label>
-                <input type="number" id="min_land_size" name="min_land_size" />
+                <input type="number" id="min_land_size" name="min_land_size" value="{{ record.min_land_size }}"/>
             </div>
 
             <div class="form-group dynamic-field max_land_size hidden">
                 <label for="max_land_size">What is The Land Size?:</label>
-                <input type="number" id="max_land_size" name="max_land_size" />
+                <input type="number" id="max_land_size" name="max_land_size" value="{{ record.max_land_size }}"/>
             </div>
 
             <div class="form-group dynamic-field price_per_acre hidden">
-                <label for="price_per_acre">Price Per Acre?:<span class="text-danger"> *</span></label>
-                <input type="number" id="price_per_acre" name="price_per_acre" />
+                <label for="price_per_acre">Price Per Acre?:</label>
+                <input type="number" id="price_per_acre" name="price_per_acre" value="{{ record.price_per_acre }}" />
             </div>
 
             <div class="form-group dynamic-field type_of_ownership hidden">
                 <label for="type_of_ownership">Type of ownership?:</label>
                 <select id="type_of_ownership" name="type_of_ownership" >
-                    <option value="">-- Select --</option>
+                    <option value="{{ record.type_of_ownership }}">{{ record.type_of_ownership }}</option>
                     <option value="Land Owner">Land Owner</option>
                     <option value="Builder">Builder</option>
                     <option value="ReSeller">Reseller</option>
                 </select>
             </div>
 
+            <div class="form-group dynamic-field multiple_properties hidden">
+                <label for="multiple_properties">Multiple Properties?</label>
+                <select id="multiple_properties" name="multiple_properties">
+                    <option value="{{ record.multiple_properties }}">{{ record.multiple_properties }}</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+
             <div class="form-group dynamic-field purpose hidden">
-                <label for="purpose">Purpose?<span class="text-danger"> *</span></label>
-                <select id="purpose" name="purpose" required >
-                    <option value="">-- Select --</option>
+                <label for="purpose">Purpose?:</label>
+                <select id="purpose" name="purpose" >
+                    <option value="{{ record.purpose}}">{{ record.purpose }}</option>
                     <option value="Sale">Sale</option>
                     <option value="Rent">Rent</option>
                 </select>
             </div>
 
-            <div>
-            <input type="hidden" id="agent_role" name="agent_role" value="Seller">
+            <div class="form-group dynamic-field agent_name hidden">
+                <label for="agent_name">Agent's Name:</label>
+                <input type="text" id="agent_name" name="agent_name" value="{{ record.agent_name }}"/>
             </div>
 
+            <div class="form-group dynamic-field agent_phone hidden">
+                <label for="agent_phone">Agent's Phone Number:</label>
+                <input type="number" id="agent_phone" name="agent_phone" value="{{ record.agent_phone }}" />
+            </div>
+
+            <div>
+            <input type="hidden" id="agent_role" name="agent_role" value="{{ record.agent_role }}">
+            </div>
+
+            <input type="hidden" id="property_id" name="property_id" value="{{record.id}}">
+
             <div class="form-group dynamic-field submit hidden">
-            <input type="submit" value="Submit Client" style="display: block; margin: 2% auto;">
+            <input type="submit" value="Submit Edit" style="display: block; margin: 2% auto;"> 
+            <a href="/property/dashboard-clients">Cancel</a>
             </div>
         </form>
     </section>

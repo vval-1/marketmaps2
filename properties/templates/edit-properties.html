@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dynamic Property Form</title>
+    <title>Maahbi</title>
     <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='addproperty.css')}}">
     <style>
         .form-group { margin-bottom: 15px; }
@@ -21,7 +21,7 @@
             // Hide all dynamic fields
             document.querySelectorAll('.dynamic-field').forEach(field => field.classList.add('hidden'));
 
-            // Determine which fields to show based on property type
+            //show fields based on selected field 
             if (propertyType === 'Apartment') {
                 document.querySelectorAll('.address1, .project_name, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .agent_name, .agent_phone, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Villa') {
@@ -41,8 +41,8 @@
 </head>
 <body>
     <section>
-        <h1 style="text-align: center; margin-top: 2%; margin-bottom: 2%;">Edit Asset Form</h1>
-        <form action="/property/add-property" method="post">
+        <h1 style="text-align: center; margin-top: 2%; margin-bottom: 2%;">Edit Property Form</h1>
+        <form action="/property/dashboard/update" method="post">
             <div class="form-group">
                 <label for="property_type">Select Property Type:</label>
                 <select id="property_type" name="property_type" onchange="showFields(this.value)">
@@ -190,18 +190,16 @@
                 <input type="text" id="agent_name" name="agent_name" value="{{ record.agent_name }}"/>
             </div>
 
+            <input type="hidden" id="property_id" name="property_id" value="{{record.id}}">
+
             <div class="form-group dynamic-field agent_phone hidden">
                 <label for="agent_phone">Agent's Phone Number:</label>
                 <input type="number" id="agent_phone" name="agent_phone" value="{{ record.agent_phone }}" />
             </div>
 
-            <div>
-            <input type="hidden" id="agent_role" name="agent_role" value="{{ record.agent_role }}">
-            </div>
-
             <div class="form-group dynamic-field submit hidden">
             <input type="submit" value="Submit Edit" style="display: block; margin: 2% auto;"> 
-            <a href="/property/dashboard-clients">Cancel</a>
+            <a href="/property/dashboard-properties">Cancel</a>
             </div>
         </form>
     </section>
