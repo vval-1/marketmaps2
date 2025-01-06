@@ -93,13 +93,40 @@ def add_client():
 @properties.route("/search", methods=["GET", "POST"])
 def search():
     if request.method == "POST":
+        property_type = request.form.get("property_type")
         city = request.form.get("city")
-        zipcode = request.form.get("zipcode")
-        price = request.form.get("price")
-        bedrooms = request.form.get("bedrooms")
-        bathrooms = request.form.get("bathrooms")
-        results = Properties.query.all()
+        min_price = int(request.form.get("min_price"))
+        max_price = int(request.form.get("max_price"))
+        bathrooms = int(request.form.get("bathrooms"))
+        bedrooms = int(request.form.get("bedrooms"))
+
+        print("$$$$$")
+        print(min_price)
+        print(max_price)
+        print(bathrooms)
+        print(bedrooms)
+        print("$$$$$")
+
+        # Start with a base query
+        query = Properties.query
+        
+        # Apply filters if provided
+        if property_type:
+            query = query.filter(Properties.property_type == property_type)
+        if min_price:
+            query = query.filter(Properties.min_price >= min_price)
+        if max_price:  
+            query = query.filter(Properties.max_price <= max_price) 
+        if bedrooms:
+                query = query.filter(Properties.bedrooms == bedrooms)
+        if bathrooms:
+                query = query.filter(Properties.bathrooms == bathrooms)
+                
+        print(query)        
+        # Fetch results
+        results = query.all()
         return render_template("search.html", results=results)
+
 
     return render_template("search.html")
 
@@ -224,6 +251,6 @@ def fetch():
         matching_properties = query.all()
         return render_template("match.html", results = matching_properties)
 
-@properties.route("/testing")
-def testing():
-    return redirect("/property/dashboard-properties")
+@properties.route("/test")
+def test8():
+    return render_template("test8.html")

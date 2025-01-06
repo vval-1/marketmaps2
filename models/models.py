@@ -143,8 +143,9 @@ class MatchView(db.Model):
     address1 = db.Column(db.String, nullable=True)
     min_price = db.Column(db.Float, nullable=True)
     max_price = db.Column(db.Float, nullable=True)
-    bedrooms = db.Column(db.Numeric, nullable=True)
-    bathrooms = db.Column(db.Integer, nullable=True)
+    bedrooms = db.Column(db.Float, nullable=True)
+    bathrooms = db.Column(db.Float, nullable=True)
+    min_land_size = db.Column(db.Float, nullable=True)
     purpose = db.Column(db.String, nullable=True)
     agent_role = db.Column(db.String, nullable=True)
     user_id = db.Column(db.Integer, nullable=True)  # Assuming a users table exists

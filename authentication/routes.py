@@ -48,7 +48,7 @@ def register():
             return redirect('/auth/login')
         hashed_password = bcrypt.generate_password_hash(form.password.data)
         decoded_password = hashed_password.decode('utf-8') if isinstance(hashed_password, bytes) else hashed_password
-        new_user = Users(email=form.email.data, username=form.username.data, password=decoded_password, agent_name=form.agent_name.data, agent_phone=form.agent_phone.data)
+        new_user = Users(email=form.email.data, password=decoded_password, agent_name=form.agent_name.data, agent_phone=form.agent_phone.data)
         db.session.add(new_user)
         db.session.commit()
         flash("Account Successfully Created, Please Log in!")

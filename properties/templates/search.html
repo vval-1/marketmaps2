@@ -21,16 +21,18 @@
             align-items: center;
             justify-content: center;
             height: 25vh;
+            width: 100%;
+            padding: 0 20px;
         } 
         
         .search-container {
             background-color: #ffffff;
             padding: 20px;
-            border-radius: 0px; 
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            width: 100%;
-            margin-top: 0px;
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
         } 
         
         .search-form {
@@ -38,8 +40,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            border-radius: 50px; /* Circular border */
+            border-radius: 8px;
             background-color: #f9f9f9;
+            width: 100%;
         }
         
         .form-group {
@@ -87,26 +90,41 @@
             <form action="/property/search" method="post">
                 <div class="form-group">
                     <input type="text" id="city" name="city" placeholder="City">
-                    <input type="text" id="zipcode" name="zipcode" placeholder="Zip Code">
-                    <select id="price" name="price">
-                        <option value="">Select Price</option>
-                        <option value="0-20000">$0 - $20,000</option>
-                        <option value="20000-40000">$20,000 - $40,000</option>
-                        <option value="40000-60000">$40,000 - $60,000</option>
-                    </select>                 
+                    <select id="property_type" name="property_type">
+                        <option value="">Select Property Type</option>
+                        <option value="Apartment">Apartment</option>
+                        <option value="Villa">Villa</option>
+                        <option value="Land">Land</option>
+                        <option value="Plot">Plot</option>
+                        <option value="Commercial">Commerical</option>
+                    </select> 
+                    <select id="min_price" name="min_price">
+                        <option value="">Select Minimum Price</option>
+                        <option value="2000000">20L</option>
+                        <option value="4000000">40L</option>
+                        <option value="6000000">60L</option>
+                        <option value="8000000">80L</option>
+                    </select>    
+                    <select id="max_price" name="max_price">
+                        <option value="">Select Maximum Price</option>
+                        <option value="4000000">40L</option>
+                        <option value="6000000">60L</option>
+                        <option value="8000000">80L</option>
+                        <option value="10000000">1cr</option>
+                    </select>               
                     <select id="bedrooms" name="bedrooms">
                         <option value="">Bedrooms</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
-                        <option value="4+">4+</option>
+                        <option value="4">4</option>
                     </select>    
                     <select id="bathrooms" name="bathrooms">
                         <option value="">Bathrooms</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
-                        <option value="4+">4+</option>
+                        <option value="4">4</option>
                     </select>
                     <button type="submit">Search</button>
                 </div>
@@ -167,31 +185,45 @@
                 width: 70%; /* Adjust as needed  */
             }
         </style>
+  
     <table>
         <tr>
             <th>ID</th>
+            <th>Property Type</th>
             <th>Address</th>
-            <th>City</th>
-            <th>Zipcode</th>
-            <th>Price</th>
+            <th>Min Price</th>
+            <th>Max Price</th>
             <th>Bedrooms</th>
-            <th>Bathrooms</th>
+            <th>Agent's Phone Number</th>
         </tr>
         {% for result in results %}
         <tr>
             <td>{{ loop.index }}</td>
+            <td>{{ result.property_type }}</td>
             <td>{{ result.address1 }}</td>
-            <td>{{ result.city }}</td>
-            <td>{{ result.zipcode }}</td>
-            <td>{{ result.price }}</td>
+            <td>{{ result.min_price }}</td>
+            <td>{{ result.max_price }}</td>
             <td>{{ result.bedrooms }}</td>
-            <td>{{ result.bathrooms }}</td>
+            <td>{{ result.agent_phone | int}}</td>
         </tr>
         {% endfor %}
     </table>
     {% if not results %}
         <p>No results found.</p>
     {% endif %}
-    </div>
+    </div>    
+<!-- <script>
+    const submitButton = document.querySelector('.container button[type="submit"]');
+const resultsBox = document.querySelector('.results-box');
+
+// Add an event listener to the submit button
+submitButton.addEventListener('click', function(event) {
+  event.preventDefault();  // Prevent the form from submitting
+
+  // Show the results box when the button is clicked
+  resultsBox.style.display = 'block';
+});
+
+</script> -->
 </body>
 </html>
