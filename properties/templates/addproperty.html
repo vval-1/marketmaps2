@@ -29,15 +29,15 @@
 
             // Determine which fields to show based on property type
             if (propertyType === 'Apartment') {
-                document.querySelectorAll('.address1, .project_name, .multiple_properties, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.project_name, .location, .multiple_properties, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Villa') {
-                document.querySelectorAll('.address1, .project_name, .multiple_properties, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .is_gated, .uds, .min_land_size, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll(' .project_name, .multiple_properties, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .is_gated, .min_land_size, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Land') {
-                document.querySelectorAll('.address1, .facing_direction, .min_price, .max_price, .max_land_size, .price_per_acre, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.facing_direction, .min_price, .max_price, .max_land_size, .price_per_acre, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Plot') {
-                document.querySelectorAll('.address1, .project_name, .facing_direction, .min_price, .max_price, .is_gated, .min_land_size, .price_per_acre, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));  
+                document.querySelectorAll('.project_name, .facing_direction, .min_land_size, .min_price, .max_price, .is_gated, .price_per_acre, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));  
             } else if (propertyType === 'Commercial') {
-                document.querySelectorAll('.address1, .project_name, .multiple_properties, min_land_size, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.project_name, .multiple_properties, min_land_size, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             }
             manageRequiredAttributes();
         }
@@ -63,28 +63,58 @@
                 </select>
             </div>
 
-            <div class="form-group dynamic-field address1 hidden">
-                <label for="address1">Address:<span class="text-danger"> *</span></label>
-                <input type="text" id="address1" name="address1" required />
+            <div class="form-group dynamic-field purpose hidden">
+                <label for="purpose">Purpose?<span class="text-danger"> *</span></label>
+                <select id="purpose" name="purpose" required >
+                    <option value="">-- Select --</option>
+                    <option value="Sale">Sale</option>
+                    <option value="Rent">Rent</option>
+                </select>
             </div>
 
+            <div class="form-group dynamic-field multiple_properties hidden">
+                <label for="multiple_properties">Multiple Properties?<span class="text-danger"> *</span></label>
+                <select id="multiple_properties" name="multiple_properties" required >
+                    <option value="">-- Select --</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+
+            <!-- <div class="form-group dynamic-field address1 hidden">
+                <label for="address1">Address:<span class="text-danger"> *</span></label>
+                <input type="text" id="address1" name="address1" required />
+            </div> -->
+
             <div class="form-group dynamic-field project_name hidden">
-                <label for="project_name">Project Name (not seen by other users):</label>
+                <label for="project_name">Project Name:</label>
                 <input type="text" id="project_name" name="project_name" />
             </div>
 
             <div class="form-group dynamic-field city hidden">
-                <label for="city">City:<span class="text-danger"> *</span></label>
-                <input type="text" id="city" name="city" required />
+                <label for="city">City: </label>
+                <select id="city" name="city" >
+                    <option value="Hyderabad">Hyderabad</option>
+                </select>
+            </div>
+
+            <div class="form-group dynamic-field location hidden">
+                <label for="location">Location?:</label>
+                <select id="location" name="location">
+                    <option value="">-- Select -- </option>
+                    {% for location in locations %}
+                        <option value="{{location}}">{{location}}</option>
+                    {% endfor %}    
+                </select>
             </div>
 
             <div class="form-group dynamic-field min_price hidden">
-                <label for="min_price">Minimum Price:<span class="text-danger"> *</span></label>
+                <label for="min_price">Minimum Property Cost:<span class="text-danger"> *</span></label>
                 <input type="number" id="min_price" name="min_price" required />
             </div>
 
             <div class="form-group dynamic-field max_price hidden">
-                <label for="max_price">Maximum Price:<span class="text-danger"> *</span></label>
+                <label for="max_price">Maximum Property Cost:<span class="text-danger"> *</span></label>
                 <input type="number" id="max_price" name="max_price" required />
             </div>
             
@@ -94,8 +124,8 @@
             </div>
 
             <div class="form-group dynamic-field bathrooms hidden">
-                <label for="bathrooms">How Many Bathrooms?:<span class="text-danger"> *</span></label>
-                <input type="number" id="bathrooms" name="bathrooms" required />
+                <label for="bathrooms">How Many Bathrooms?:</label>
+                <input type="number" id="bathrooms" name="bathrooms" />
             </div>
 
             <div class="form-group dynamic-field min_sqft hidden">
@@ -114,8 +144,8 @@
             </div>
 
             <div class="form-group dynamic-field facing_direction hidden">
-                <label for="facing_direction">What Direction?:<span class="text-danger"> *</span></label>
-                <select id="facing_direction" name="facing_direction" required >
+                <label for="facing_direction">Property Facing?:</label>
+                <select id="facing_direction" name="facing_direction"  >
                     <option value="">-- Select --</option>
                     <option value="NORTH">North</option>
                     <option value="EAST">East</option>
@@ -173,23 +203,7 @@
                 </select>
             </div>
 
-            <div class="form-group dynamic-field multiple_properties hidden">
-                <label for="multiple_properties">Multiple Properties?<span class="text-danger"> *</span></label>
-                <select id="multiple_properties" name="multiple_properties" required >
-                    <option value="">-- Select --</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
-                </select>
-            </div>
 
-            <div class="form-group dynamic-field purpose hidden">
-                <label for="purpose">Purpose?<span class="text-danger"> *</span></label>
-                <select id="purpose" name="purpose" required >
-                    <option value="">-- Select --</option>
-                    <option value="Sale">Sale</option>
-                    <option value="Rent">Rent</option>
-                </select>
-            </div>
 
             <div>
             <input type="hidden" id="agent_role" name="agent_role" value="Seller">

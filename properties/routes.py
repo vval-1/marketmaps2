@@ -2,10 +2,12 @@ from flask import render_template, request, Blueprint, redirect, url_for, sessio
 from models import db
 from models.models import Properties, Clients, Users, MatchView
 from flask_login import LoginManager, login_required
+from properties.locations import hyderabad_locations
 
 properties = Blueprint(
     "properties", __name__, template_folder="templates", static_folder="static"
 )
+
 
 def validate_data(data_dict):
     for key, value in data_dict.items():
@@ -51,7 +53,7 @@ def add_properties():
         db.session.add(new_property)
         db.session.commit()
         return redirect("/property/dashboard-properties")
-    return render_template("addproperty.html")
+    return render_template("addproperty.html", locations = hyderabad_locations)
 
 
 @properties.route("/add-client", methods=["GET", "POST"])
@@ -94,23 +96,14 @@ def add_client():
 def search():
     if request.method == "POST":
         property_type = request.form.get("property_type")
-        city = request.form.get("city")
+        # city = request.form.get("city")
         min_price = int(request.form.get("min_price"))
         max_price = int(request.form.get("max_price"))
         bathrooms = int(request.form.get("bathrooms"))
         bedrooms = int(request.form.get("bedrooms"))
 
-        print("$$$$$")
-        print(min_price)
-        print(max_price)
-        print(bathrooms)
-        print(bedrooms)
-        print("$$$$$")
-
-        # Start with a base query
         query = Properties.query
         
-        # Apply filters if provided
         if property_type:
             query = query.filter(Properties.property_type == property_type)
         if min_price:
@@ -121,11 +114,10 @@ def search():
                 query = query.filter(Properties.bedrooms == bedrooms)
         if bathrooms:
                 query = query.filter(Properties.bathrooms == bathrooms)
-                
-        print(query)        
+                      
         # Fetch results
         results = query.all()
-        return render_template("search.html", results=results)
+        return render_template("search-results.html", results=results)
 
 
     return render_template("search.html")
@@ -254,3 +246,4 @@ def fetch():
 @properties.route("/test")
 def test8():
     return render_template("test8.html")
+

@@ -130,6 +130,87 @@
                 </div>
             </form>
         </div>
-    </div>      
+    </div>
+    <div class = "results-box">
+        <div class = results-title" style="font-size: 25px; font-weight: bold; text-align: right; margin-bottom: 16px;">Search Results</div>
+        <style>          
+            table {
+                margin: 0 auto; /* Centers the table */
+                border-collapse: collapse;
+                width: 100%; /* Adjust width as needed */
+                font-family: Arial, sans-serif;
+                color: rgb(0, 0, 0);
+            }
+
+            /* Style for the header row */
+            table thead tr {
+                background-color: rgb(255, 255, 255);
+                color: rgb(0, 0, 0);
+            }
+
+            /* Style for all cells */
+            table td, table th {
+                border: 1px solid #e3e3e3;
+                padding: 12px;
+                text-align: center;
+            }
+
+            /* Zebra striping for rows */
+            table tbody tr:nth-child(even) {
+                background-color: #ffffff;
+            }
+
+            table tbody tr:nth-child(odd) {
+                background-color: #ffffff;
+            }
+
+            /* Hover effect */
+            table tbody tr:hover {
+                background-color: #d6d6d6;
+            }
+
+            /* Optional: Adjust font size and text alignment for aesthetics */
+            table {
+                font-size: 16px;
+            }
+             .results-box {
+                display: flex;
+                flex-direction: column; /* Stacks content vertically */
+                align-items: flex-start; /* Aligns content to the left*/
+                padding: 16px; /* Adds spacing around the content */
+                border: 1px solid #000000; 
+                background-color: #e7e7e7; /* Dark background for aesthetic */
+                color: rgb(0, 0, 0); /* Text color */
+                margin: 0px auto; /* Center the box on the page */
+                width: 70%; /* Adjust as needed  */
+            }
+        </style>
+  
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Property Type</th>
+            <th>Address</th>
+            <th>Min Price</th>
+            <th>Max Price</th>
+            <th>Bedrooms</th>
+            <th>Agent's Phone Number</th>
+        </tr>
+        {% for result in results %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ result.property_type }}</td>
+            <td>{{ result.address1 }}</td>
+            <td>{{ result.min_price }}</td>
+            <td>{{ result.max_price }}</td>
+            <td>{{ result.bedrooms }}</td>
+            <td>{{ result.agent_phone | int}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% if not results %}
+        <p>No results found.</p>
+    {% endif %}
+    </div>    
 </body>
 </html>
