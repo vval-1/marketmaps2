@@ -1,7 +1,7 @@
-from flask import render_template, request, Blueprint, redirect, url_for, session
+from flask import render_template, request, Blueprint, redirect, session
 from models import db
-from models.models import Properties, Clients, Users, MatchView
-from flask_login import LoginManager, login_required
+from models.models import Properties, MatchView
+from flask_login import login_required
 from properties.locations import hyderabad_locations
 
 properties = Blueprint(
@@ -242,8 +242,4 @@ def fetch():
             )
         matching_properties = query.all()
         return render_template("match.html", results = matching_properties)
-
-@properties.route("/test")
-def test8():
-    return render_template("test8.html")
 
