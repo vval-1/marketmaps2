@@ -45,8 +45,9 @@ table {
     border: 1px solid #000000; 
     background-color: #dedddd; /* Dark background for aesthetic */
     color: rgb(0, 0, 0); /* Text color */
-    margin: 3% auto; /* Center the box on the page */
+    margin: 0 auto 2% auto;
     width: 70%; /* Adjust as needed  */
+    border-radius: 8px;
 }
 button[type="submit"] {
     background-color: rgb(230, 105, 105);

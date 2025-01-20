@@ -24,13 +24,17 @@ class Properties(db.Model):
     uds = db.Column(db.Float, nullable=True)
     min_land_size = db.Column(db.Float, nullable=True)
     max_land_size = db.Column(db.Float, nullable=True)
+    min_plot_size = db.Column(db.Float, nullable=True)
+    max_plot_size = db.Column(db.Float, nullable=True)
     price_per_acre = db.Column(db.Float, nullable=True)
+    price_per_sqyd = db.Column(db.Float, nullable=True)
     type_of_ownership = db.Column(db.String(30), nullable=True)
     multiple_properties = db.Column(db.String(10), nullable=True)
     purpose = db.Column(db.String(30), nullable=True)
     agent_name = db.Column(db.String(30), nullable=True)
     agent_phone = db.Column(db.Float, nullable=True)
     agent_role = db.Column(db.String(30), nullable=True)
+    location = db.Column(db.String(100), nullable=True)
     user_id = db.Column(db.Integer, nullable=True)
     date_added = db.Column(db.DateTime, default=datetime.datetime.now(), nullable=True)
 
@@ -53,13 +57,17 @@ class Properties(db.Model):
         uds=None,
         min_land_size=None,
         max_land_size=None,
+        min_plot_size=None,
+        max_plot_size=None,
         price_per_acre=None,
+        price_per_sqyd=None,
         type_of_ownership=None,
         multiple_properties=None,
         purpose=None,
         agent_name=None,
         agent_phone=None,
         agent_role=None,
+        location=None,
         user_id=None,
         date_added=None,
     ):
@@ -80,13 +88,17 @@ class Properties(db.Model):
         self.uds = uds
         self.min_land_size = min_land_size
         self.max_land_size = max_land_size
+        self.min_plot_size = min_plot_size
+        self.max_plot_size = max_plot_size
         self.price_per_acre = price_per_acre
+        self.price_per_sqyd = price_per_sqyd
         self.type_of_ownership = type_of_ownership
         self.multiple_properties = multiple_properties
         self.purpose = purpose
         self.agent_name = agent_name
         self.agent_phone = agent_phone
         self.agent_role = agent_role
+        self.location = location
         self.user_id = user_id
         self.date_added = date_added
 

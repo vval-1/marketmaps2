@@ -20,6 +20,9 @@
           border-radius: 10px;
           cursor: pointer;
         }
+        .results-box{
+            margin: 4% auto 5% auto;
+        }
       </style>
 <table>
     <tr>
@@ -36,8 +39,8 @@
         <td>{{ result.property_type }}</td>
         <td>Rs.{{ result.min_price }}</td>
         <td>{{ result.bedrooms }}</td>
-        <td>{{ result.agent_name}}</td>
-        <td>{{result.agent_phone | int }}</td>
+        <td>{{ result.agent_name }}</td>
+        <td>{{ result.agent_phone | int }}</td>
     </tr>
 {% endfor %}
 </table>
