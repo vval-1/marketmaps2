@@ -57,3 +57,17 @@ button[type="submit"] {
     border-radius: 10px;
     cursor: pointer;
     } 
+    button.fetch-btn {
+        background-color: rgb(105, 180, 230); 
+    }
+    
+    /* Edit Button */
+    button.edit-btn {
+        background-color: rgb(211, 73, 238); 
+    }
+    
+    /* Delete Button */
+    button.delete-btn {
+        background-color: rgb(230, 105, 105); 
+    }
+    

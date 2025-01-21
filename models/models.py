@@ -152,12 +152,14 @@ class MatchView(db.Model):
 
     id = db.Column(db.BigInteger, primary_key=True)  # Assuming 'id' is a primary key
     property_type = db.Column(db.VARCHAR(20), nullable=True)
-    address1 = db.Column(db.String, nullable=True)
+    location = db.Column(db.VARCHAR(100), nullable=True)
+    project_name = db.Column(db.VARCHAR(100), nullable=True)
     min_price = db.Column(db.Float, nullable=True)
     max_price = db.Column(db.Float, nullable=True)
     bedrooms = db.Column(db.Float, nullable=True)
-    bathrooms = db.Column(db.Float, nullable=True)
+    min_sqft = db.Column(db.Float, nullable=True)
     min_land_size = db.Column(db.Float, nullable=True)
+    min_plot_size = db.Column(db.Float, nullable=True)
     purpose = db.Column(db.String, nullable=True)
     agent_role = db.Column(db.String, nullable=True)
     user_id = db.Column(db.Integer, nullable=True)  # Assuming a users table exists

@@ -219,9 +219,11 @@ def fetch():
         min_sqft = current_property.min_sqft
         max_sqft = current_property.max_sqft
         bedrooms = current_property.bedrooms
-        bathrooms = current_property.bathrooms
+        purpose = current_property.purpose
         min_land_size = current_property.min_land_size
         max_land_size = current_property.max_land_size
+        min_plot_size = current_property.min_plot_size
+        max_plot_size = current_property.max_plot_size
         agent_role = current_property.agent_role
 
         query = Properties.query.filter(
@@ -229,23 +231,34 @@ def fetch():
         Properties.property_type == property_type,
         Properties.min_price <= max_price,
         Properties.max_price >= min_price,
-        Properties.agent_role != agent_role
+        Properties.agent_role != agent_role,
+        Properties.purpose == purpose
         )
         if property_type in ["Apartment", "Villa"]:
             query = query.filter(
                 Properties.bedrooms == bedrooms,
-                Properties.bathrooms == bathrooms
+                Properties.min_sqft <= max_sqft,
+                Properties.max_sqft >= min_sqft
             )
-        elif property_type in ["Plot", "Commercial"]:
+        elif property_type == "Commercial":
             query = query.filter(
             Properties.min_sqft <= max_sqft,
             Properties.max_sqft >= min_sqft
             )
+        elif property_type == "Plot":
+            query = query.filter(
+            Properties.min_plot_size <= max_plot_size,
+            Properties.max_plot_size >= min_plot_size
+            )    
         elif property_type == "Land":
             query = query.filter(
             Properties.min_land_size <= max_land_size,
             Properties.max_land_size >= min_land_size
             )
         matching_properties = query.all()
-        return render_template("match.html", results = matching_properties)
+        if agent_role == 'Seller':
+            return render_template("match-clients.html", results = matching_properties)
+        elif agent_role == 'Buyer':
+            return render_template("match-properties.html", results = matching_properties)
+        
 

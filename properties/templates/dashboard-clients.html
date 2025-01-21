@@ -11,16 +11,6 @@
 <body>
   {% include 'navbar2.html' %}
 </body>
-<style>
-  button[type="submit"] {
-    background-color: rgb(230, 105, 105);
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-</style>
 <div class="results-title" style="
    font-size: 32px; 
    font-weight: bold; 
@@ -43,46 +33,44 @@
   <table>
     <tr>
       <th>ID</th>
-      <th>Address</th>
       <th>Project Name</th>
-      <th>Property Type</th>
-      <th>Price</th>
+      <th>Minimum Price</th>
+      <th>Minimum Sqft</th>
       <th>Bedrooms</th>
-      <th>Match Count</th>
+      <th>Purpose</th>
+      <th>My Matches</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
     {% for result in apartment %}
     <tr>
       <td>{{ loop.index }}</td>
-      <td>{{ result.address1 }}</td>
       <td>{{ result.project_name }}</td>
-      <td>{{ result.property_type }}</td>
       <td>Rs.{{ result.min_price }}</td>
+      <td>{{ result.min_sqft }}</td>
       <td>{{ result.bedrooms }}</td>
+      <td>{{ result.purpose }}</td>
       <td>
         <form action="dashboard/fetch" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">{{ result.match_count }} matches</button>
+          <button type="submit" class="fetch-btn">{{ result.match_count }} matches</button>
         </form>
       </td>
       <td>
         <form action="dashboard/edit" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">Edit</button>
+          <button type="submit" class="edit-btn" >Edit</button>
         </form>
       </td>
       <td>
         <form action="dashboard/delete" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit" onclick="return checker()">Delete</button>
+          <button type="submit" class="delete-btn" onclick="return checker()">Delete</button>
         </form>
       </td>
     </tr>
     {% endfor %}
   </table>
-  {% else %}
-  <p>No Villas Found.</p>
   {% endif %}
 </div>
 
@@ -92,40 +80,40 @@
   <h2>Villas</h2>
   <table>
     <tr>
-      <th>ID</th>
-      <th>Address</th>
-      <th>Project Name</th>
-      <th>Property Type</th>
-      <th>Price</th>
-      <th>Bedrooms</th>
-      <th>Match Count</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
-    {% for result in villas %}
-    <tr>
-      <td>{{ loop.index }}</td>
-      <td>{{ result.address1 }}</td>
-      <td>{{ result.project_name }}</td>
-      <td>{{ result.property_type }}</td>
-      <td>Rs.{{ result.min_price }}</td>
-      <td>{{ result.bedrooms }}</td>
+        <th>ID</th>
+        <th>Project Name</th>
+        <th>Minimum Price</th>
+        <th>Minimum Sqft</th>
+        <th>Bedrooms</th>
+        <th>Purpose</th>
+        <th>My Matches</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+      {% for result in villas %}
+      <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ result.project_name }}</td>
+        <td>Rs.{{ result.min_price }}</td>
+        <td>{{ result.min_sqft }}</td>
+        <td>{{ result.bedrooms }}</td>
+        <td>{{ result.purpose }}</td>
       <td>
         <form action="dashboard/fetch" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">{{ result.match_count }} matches</button>
+          <button type="submit" class="fetch-btn">{{ result.match_count }} matches</button>
         </form>
       </td>
       <td>
         <form action="dashboard/edit" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">Edit</button>
+          <button type="submit" class="edit-btn">Edit</button>
         </form>
       </td>
       <td>
         <form action="dashboard/delete" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit" onclick="return checker()">Delete</button>
+          <button type="submit" class="delete-btn" onclick="return checker()">Delete</button>
         </form>
       </td>
     </tr>
@@ -142,39 +130,38 @@
   <table>
     <tr>
       <th>ID</th>
-      <th>Address</th>
       <th>Project Name</th>
-      <th>Property Type</th>
       <th>Price</th>
-      <th>Bedrooms</th>
-      <th>Match Count</th>
+      <th>Land Size </th>
+      <th>Purpose</th>
+      <th>My Matches</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
     {% for result in land %}
     <tr>
       <td>{{ loop.index }}</td>
-      <td>{{ result.address1 }}</td>
       <td>{{ result.project_name }}</td>
-      <td>{{ result.property_type }}</td>
-      <td>Rs.{{ result.min_price }}</td>
-      <td>{{ result.bedrooms }}</td>
+      <td>{{ result.location }}</td>
+      <td>{{ result.min_price }}</td>
+      <td>{{ result.min_land_size }}</td>
+      <td>{{ result.purpose }}</td>
       <td>
         <form action="dashboard/fetch" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">{{ result.match_count }} matches</button>
+          <button type="submit" class="fetch-btn">{{ result.match_count }} matches</button>
         </form>
       </td>
       <td>
         <form action="dashboard/edit" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">Edit</button>
+          <button type="submit" class="edit-btn">Edit</button>
         </form>
       </td>
       <td>
         <form action="dashboard/delete" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit" onclick="return checker()">Delete</button>
+          <button type="submit" class="delete-btn" onclick="return checker()">Delete</button>
         </form>
       </td>
     </tr>
@@ -191,39 +178,37 @@
   <table>
     <tr>
       <th>ID</th>
-      <th>Address</th>
       <th>Project Name</th>
-      <th>Property Type</th>
       <th>Price</th>
-      <th>Bedrooms</th>
-      <th>Match Count</th>
+      <th>Plot Size </th>
+      <th>Purpose</th>
+      <th>My Matches</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
     {% for result in plot %}
     <tr>
-      <td>{{ loop.index }}</td>
-      <td>{{ result.address1 }}</td>
-      <td>{{ result.project_name }}</td>
-      <td>{{ result.property_type }}</td>
-      <td>Rs.{{ result.min_price }}</td>
-      <td>{{ result.bedrooms }}</td>
+        <td>{{ loop.index }}</td>
+        <td>{{ result.project_name }}</td>
+        <td>{{ result.min_price }}</td>
+        <td>{{ result.min_plot_size }}</td>
+        <td>{{ result.purpose }}</td>
       <td>
         <form action="dashboard/fetch" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">{{ result.match_count }} matches</button>
+          <button type="submit" class="fetch-btn">{{ result.match_count }} matches</button>
         </form>
       </td>
       <td>
         <form action="dashboard/edit" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">Edit</button>
+          <button type="submit" class="edit-btn">Edit</button>
         </form>
       </td>
       <td>
         <form action="dashboard/delete" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit" onclick="return checker()">Delete</button>
+          <button type="submit" class="delete-btn" onclick="return checker()">Delete</button>
         </form>
       </td>
     </tr>
@@ -233,34 +218,32 @@
 </div>
 
 
-{% set commerical = results | selectattr('property_type', 'equalto', 'Commercial') | list %}
+{% set commercial = results | selectattr('property_type', 'equalto', 'Commercial') | list %}
 {% if commercial %}
 <div class="results-box">
   <h2>Commerical Properties</h2>
   <table>
     <tr>
       <th>ID</th>
-      <th>Address</th>
       <th>Project Name</th>
-      <th>Property Type</th>
       <th>Price</th>
-      <th>Bedrooms</th>
-      <th>Match Count</th>
+      <th>Commerical Sqft</th>
+      <th>Purpose</th>
+      <th>My Matches</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
     {% for result in commercial %}
     <tr>
       <td>{{ loop.index }}</td>
-      <td>{{ result.address1 }}</td>
       <td>{{ result.project_name }}</td>
-      <td>{{ result.property_type }}</td>
       <td>Rs.{{ result.min_price }}</td>
-      <td>{{ result.bedrooms }}</td>
+      <td>{{result.min_sqft}}</td>
+      <td>{{ result.purpose }}</td>
       <td>
         <form action="dashboard/fetch" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">{{ result.match_count }} matches</button>
+          <button type="submit" class="fetch-btn">{{ result.match_count }} matches</button>
         </form>
       </td>
       <td>
@@ -272,7 +255,7 @@
       <td>
         <form action="dashboard/delete" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit" onclick="return checker()">Delete</button>
+          <button type="submit" class="delete-btn" onclick="return checker()">Delete</button>
         </form>
       </td>
     </tr>
@@ -283,7 +266,7 @@
 
 
 {% if not results %}
-<p>No Properties Yet!</p>
+<p>No Clients Yet!</p>
 {% endif %}
 </div>
 <script>

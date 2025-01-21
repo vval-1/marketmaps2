@@ -11,16 +11,6 @@
 <body>
   {% include 'navbar2.html' %}
 </body>
-<style>
-  button[type="submit"] {
-    background-color: rgb(230, 105, 105);
-    color: #fff;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-</style>
 <div class="results-title" style="
    font-size: 32px; 
    font-weight: bold; 
@@ -65,26 +55,24 @@
       <td>
         <form action="dashboard/fetch" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">{{ result.match_count }} matches</button>
+          <button type="submit" class="fetch-btn">{{ result.match_count }} matches</button>
         </form>
       </td>
       <td>
         <form action="dashboard/edit" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">Edit</button>
+          <button type="submit" class="edit-btn">Edit</button>
         </form>
       </td>
       <td>
         <form action="dashboard/delete" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit" onclick="return checker()">Delete</button>
+          <button type="submit" class="delete-btn" onclick="return checker()">Delete</button>
         </form>
       </td>
     </tr>
     {% endfor %}
   </table>
-  {% else %}
-  <p>No Villas Found.</p>
   {% endif %}
 </div>
 
@@ -117,19 +105,19 @@
       <td>
         <form action="dashboard/fetch" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">{{ result.match_count }} matches</button>
+          <button type="submit" class="fetch-btn">{{ result.match_count }} matches</button>
         </form>
       </td>
       <td>
         <form action="dashboard/edit" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">Edit</button>
+          <button type="submit" class="edit-btn">Edit</button>
         </form>
       </td>
       <td>
         <form action="dashboard/delete" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit" onclick="return checker()">Delete</button>
+          <button type="submit" class="delete-btn" onclick="return checker()">Delete</button>
         </form>
       </td>
     </tr>
@@ -166,19 +154,19 @@
       <td>
         <form action="dashboard/fetch" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">{{ result.match_count }} matches</button>
+          <button type="submit" class="fetch-btn">{{ result.match_count }} matches</button>
         </form>
       </td>
       <td>
         <form action="dashboard/edit" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">Edit</button>
+          <button type="submit" class="edit-btn">Edit</button>
         </form>
       </td>
       <td>
         <form action="dashboard/delete" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit" onclick="return checker()">Delete</button>
+          <button type="submit" class="delete-btn" onclick="return checker()">Delete</button>
         </form>
       </td>
     </tr>
@@ -215,19 +203,19 @@
       <td>
         <form action="dashboard/fetch" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">{{ result.match_count }} matches</button>
+          <button type="submit" class="fetch-btn">{{ result.match_count }} matches</button>
         </form>
       </td>
       <td>
         <form action="dashboard/edit" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">Edit</button>
+          <button type="submit" class="edit-btn">Edit</button>
         </form>
       </td>
       <td>
         <form action="dashboard/delete" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit" onclick="return checker()">Delete</button>
+          <button type="submit" class="delete-btn" onclick="return checker()">Delete</button>
         </form>
       </td>
     </tr>
@@ -264,19 +252,19 @@
       <td>
         <form action="dashboard/fetch" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">{{ result.match_count }} matches</button>
+          <button type="submit" class="fetch-btn">{{ result.match_count }} matches</button>
         </form>
       </td>
       <td>
         <form action="dashboard/edit" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit">Edit</button>
+          <button type="submit" class="edit-btn">Edit</button>
         </form>
       </td>
       <td>
         <form action="dashboard/delete" method="post">
           <input type="hidden" name="property_id" value="{{ result.id }}">
-          <button type="submit" onclick="return checker()">Delete</button>
+          <button type="submit" class="delete-btn" onclick="return checker()">Delete</button>
         </form>
       </td>
     </tr>
