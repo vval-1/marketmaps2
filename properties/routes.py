@@ -180,7 +180,6 @@ def update():
         record = Properties.query.filter_by(id=Property_id).first()
         edit_data = dict(request.form)
         clean_data = validate_data(edit_data)
-        record.address1 = clean_data["address1"]
         record.property_type = clean_data["property_type"]
         record.city = clean_data["city"]
         record.project_name = clean_data["project_name"]
@@ -200,6 +199,10 @@ def update():
         record.price_per_acre = clean_data["price_per_acre"]
         record.type_of_ownership = clean_data["type_of_ownership"]
         record.multiple_properties = clean_data["multiple_properties"]
+        record.location = clean_data["location"]
+        record.min_plot_size = clean_data["min_plot_size"]
+        record.max_plot_size = clean_data["max_plot_size"]
+        record.price_per_sqyd = clean_data["price_per_sqyd"]
         record.purpose = clean_data["purpose"]
         try:
             db.session.commit()
@@ -260,5 +263,63 @@ def fetch():
             return render_template("match-clients.html", results = matching_properties)
         elif agent_role == 'Buyer':
             return render_template("match-properties.html", results = matching_properties)
-        
+
+@properties.route("/searchtest", methods=["GET", "POST"])
+def searchtest():
+    if request.method == "POST":
+        def safe_search(value):
+            try:
+                return int(value) if value != "" else None
+            except ValueError:
+                return None
+
+        # Retrieve form data.
+        property_type = request.form.get("property_type")
+        purpose = request.form.get("purpose")
+
+        # Convert form fields to integers.
+        min_price = safe_search(request.form.get("min_price", ""))
+        max_price = safe_search(request.form.get("max_price", ""))
+        bedrooms = safe_search(request.form.get("bedrooms", ""))
+        bathrooms = safe_search(request.form.get("bathrooms", ""))
+        min_sqft = safe_search(request.form.get("min_sqft", ""))
+        max_sqft = safe_search(request.form.get("max_sqft", ""))
+        min_plot_size = safe_search(request.form.get("min_plot_size", ""))
+        max_plot_size = safe_search(request.form.get("max_plot_size", ""))
+        min_land_size = safe_search(request.form.get("min_land_size", ""))
+        max_land_size = safe_search(request.form.get("max_land_size", ""))
+
+        filters = []
+        if property_type:
+            filters.append(Properties.property_type == property_type)
+        if purpose:
+            filters.append(Properties.purpose == purpose)
+        if min_price is not None:
+            filters.append(Properties.min_price >= min_price)
+        if max_price is not None:
+            filters.append(Properties.max_price <= max_price)
+        if bedrooms is not None:
+            filters.append(Properties.bedrooms == bedrooms)
+        if bathrooms is not None:
+            filters.append(Properties.bathrooms == bathrooms)
+        if min_sqft is not None:
+            filters.append(Properties.min_sqft >= min_sqft)
+        if max_sqft is not None:
+            filters.append(Properties.max_sqft <= max_sqft)
+        if min_plot_size is not None:
+            filters.append(Properties.plot_size >= min_plot_size)
+        if max_plot_size is not None:
+            filters.append(Properties.plot_size <= max_plot_size)
+        if min_land_size is not None:
+            filters.append(Properties.min_land_size >= min_land_size)
+        if max_land_size is not None:
+            filters.append(Properties.max_land_size <= max_land_size)
+
+        results = Properties.query.filter(*filters).all()
+        print(results)
+        return render_template("test-results.html", results=results)
+
+    return render_template("test.html")
+
+
 

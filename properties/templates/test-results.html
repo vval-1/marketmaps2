@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <div id="dashboard"></div>
+  <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='dashboard.css')}}">
+  <title>Dashboard</title>
+
+<body>
+  {% include 'navbar2.html' %}
+</body>
+<div class="results-title" style="
+   font-size: 32px; 
+   font-weight: bold; 
+   text-align: center; 
+   margin: 20px auto; 
+   margin-bottom: 5px;
+   color: #333333; 
+   background-color: #ebeaea; 
+   border-radius: 8px; 
+   width: 70%;
+  ">
+  My Clients
+</div>
+
+
+{% set apartment = results | selectattr('property_type', 'equalto', 'Apartment') | list %}
+{% if apartment %}
+<div class="results-box">
+  <h2>Apartments</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Project Name</th>
+      <th>Minimum Price</th>
+      <th>Maximum Price</th>
+      <th>Bedrooms</th>
+      <th>Minimum Sqft</th>
+      <th>Maximum Sqft</th>
+      <th>Purpose</th>
+      <th>Agent Phone Number</th>
+    </tr>
+    {% for result in apartment %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ result.project_name }}</td>
+      <td>Rs.{{ result.min_price }}</td>
+      <td>Rs.{{ result.max_price }}</td>
+      <td>{{ result.bedrooms }}</td>
+      <td>{{ result.min_sqft }}</td>
+      <td>{{ result.max_sqft }}</td>
+      <td>{{ result.purpose }}</td>
+      <td>{{ result.agent_phone | int}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+
+{% set villas = results | selectattr('property_type', 'equalto', 'Villa') | list %}
+{% if villas %}
+<div class="results-box">
+  <h2>Villas</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Project Name</th>
+      <th>Minimum Price</th>
+      <th>Maximum Price</th>
+      <th>Bedrooms</th>
+      <th>Minimum Sqft</th>
+      <th>Maximum Sqft</th>
+      <th>Minimum Plot Size</th>
+      <th>Maximum Plot Size</th>
+      <th>Purpose</th>
+      <th>Agent Phone Number</th>
+    </tr>
+    {% for result in villas %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ result.project_name }}</td>
+      <td>Rs.{{ result.min_price }}</td>
+      <td>Rs.{{ result.max_price }}</td>
+      <td>{{ result.bedrooms }}</td>
+      <td>{{ result.min_sqft }}</td>
+      <td>{{ result.max_sqft }}</td>
+      <td>{{ result.min_plot_size }}</td>
+      <td>{{ result.max_max_plot_size }}</td>
+      <td>{{ result.purpose }}</td>
+      <td>{{ result.agent_phone | int}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+
+
+{% set plot = results | selectattr('property_type', 'equalto', 'Plot') | list %}
+{% if plot %}
+<div class="results-box">
+  <h2>Plots</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Project Name</th>
+      <th>Minimum Price</th>
+      <th>Maximum Price</th>
+      <th>Minimum Plot Size</th>
+      <th>Maximum Plot Size</th>
+      <th>Purpose</th>
+      <th>Agent Phone Number</th>
+    </tr>
+    {% for result in plot %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ result.project_name }}</td>
+      <td>Rs.{{ result.min_price }}</td>
+      <td>Rs.{{ result.max_price }}</td>
+      <td>{{ result.min_plot_size }}</td>
+      <td>{{ result.max_max_plot_size }}</td>
+      <td>{{ result.purpose }}</td>
+      <td>{{ result.agent_phone | int}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+
+
+{% set land = results | selectattr('property_type', 'equalto', 'Land') | list %}
+{% if land %}
+<div class="results-box">
+  <h2>Land</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Project Name</th>
+      <th>Minimum Price</th>
+      <th>Maximum Price</th>
+      <th>Minimum Land Size</th>
+      <th>Maximum Land Size</th>
+      <th>Purpose</th>
+      <th>Agent Phone Number</th>
+    </tr>
+    {% for result in land %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ result.project_name }}</td>
+        <td>{{ result.min_price }}</td>
+        <td>{{ result.max_price }}</td>
+        <td>{{ result.min_land_size }}</td>
+        <td>{{ result.max_land_size }}</td>
+        <td>{{ result.purpose }}</td>
+        <td>{{ result.agent_phone | int}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+
+
+{% set commercial = results | selectattr('property_type', 'equalto', 'Commercial') | list %}
+{% if commercial %}
+<div class="results-box">
+  <h2>Commerical Properties</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Project Name</th>
+      <th>Minimum Price</th>
+      <th>Maximum Price</th>
+      <th>Minimum Sqft</th>
+      <th>Maximum Sqft</th>
+      <th>Purpose</th>
+      <th>Agent Phone Number</th>
+    </tr>
+    {% for result in plot %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ result.project_name }}</td>
+      <td>Rs.{{ result.min_price }}</td>
+      <td>Rs.{{ result.max_price }}</td>
+      <td>{{ result.min_sqft }}</td>
+      <td>{{ result.max_max_sqft }}</td>
+      <td>{{ result.purpose }}</td>
+      <td>{{ result.agent_phone | int}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+
+
+{% if not results %}
+<p>No Results Yet!</p>
+{% endif %}
+</div>
+</body>
+
+</html>

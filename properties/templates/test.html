@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maahbi</title>
+  <style>
+    /* Reset and base styles */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #8bb2dc;
+      margin: 0;
+      height: 100vh;
+    }
+    /* Container centering */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2% 20px;
+    }
+    /* White search box */
+    .search-container {
+      background-color: #ffffff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    /* Form setup */
+    .search-form {
+      display: flex;
+      flex-direction: column;
+    }
+    /* Flex groups */
+    .form-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    /* Common styling for inputs, selects, and button */
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group select,
+    .form-group button[type="submit"] {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      flex: 1 1 150px;
+      min-width: 150px;
+      height: 42px; /* Ensures a consistent height */
+    }
+    /* Button specific styles */
+    .form-group button[type="submit"] {
+      background-color: #007bff;
+      color: #ffffff;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .form-group button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <!-- If using a templating engine, your navbar can be included here -->
+  {% include 'navbar2.html' %}
+
+  <div class="container">
+    <div class="search-container">
+      <form action="/property/searchtest" method="post" class="search-form">
+        <!-- Common Fields and Search Button on one row -->
+        <div class="form-group">
+          <select id="property_type" name="property_type">
+            <option value="">Select Property Type</option>
+            <option value="Apartment">Apartment</option>
+            <option value="Villa">Villa</option>
+            <option value="Plot">Plot</option>
+            <option value="Land">Land</option>
+            <option value="Commercial">Commercial</option>
+          </select>
+          <select id="city" name="city">
+            <option value="Hyderabad">Hyderabad</option>
+          </select>
+          <select id="purpose" name="purpose">
+            <option value="">Select Purpose</option>
+            <option value="Sale">Sale</option>
+            <option value="Rent">Rent</option>
+          </select>
+          <select id="min_price" name="min_price">
+            <option value="">Select Minimum Price</option>
+            <option value="2000000">20L</option>
+            <option value="4000000">40L</option>
+            <option value="6000000">60L</option>
+            <option value="8000000">80L</option>
+          </select>
+          <select id="max_price" name="max_price">
+            <option value="">Select Maximum Price</option>
+            <option value="4000000">40L</option>
+            <option value="6000000">60L</option>
+            <option value="8000000">80L</option>
+            <option value="10000000">1cr</option>
+          </select>
+          <button type="submit">Search</button>
+        </div>
+
+        <!-- Conditional fields (initially hidden) -->
+        <!-- Apartment Fields -->
+        <div id="apartmentFields" class="form-group conditional-field" style="display: none;">
+          <select id="bedrooms" name="bedrooms">
+            <option value="">Bedrooms</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          <select id="bathrooms" name="bathrooms">
+            <option value="">Bathrooms</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          <input type="number" id="min_sqft" name="min_sqft" placeholder="Minimum Square Feet" />
+          <input type="number" id="max_sqft" name="max_sqft" placeholder="Maximum Square Feet" />
+        </div>
+
+        <!-- Villa Fields (Apartment fields plus Plot Size) -->
+        <div id="villaFields" class="form-group conditional-field" style="display: none;">
+          <select id="bedrooms" name="bedrooms">
+            <option value="">Bedrooms</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          
+          <input type="number" id="min_sqft" name="min_sqft" placeholder="Minimum Square Feet" />
+          <input type="number" id="max_sqft" name="max_sqft" placeholder="Maximum Square Feet" />
+          <input type="number" id="min_plot_size" name="min_plot_size" placeholder="Minimum Plot Size" />
+          <input type="number" id="max_plot_size" name="max_plot_size" placeholder="Maximum Plot Size" />
+        </div>
+
+        <!-- Plot Fields -->
+        <div id="plotFields" class="form-group conditional-field" style="display: none;">
+          <input type="number" id="min_plot_size" name="min_plot_size" placeholder="Min Plot Size (SQYD)" />
+          <input type="number" id="max_plot_size" name="max_plot_size" placeholder="Max Plot Size (SQYD)" />
+        </div>
+
+        <!-- Land Fields -->
+        <div id="landFields" class="form-group conditional-field" style="display: none;">
+          <input type="number" id="min_land_size" name="min_land_size" placeholder="Min Land Size (Acres)" />
+          <input type="number" id="max_land_size" name="max_land_size" placeholder="Max Land Size (Acres)" />
+        </div>
+
+        <!-- Commercial Fields -->
+        <div id="commercialFields" class="form-group conditional-field" style="display: none;">
+          <input type="number" id="min_sqft" name="min_sqft" placeholder="Mininum Square Feet" />
+          <input type="number" id="max_sqft" name="max_sqft" placeholder="Maximum Square Feet" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Toggle the display of conditional fields based on property type selection.
+    document.getElementById("property_type").addEventListener("change", function () {
+      // Hide all conditional fields first.
+      var conditionalFields = document.querySelectorAll(".conditional-field");
+      conditionalFields.forEach(function (fieldGroup) {
+        fieldGroup.style.display = "none";
+      });
+
+      // Show the appropriate field group based on the selected property type.
+      var selectedType = this.value;
+      if (selectedType === "Apartment") {
+        document.getElementById("apartmentFields").style.display = "flex";
+      } else if (selectedType === "Villa") {
+        document.getElementById("villaFields").style.display = "flex";
+      } else if (selectedType === "Plot") {
+        document.getElementById("plotFields").style.display = "flex";
+      } else if (selectedType === "Land") {
+        document.getElementById("landFields").style.display = "flex";
+      } else if (selectedType === "Commercial") {
+        document.getElementById("commercialFields").style.display = "flex";
+      }
+    });
+  </script>
+</body>
+</html>
