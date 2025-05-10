@@ -11,21 +11,21 @@ class Properties(db.Model):
     project_name = db.Column(db.String(100), nullable=True)
     property_type = db.Column(db.String(20), nullable=True)
     city = db.Column(db.String(30), nullable=True)
-    min_price = db.Column(db.Float, nullable=True)
-    max_price = db.Column(db.Float, nullable=True)
+    price = db.Column(db.Float, nullable=True)
+    # max_price = db.Column(db.Float, nullable=True)
     bedrooms = db.Column(db.Float, nullable=True)
     bathrooms = db.Column(db.Float, nullable=True)
     facing_direction = db.Column(db.String(10), nullable=True)
     possession = db.Column(db.String(30), nullable=True)
-    min_sqft = db.Column(db.Float, nullable=True)
-    max_sqft = db.Column(db.Float, nullable=True)
+    sqft = db.Column(db.Float, nullable=True)
+    # max_sqft = db.Column(db.Float, nullable=True)
     price_per_sqft = db.Column(db.Float, nullable=True)
     is_gated = db.Column(db.String(10), nullable=True)
     uds = db.Column(db.Float, nullable=True)
-    min_land_size = db.Column(db.Float, nullable=True)
-    max_land_size = db.Column(db.Float, nullable=True)
-    min_plot_size = db.Column(db.Float, nullable=True)
-    max_plot_size = db.Column(db.Float, nullable=True)
+    land_size = db.Column(db.Float, nullable=True)
+    # max_land_size = db.Column(db.Float, nullable=True)
+    plot_size = db.Column(db.Float, nullable=True)
+    # max_plot_size = db.Column(db.Float, nullable=True)
     price_per_acre = db.Column(db.Float, nullable=True)
     price_per_sqyd = db.Column(db.Float, nullable=True)
     type_of_ownership = db.Column(db.String(30), nullable=True)
@@ -44,21 +44,21 @@ class Properties(db.Model):
         project_name = None,
         property_type=None,
         city=None,
-        min_price=None,
-        max_price=None,
+        price=None,
+        # max_price=None,
         bedrooms=None,
         bathrooms=None,
         facing_direction=None,
         possession=None,
-        min_sqft=None,
-        max_sqft=None,
+        sqft=None,
+        # max_sqft=None,
         price_per_sqft=None,
         is_gated=None,
         uds=None,
-        min_land_size=None,
-        max_land_size=None,
-        min_plot_size=None,
-        max_plot_size=None,
+        land_size=None,
+        # max_land_size=None,
+        plot_size=None,
+        # max_plot_size=None,
         price_per_acre=None,
         price_per_sqyd=None,
         type_of_ownership=None,
@@ -75,21 +75,21 @@ class Properties(db.Model):
         self.project_name = project_name
         self.property_type = property_type
         self.city = city
-        self.min_price = min_price
-        self.max_price = max_price
+        self.price = price
+        # self.max_price = max_price
         self.bedrooms = bedrooms
         self.bathrooms = bathrooms
         self.facing_direction = facing_direction
         self.possession = possession
-        self.min_sqft = min_sqft
-        self.max_sqft = max_sqft
+        self.sqft = sqft
+        # self.max_sqft = max_sqft
         self.price_per_sqft = price_per_sqft
         self.is_gated = is_gated
         self.uds = uds
-        self.min_land_size = min_land_size
-        self.max_land_size = max_land_size
-        self.min_plot_size = min_plot_size
-        self.max_plot_size = max_plot_size
+        self.land_size = land_size
+        # self.max_land_size = max_land_size
+        self.plot_size = plot_size
+        # self.max_plot_size = max_plot_size
         self.price_per_acre = price_per_acre
         self.price_per_sqyd = price_per_sqyd
         self.type_of_ownership = type_of_ownership
