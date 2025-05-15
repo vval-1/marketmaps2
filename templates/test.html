@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatchMyProps</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #FFFFFF;
+            color: #3B2B2F;
+        }
+
+        .hero-section {
+            background-color: #fafbfc;
+            padding: 50px 60px;
+            text-align: left;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5em;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+
+        .hero-section p {
+            font-size: 1.2em;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        .hero-image-section {
+            width: 100%;
+            height: 50vh;
+            background-image: url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .services {
+            padding: 2rem;
+            text-align: center;
+            background: #000;
+            color: #fff;
+        }
+
+        .services h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .services-container {
+            display: flex;
+            gap: 1px;
+            background: #333;
+        }
+
+        .service {
+            flex: 1;
+            padding: 2rem;
+            background: #000;
+            box-sizing: border-box;
+        }
+
+        .service:not(:last-child) {
+            border-right: 1px solid #fff;
+        }
+
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #2ECC71;
+        }
+
+        .service h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .service p {
+            font-size: 1rem;
+            line-height: 1.5;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 30px 20px;
+                text-align: center;
+            }
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+            .hero-section p {
+                font-size: 1em;
+            }
+            .hero-image-section {
+                height: 30vh;
+            }
+            .services-container {
+                flex-direction: column;
+            }
+            .service:not(:last-child) {
+                border-right: none;
+                border-bottom: 1px solid #fff;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        <h1>Elevate Your Real <br>Estate Management</h1>
+        <p>Find The Perfect Match For Your Property In Hyderabad</p>
+    </div>
+
+    <div class="hero-image-section">
+        </div>
+
+    <section class="services">
+        <h1>Our Services</h1>
+        <div class="services-container">
+            <div class="service">
+                <div class="icon">🏠</div>
+                <h2>Residential Projects</h2>
+                <p>We specialize in designing and constructing truly exceptional residential properties. Our focus is on creating inspiring living spaces that reflect modern lifestyles while prioritizing quality and sustainability in every aspect of the project.</p>
+            </div>
+            <div class="service">
+                <div class="icon">🏢</div>
+                <h2>Commercial Projects</h2>
+                <p>In our commercial projects, we bring innovation and excellence to the forefront. From office buildings to retail spaces, we deliver dynamic, functional, and future-ready solutions that cater to the diverse and evolving needs of businesses and communities.</p>
+            </div>
+            <div class="service">
+                <div class="icon">🛠️</div>
+                <h2>Construction Projects</h2>
+                <p>Our meticulous construction management ensures that every project is executed with precision and care. From overseeing timelines to quality control, we handle the entire process to guarantee the successful completion of each development.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Maahbi</title>
+    <title>MatchMyprops</title>
     <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='addproperty.css')}}">
     <style>
         .form-group { margin-bottom: 15px; }
@@ -49,7 +49,7 @@
 <body>
     <section>
         <h1 style="text-align: center; margin-top: 2%; margin-bottom: 2%;">New Property Submission</h1>
-        <h2><span class="text-danger"> *</span>Indicates Required Field</h2>
+        <h2 style="font-size: 1em;"><span class="text-danger"> *</span>Indicates Required Field</h2>
         <form action="/property/add-property" method="post" >
             <div class="form-group">
                 <label for="property_type">Select Property Type:</label>

@@ -2,75 +2,95 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="ID=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maahbi</title>
+    <title>MatchMyprops</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
-/* Global Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
 
-body {
-    background-color: #8bb2dc;
-}
+        body {
+            margin: 0;
+            font-family: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #000;
+            color: #fff;
+            font-weight: 400;
+        }
 
-.navbar{
-    display: flex
-}
-/* Header Styling */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px;
-    background-color: rgb(0, 0, 0);
-}
+        /* Header Styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 25px;
+            background-color: rgb(0, 0, 0);
+        }
 
-/* Logo Styling */
-.logo {
-    font-size: 28px;
-    font-weight: 700;
-    color: #fffdfd;
-    text-decoration: none;
-}
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fffdfd;
+            text-decoration: none;
+        }
 
-.dropdown {
+        .navbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            margin: 0 20px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .navbar a:hover {
+            color: #8bb2dc;
+        }
+
+        .dropdown {
             position: relative;
+            margin-left: 20px;
         }
 
         .dropdown-icon {
-            /* cursor: pointer;
-            font-size: 1.5em; */
-            transition: background-color 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
         }
 
-        .dropdown-icon:hover {
-            background-color: #e9ecef;
+        .dropdown-icon-img {
+            width: 32px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .dropdown-content {
-        display: none;
-        position: absolute;
-        top: 100%; /* Position below the dropdown icon */
-        right: 0;
-        background-color: #000000; /* White background for better contrast */
-        min-width: 200px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Softer shadow for a natural feel */
-        border-radius: 4px; /* Slightly reduced radius for a sharper look */
-        z-index: 1000; /* Ensures it stays above other elements */
-        margin-top: 5px;
-        padding: 10px 0; /* Adds spacing inside the dropdown */
-        animation: fadeIn 0.2s ease-in-out;
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #000000;
+            min-width: 200px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            z-index: 1000;
+            margin-top: 10px;
+            padding: 10px 0;
+            animation: fadeIn 0.2s ease-in-out;
+            border: 1px solid #444;
         }
-
 
         .dropdown-content a {
             display: flex;
@@ -82,24 +102,19 @@ body {
             font-size: 1em;
             transition: background-color 0.2s, color 0.2s;
         }
-
-        .dropdown-content a:last-child {
-            border-bottom: none;
+        .dropdown-content a:hover {
+            background-color: #333;
         }
 
-        .dropdown-content a i { 
-        margin-right: 10px; /* Adjust margin as needed */
+        .dropdown-content hr {
+            border: 0;
+            border-top: 1px solid #444;
+            margin: 8px 0;
         }
 
-
-        .dropdown-content .icon {
-            font-size: 1.2em;
-            color: #666;
-        }
-
-        .dropdown-icon-img {
-            width: 32px; /* adjust width */
-            height: 30px; /* ensure image doesn't exceed parent width */
+        .dropdown-content a i {
+            width: 1.2em;
+            text-align: center;
         }
 
         .show {
@@ -117,57 +132,232 @@ body {
             }
         }
 
-/* Navbar Styling */
-.navbar a {
-    margin: 0 20px;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 600;
-}
+        /* Thin blue divider line */
+        .section-divider { /* Renamed to be more generic */
+            border: none;
+            height: 1px;
+            background-color: #8bb2dc; /* Blue color */
+            margin: 0; /* Remove default HR margins */
+        }
 
-.login-menu {
-    position: absolute;
-    top: 7%;
-    right: 0%;
-    width: 150px;
-    z-index: 1000; /* Ensure it's above other content */
-}
+        /* Hero Section Styles */
+        .hero-section {
+            background-color: #000;
+            color: #fff;
+            padding: 70px 60px 50px;
+        }
 
-.sub-menu {
-    background-color: black;
-    padding: 10px; /* Reduced padding for better spacing */
-    margin: 0; /* Removed margin to prevent extra space */
-    border-radius: 5px; /* Added rounded corners */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Added a subtle shadow */
-}
+        .hero-section .text-content {
+            margin-bottom: 40px;
+        }
 
-.sub-menu a {
-    display: block; /* Make links block elements */
-    color: white; /* Added white text color for contrast */
-    text-decoration: none; /* Remove underlines from links */
-    font-weight: bold;
-    padding: 5px 0; /* Add vertical padding to links */
-    text-align: center; /* Center the text */
-}
+        .hero-section h1 {
+            font-size: 4em;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #8bb2dc;
+        }
 
-.sub-menu hr {
-    border-top: 1px solid gray; /* Style the hr */
-    margin: 5px 0; /* Add margin to the hr */
-}
+        .hero-section p.subheading {
+            font-size: 1.2em;
+            font-weight: 400;
+            color: #e0e0e0;
+            max-width: 550px;
+        }
 
-/* Hover effect for the links */
-.sub-menu a:hover {
-    background-color: #333; /* Darker background on hover */
-}
+        .hero-image-container img {
+            display: block;
+            max-width: 1400px; /* Increased max-width for a larger image */
+            width: 100%;
+            height: 550px; /* You might want to adjust this or use auto */
+            object-fit: cover; /* Ensures the image covers the area, might crop */
+            margin: 0 auto;
+            border-radius: 6px;
+        }
 
-/* Navbar Link Hover Effect */
-.navbar a:hover {
-    color: #8bb2dc;
-    }
-</style>
+        /* "Our Services" Section Styles */
+        .services {
+            background: #000;
+            color: #fff;
+            padding: 60px 60px 80px;
+            text-align: left;
+        }
+
+        .services > h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 50px;
+            line-height: 1.1;
+        }
+
+        .services-container {
+            display: flex;
+            gap: 0;
+        }
+
+        .service {
+            flex: 1;
+            padding: 30px 35px 40px;
+            background: #000;
+            box-sizing: border-box;
+            text-align: left;
+        }
+
+        .service:not(:last-child) {
+            border-right: 1px solid #444;
+        }
+
+        .services .icon {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            height: 20px;
+        }
+
+        .icon-shape {
+            background-color: #8bb2dc;
+            height: 100%;
+        }
+
+        .parallelogram {
+            width: 10px;
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        }
+        .parallelogram:not(:last-child) {
+            margin-right: -5px;
+        }
+
+        .circle {
+            width: 20px;
+            border-radius: 50%;
+        }
+        .circle:not(:last-child) {
+            margin-right: -10px;
+        }
+
+        .service h2 {
+            font-size: 1.7em;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .service p {
+            font-size: 0.95em;
+            line-height: 1.65;
+            color: #fff;
+            max-width: 300px;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .navbar a {
+                margin: 0 10px;
+            }
+
+            .hero-section {
+                padding: 50px 40px 40px;
+            }
+            .hero-section h1 {
+                font-size: 3.2em;
+            }
+            .hero-section p.subheading {
+                font-size: 1.15em;
+            }
+            .hero-image-container img {
+                max-width: 100%; /* Allow image to scale down nicely */
+                height: 400px; /* Adjust height for tablets */
+            }
+
+            .services > h1 {
+                font-size: 3em;
+            }
+            .service h2 {
+                font-size: 1.5em;
+            }
+            .service p {
+                max-width: 100%;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 14px 15px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                margin-top: 10px;
+            }
+            .navbar a {
+                margin: 8px 0;
+                padding: 5px 0;
+            }
+            .dropdown {
+                margin-left: 0;
+                margin-top: 10px;
+                align-self: flex-start;
+            }
+            .dropdown-content {
+                min-width: 180px;
+            }
+
+            .hero-section {
+                padding: 40px 20px 30px;
+            }
+            .hero-section h1 {
+                font-size: 2.5em;
+            }
+            .hero-section p.subheading {
+                font-size: 1em;
+                max-width: 100%;
+            }
+            .hero-image-container img {
+                height: 300px; /* Adjust height for mobile */
+            }
+
+            .services {
+                padding: 40px 20px 50px;
+            }
+            .services > h1 {
+                font-size: 2.5em;
+                margin-bottom: 40px;
+                text-align: center;
+            }
+            .services-container {
+                flex-direction: column;
+            }
+            .service {
+                padding: 30px 20px;
+                border-right: none;
+            }
+            .service:not(:last-child) {
+                border-bottom: 1px solid #444;
+            }
+            .service h2 {
+                font-size: 1.4em;
+            }
+            .service p {
+                font-size: 0.85em;
+            }
+            .services .icon {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
 <body>
     <header class="header">
-        <a href="/" class="logo">REIMAX JUBILEE</a>
+        <a href="/" class="logo">MatchMyprops</a>
         <nav class="navbar">
             <a href="/property/search">Search</a>
             <a href="/property/dashboard-properties">My Properties</a>
@@ -176,34 +366,85 @@ body {
             <a href="/property/add-client">Add Client</a>
             <div class="dropdown">
                 <span class="dropdown-icon" onclick="toggleDropdown()">
-                    <img src="{{ url_for('static', filename='company-logo.png') }}" alt="Menu Icon" class="dropdown-icon-img">
+                    <img src="{{ url_for('static', filename='profile-icon.jpg') }}" alt="Menu Icon" class="dropdown-icon-img">
                 </span>
                 <div id="myDropdown" class="dropdown-content">
                     <a href="/account"><i class="fa-solid fa-gear"></i>Settings</a>
                     <a href="/support"><i class="fa-regular fa-envelope"></i>Support</a>
                     <hr>
                     <a href="/auth/logout"><i class="fa-solid fa-right-from-bracket"></i>Log Out</a>
-                </div>   
+                </div>
             </div>
         </nav>
     </header>
+    <hr class="section-divider"> <!-- Divider after header -->
+
+    <section class="hero-section">
+        <div class="text-content">
+            <h1>Elevate Your Real<br>Estate Management</h1>
+            <p class="subheading">Find The Perfect Match For Your Property In Hyderabad</p>
+        </div>
+        <div class="hero-image-container">
+            <!-- Real estate image example from Pexels -->
+            <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Modern house exterior">
+            <!-- You can also try:
+                 https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1600 (Interior)
+                 https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg?auto=compress&cs=tinysrgb&w=1600 (House with yard)
+            -->
+        </div>
+    </section>
+    <hr class="section-divider"> <!-- Divider before services -->
+
+    <section class="services">
+        <h1>Our Services</h1>
+        <div class="services-container">
+            <div class="service">
+                <div class="icon">
+                    <div class="icon-shape parallelogram"></div>
+                    <div class="icon-shape parallelogram"></div>
+                    <div class="icon-shape parallelogram"></div>
+                </div>
+                <h2>Residential Projects</h2>
+                <p>We specialize in designing and constructing truly exceptional residential properties. Our focus is on creating inspiring living spaces that reflect modern lifestyles while prioritizing quality and sustainability in every aspect of the project.</p>
+            </div>
+            <div class="service">
+                <div class="icon">
+                    <div class="icon-shape circle"></div>
+                    <div class="icon-shape circle"></div>
+                </div>
+                <h2>Commercial Projects</h2>
+                <p>In our commercial projects, we bring innovation and excellence to the forefront. From office buildings to retail spaces, we deliver dynamic, functional, and future-ready solutions that cater to the diverse and evolving needs of businesses and communities.</p>
+            </div>
+            <div class="service">
+                <div class="icon">
+                    <div class="icon-shape circle"></div>
+                    <div class="icon-shape circle"></div>
+                    <div class="icon-shape circle"></div>
+                </div>
+                <h2>Construction Projects</h2>
+                <p>Our meticulous construction management ensures that every project is executed with precision and care. From overseeing timelines to quality control, we handle the entire process to guarantee the successful completion of each development.</p>
+            </div>
+        </div>
+    </section>
+
     <script>
         function toggleDropdown() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
 
-    // Close the dropdown if the user clicks outside of it
-    window.addEventListener('click', function(event) {
-        // Ensure that clicks outside of the dropdown will close it
-        if (!event.target.closest('.dropdown')) {
-            const dropdowns = document.getElementsByClassName("dropdown-content");
-            for (const dropdown of dropdowns) {
-                if (dropdown.classList.contains('show')) {
-                    dropdown.classList.remove('show');
+        window.addEventListener('click', function(event) {
+            if (event.target.closest('.dropdown-icon')) {
+                return;
+            }
+            if (!event.target.closest('.dropdown')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (const dropdown of dropdowns) {
+                    if (dropdown.classList.contains('show')) {
+                        dropdown.classList.remove('show');
+                    }
                 }
             }
-        }
-    });
+        });
     </script>
 </body>
 </html>

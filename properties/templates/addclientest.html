@@ -29,15 +29,15 @@
 
             // Determine which fields to show based on property type
             if (propertyType === 'Apartment') {
-                document.querySelectorAll('.project_name, .bedrooms, .bathrooms, .city, .price, .facing_direction, .sqft, .is_gated, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.project_name, .bedrooms, .bathrooms, .city, .price, .max_price, .facing_direction, .sqft, .max_sqft, .is_gated, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Villa') {
-                document.querySelectorAll(' .project_name, .bedrooms, .bathrooms, .city, .price, .facing_direction, .sqft, .is_gated, .uds, .land_size, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll(' .project_name, .bedrooms, .bathrooms, .city, .price, .max_price, .facing_direction, .sqft, .max_sqft, .is_gated, .uds, .land_size, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Land') {
-                document.querySelectorAll(' .price, .project_name, .city, .land_size, .price_per_acre, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll(' .price, .max_price, .project_name, .city, .land_size, .max_land_size, .price_per_acre, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Plot') {
-                document.querySelectorAll('.project_name, .city, .price, .is_gated, .plot_size .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));  
+                document.querySelectorAll('.project_name, .city, .price, .max_price, .is_gated, .plot_size, .max_plot_size, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));  
             } else if (propertyType === 'Commercial') {
-                document.querySelectorAll('.project_name, .city, .price, .facing_direction, .sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.project_name, .city, .price, .max_price, .facing_direction, .sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             }
             manageRequiredAttributes();
         }
@@ -89,10 +89,10 @@
                 <input type="number" id="price" name="price" required />
             </div>
 
-            <!-- <div class="form-group dynamic-field max_price hidden">
+            <div class="form-group dynamic-field max_price hidden">
                 <label for="max_price">Maximum Property Cost:<span class="text-danger"> *</span></label>
                 <input type="number" id="max_price" name="max_price" required />
-            </div> -->
+            </div>
             
             <div class="form-group dynamic-field bedrooms hidden">
                 <label for="bedrooms">How Many Bedrooms?:<span class="text-danger"> *</span></label>
@@ -109,10 +109,10 @@
                 <input type="number" id="sqft" name="sqft" required />
             </div>
 
-            <!-- <div class="form-group dynamic-field max_sqft hidden">
+            <div class="form-group dynamic-field max_sqft hidden">
                 <label for="max_sqft">Maximum Square Feet?:<span class="text-danger"> *</span></label>
                 <input type="number" id="max_sqft" name="max_sqft" required />
-            </div> -->
+            </div>
 
             <div class="form-group dynamic-field price_per_sqft hidden">
                 <label for="price_per_sqft">Price Per Sqft?:<span class="text-danger"> *</span></label>
@@ -155,20 +155,20 @@
                 <input type="number" id="plot_size" name="plot_size" required />
             </div>
 
-            <!-- <div class="form-group dynamic-field max_plot_size hidden">
+            <div class="form-group dynamic-field max_plot_size hidden">
                 <label for="max_plot_size">Maximum Plot Size?:<span class="text-danger"> *</span></label>
                 <input type="number" id="max_plot_size" name="max_plot_size" required />
-            </div> -->
+            </div>
 
             <div class="form-group dynamic-field land_size hidden">
                 <label for="land_size">Land Size? (Acres):<span class="text-danger"> *</span></label>
                 <input type="number" id="land_size" name="land_size" required />
             </div>
 
-            <!-- <div class="form-group dynamic-field max_land_size hidden">
+            <div class="form-group dynamic-field max_land_size hidden">
                 <label for="max_land_size">Maximum Land Size? (Acres):<span class="text-danger"> *</span></label>
                 <input type="number" id="max_land_size" name="max_land_size" required />
-            </div> -->
+            </div>
 
             <div class="form-group dynamic-field price_per_acre hidden">
                 <label for="price_per_acre">Price Per Acre?:</label>

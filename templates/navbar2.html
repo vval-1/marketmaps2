@@ -19,18 +19,19 @@
 }
 
 body {
-    background-color: #8bb2dc;
+    background-color: #000000;
 }
 
 .navbar{
-    display: flex
+    display: flex;
+    align-items: center;
 }
 /* Header Styling */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px;
+    padding: 14px 25px;
     background-color: rgb(0, 0, 0);
 }
 
@@ -42,15 +43,24 @@ body {
     text-decoration: none;
 }
 
+.section-divider { /* Renamed to be more generic */
+            border: none;
+            height: 1px;
+            background-color: #8bb2dc; /* Blue color */
+            margin: 0; /* Remove default HR margins */
+        }
+
 .dropdown {
             position: relative;
+            margin-left: 20px;
         }
 
         .dropdown-icon {
-            /* cursor: pointer;
-            font-size: 1.5em; */
-            transition: background-color 0.2s;
-        }
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
 
         .dropdown-icon:hover {
             background-color: #e9ecef;
@@ -100,6 +110,8 @@ body {
         .dropdown-icon-img {
             width: 32px; /* adjust width */
             height: 30px; /* ensure image doesn't exceed parent width */
+            border-radius: 50%;
+            object-fit: cover;
         }
 
         .show {
@@ -171,7 +183,7 @@ body {
 </style>
 <body>
     <header class="header">
-        <a href="/" class="logo-img"><img src="{{ url_for('static', filename='company-logo.png') }}" class="logo-img"></a>
+        <a href="/" class="logo">MatchMyprops</a>
         <nav class="navbar">
             <a href="/property/search">Search</a>
             <a href="/property/dashboard-properties">My Properties</a>
@@ -187,10 +199,14 @@ body {
                     <a href="/support"><i class="fa-regular fa-envelope"></i>Support</a>
                     <hr>
                     <a href="/auth/logout"><i class="fa-solid fa-right-from-bracket"></i>Log Out</a>
-                </div>   
+                </div>  
             </div>
         </nav>
     </header>
+    <div>
+        <hr class="section-divider"> 
+    </div>
+    </body>
     <script>
         function toggleDropdown() {
         document.getElementById("myDropdown").classList.toggle("show");

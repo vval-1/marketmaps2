@@ -319,7 +319,7 @@ def searchtest():
         print(results)
         return render_template("test-results.html", results=results)
 
-    return render_template("test.html")
+    return render_template("test1.html")
 
 @properties.route("/addproptest", methods=["GET", "POST"])
 @login_required
@@ -400,3 +400,4 @@ def add_client2():
         db.session.commit()
         return redirect("/property/dashboard-clients")
     return render_template("addclientest.html")
+
