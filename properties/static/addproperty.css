@@ -13,11 +13,11 @@
     width: 100%; 
     padding: 10px; /* Uniform padding */
     box-sizing: border-box; /* Ensures padding doesn't expand the input width */
-    border: 3px solid #8bb2dc;
-    border-radius: 5px;
+    border: 0.1px solid #434343;
+    border-radius: 10px;
     font-size: 16px;/* Consistent text size */
     height: 45px; /* Uniform height for all input fields */
-    background-color: #000;
+    background-color: #282828 ;
     color:#ffffff;
 }
 
@@ -32,7 +32,7 @@ section {
     padding: 20px;
     font-size: 20px;
     border: 1px solid #8bb2dc;
-    border-radius: 10px;
+    border-radius: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     background-color:#000 ; 
     color: #dedddd;

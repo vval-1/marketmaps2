@@ -29,15 +29,15 @@
 
             // Determine which fields to show based on property type
             if (propertyType === 'Apartment') {
-                document.querySelectorAll('.project_name, .location, .multiple_properties, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.project_name, .location, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Villa') {
-                document.querySelectorAll(' .project_name, .multiple_properties, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .is_gated, .min_land_size, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll(' .project_name, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .is_gated, .min_land_size, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Land') {
                 document.querySelectorAll('.facing_direction, .min_price, .max_price, .min_land_size, .price_per_acre, .city, .location, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Plot') {
                 document.querySelectorAll('.project_name, .facing_direction, .min_plot_size, .min_price, .price_per_sqyd, .max_price, .is_gated, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));  
             } else if (propertyType === 'Commercial') {
-                document.querySelectorAll('.project_name, .multiple_properties, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.project_name, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             }
             manageRequiredAttributes();
         }
@@ -207,8 +207,6 @@
                     <option value="ReSeller">Reseller</option>
                 </select>
             </div>
-
-
 
             <div>
             <input type="hidden" id="agent_role" name="agent_role" value="Seller">

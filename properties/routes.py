@@ -103,23 +103,23 @@ def search():
     if request.method == "POST":
         property_type = request.form.get("property_type")
         # city = request.form.get("city")
-        min_price = int(request.form.get("min_price"))
-        max_price = int(request.form.get("max_price"))
-        bathrooms = int(request.form.get("bathrooms"))
-        bedrooms = int(request.form.get("bedrooms"))
+        # min_price = int(request.form.get("min_price"))
+        # max_price = int(request.form.get("max_price"))
+        # bathrooms = int(request.form.get("bathrooms"))
+        # bedrooms = int(request.form.get("bedrooms"))
 
         query = Properties.query
         
         if property_type:
             query = query.filter(Properties.property_type == property_type)
-        if min_price:
-            query = query.filter(Properties.min_price >= min_price)
-        if max_price:  
-            query = query.filter(Properties.max_price <= max_price) 
-        if bedrooms:
-                query = query.filter(Properties.bedrooms == bedrooms)
-        if bathrooms:
-                query = query.filter(Properties.bathrooms == bathrooms)
+        # if min_price:
+        #     query = query.filter(Properties.min_price >= min_price)
+        # if max_price:  
+        #     query = query.filter(Properties.max_price <= max_price) 
+        # if bedrooms:
+        #         query = query.filter(Properties.bedrooms == bedrooms)
+        # if bathrooms:
+        #         query = query.filter(Properties.bathrooms == bathrooms)
                       
         # Fetch results
         results = query.all()

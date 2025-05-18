@@ -3,13 +3,13 @@ table {
     border-collapse: collapse;
     width: 100%; /* Adjust width as needed */
     font-family: Arial, sans-serif;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 /* Style for the header row */
 table thead tr {
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 /* Style for all cells */
@@ -21,11 +21,11 @@ table td, table th {
 
 /* Zebra striping for rows */
 table tbody tr:nth-child(even) {
-    background-color: #ffffff;
+    background-color: #000000;
 }
 
 table tbody tr:nth-child(odd) {
-    background-color: #ffffff;
+    background-color: #000000;
 }
 
 /* Hover effect */
@@ -42,9 +42,9 @@ table {
     flex-direction: column; /* Stacks content vertically */
     align-items: flex-start; /* Aligns content to the left*/
     padding: 16px; /* Adds spacing around the content */
-    border: 1px solid #000000; 
-    background-color: #dedddd; /* Dark background for aesthetic */
-    color: rgb(0, 0, 0); /* Text color */
+    border: 1px solid #ffffff; 
+    background-color: #000000; /* Dark background for aesthetic */
+    color: rgb(255, 255, 255); /* Text color */
     margin: 0 auto 2% auto;
     width: 70%; /* Adjust as needed  */
     border-radius: 8px;
@@ -58,16 +58,16 @@ button[type="submit"] {
     cursor: pointer;
     } 
     button.fetch-btn {
-        background-color: rgb(105, 180, 230); 
+        background-color: #273F4F; 
     }
     
     /* Edit Button */
     button.edit-btn {
-        background-color: rgb(211, 73, 238); 
+        background-color: #2d2d2d; 
     }
     
     /* Delete Button */
     button.delete-btn {
-        background-color: rgb(230, 105, 105); 
+        background-color: #FE7743; 
     }
     
