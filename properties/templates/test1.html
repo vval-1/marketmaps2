@@ -4,75 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Maahbi</title>
-  <style>
-    /* Reset and base styles */
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #8bb2dc;
-      margin: 0;
-      height: 100vh;
-    }
-    /* Container centering */
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2% 20px;
-    }
-    /* White search box */
-    .search-container {
-      background-color: #ffffff;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-    /* Form setup */
-    .search-form {
-      display: flex;
-      flex-direction: column;
-    }
-    /* Flex groups */
-    .form-group {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 10px;
-      width: 100%;
-    }
-    /* Common styling for inputs, selects, and button */
-    .form-group input[type="text"],
-    .form-group input[type="number"],
-    .form-group select,
-    .form-group button[type="submit"] {
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      margin-right: 10px;
-      margin-bottom: 10px;
-      flex: 1 1 150px;
-      min-width: 150px;
-      height: 42px; /* Ensures a consistent height */
-    }
-    /* Button specific styles */
-    .form-group button[type="submit"] {
-      background-color: #007bff;
-      color: #ffffff;
-      border: none;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .form-group button[type="submit"]:hover {
-      background-color: #0056b3;
-    }
-  </style>
+  <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='search.css')}}">
 </head>
 <body>
   <!-- If using a templating engine, your navbar can be included here -->

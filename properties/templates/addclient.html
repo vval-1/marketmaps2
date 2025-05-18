@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Maahbi</title>
+    <title>MatchMyProps</title>
     <link rel='stylesheet' type='text/css' href="{{url_for('properties.static', filename='addclient.css')}}">
     <style>
         .form-group { margin-bottom: 15px; }
@@ -29,15 +29,15 @@
 
             // Determine which fields to show based on property type
             if (propertyType === 'Apartment') {
-                document.querySelectorAll('.project_name, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .is_gated, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.project_name, .bedrooms, .bathrooms, .city, .price, .max_price, .facing_direction, .sqft, .max_sqft, .is_gated, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Villa') {
-                document.querySelectorAll(' .project_name, .bedrooms, .bathrooms, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .is_gated, .uds, .min_land_size, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll(' .project_name, .bedrooms, .bathrooms, .city, .price, .max_price, .facing_direction, .sqft, .max_sqft, .is_gated, .uds, .land_size, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Land') {
-                document.querySelectorAll(' .min_price, .max_price, .project_name, .city, .min_land_size, .max_land_size, .price_per_acre, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll(' .price, .max_price, .project_name, .city, .land_size, .max_land_size, .price_per_acre, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             } else if (propertyType === 'Plot') {
-                document.querySelectorAll('.project_name, .city, .min_price, .max_price, .is_gated, .min_plot_size, .max_plot_size, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));  
+                document.querySelectorAll('.project_name, .city, .price, .max_price, .is_gated, .plot_size, .max_plot_size, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));  
             } else if (propertyType === 'Commercial') {
-                document.querySelectorAll('.project_name, .city, .min_price, .max_price, .facing_direction, .min_sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
+                document.querySelectorAll('.project_name, .city, .price, .max_price, .facing_direction, .sqft, .max_sqft, .price_per_sqft, .is_gated, .uds, .type_of_ownership, .purpose, .submit').forEach(field => field.classList.remove('hidden'));
             }
             manageRequiredAttributes();
         }
@@ -84,9 +84,9 @@
                 </select>
             </div>
 
-            <div class="form-group dynamic-field min_price hidden">
-                <label for="min_price">Minimum Property Cost:<span class="text-danger"> *</span></label>
-                <input type="number" id="min_price" name="min_price" required />
+            <div class="form-group dynamic-field price hidden">
+                <label for="price">Property Cost:<span class="text-danger"> *</span></label>
+                <input type="number" id="price" name="price" required />
             </div>
 
             <div class="form-group dynamic-field max_price hidden">
@@ -104,9 +104,9 @@
                 <input type="number" id="bathrooms" name="bathrooms" />
             </div>
 
-            <div class="form-group dynamic-field min_sqft hidden">
-                <label for="min_sqft">Minimum Square Feet?:<span class="text-danger"> *</span></label>
-                <input type="number" id="min_sqft" name="min_sqft" required />
+            <div class="form-group dynamic-field sqft hidden">
+                <label for="sqft">Square Feet?:<span class="text-danger"> *</span></label>
+                <input type="number" id="sqft" name="sqft" required />
             </div>
 
             <div class="form-group dynamic-field max_sqft hidden">
@@ -150,9 +150,9 @@
             </div>
 
 
-            <div class="form-group dynamic-field min_plot_size hidden">
-                <label for="min_plot_size">Minimum Plot Size?:<span class="text-danger"> *</span></label>
-                <input type="number" id="min_plot_size" name="min_plot_size" required />
+            <div class="form-group dynamic-field plot_size hidden">
+                <label for="plot_size">Plot Size?:<span class="text-danger"> *</span></label>
+                <input type="number" id="plot_size" name="plot_size" required />
             </div>
 
             <div class="form-group dynamic-field max_plot_size hidden">
@@ -160,9 +160,9 @@
                 <input type="number" id="max_plot_size" name="max_plot_size" required />
             </div>
 
-            <div class="form-group dynamic-field min_land_size hidden">
-                <label for="min_land_size">Minimum Land Size? (Acres):<span class="text-danger"> *</span></label>
-                <input type="number" id="min_land_size" name="min_land_size" required />
+            <div class="form-group dynamic-field land_size hidden">
+                <label for="land_size">Land Size? (Acres):<span class="text-danger"> *</span></label>
+                <input type="number" id="land_size" name="land_size" required />
             </div>
 
             <div class="form-group dynamic-field max_land_size hidden">
@@ -184,7 +184,6 @@
                     <option value="ReSeller">Reseller</option>
                 </select>
             </div>
-
 
             <div>
             <input type="hidden" id="agent_role" name="agent_role" value="Buyer">

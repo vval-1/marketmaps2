@@ -24,29 +24,23 @@ def add_properties():
         property_data = dict(request.form)
         clean_data = validate_data(property_data)
         new_property = Properties(
-            # address1=clean_data["address1"],
             property_type=clean_data["property_type"],
             city=clean_data["city"],
             project_name=clean_data["project_name"],
-            min_price=clean_data["min_price"],
-            max_price=clean_data["max_price"],
+            price=clean_data["price"],
             bedrooms=clean_data["bedrooms"],
             bathrooms=clean_data["bathrooms"],
             facing_direction=clean_data["facing_direction"],
-            min_sqft=clean_data["min_sqft"],
-            max_sqft=clean_data["max_sqft"],
+            sqft=clean_data["sqft"],
             price_per_sqft=clean_data["price_per_sqft"],
             possession=clean_data["possession"],
             is_gated=clean_data["is_gated"],
             uds=clean_data["uds"],
-            min_plot_size=clean_data["min_plot_size"],
-            max_plot_size=clean_data["min_plot_size"],
-            min_land_size=clean_data["min_land_size"],
-            max_land_size=clean_data["min_land_size"],
+            plot_size=clean_data["plot_size"],
+            land_size=clean_data["land_size"],
             price_per_acre=clean_data["price_per_acre"],
             price_per_sqyd=clean_data["price_per_sqyd"],
             type_of_ownership=clean_data["type_of_ownership"],
-            multiple_properties=clean_data["multiple_properties"],
             location=clean_data["location"],
             purpose=clean_data["purpose"],
             agent_name=session["agent_name"],
@@ -70,18 +64,18 @@ def add_client():
             property_type=clean_data["property_type"],
             project_name=clean_data["project_name"],
             city=clean_data["city"],
-            min_price=clean_data["min_price"],
+            price=clean_data["price"],
             max_price=clean_data["max_price"],
             bedrooms=clean_data["bedrooms"],
             bathrooms=clean_data["bathrooms"],
             facing_direction=clean_data["facing_direction"],
-            min_sqft=clean_data["min_sqft"],
+            sqft=clean_data["sqft"],
             max_sqft=clean_data["max_sqft"],
             possession=clean_data["possession"],
             is_gated=clean_data["is_gated"],
-            min_land_size=clean_data["min_land_size"],
+            land_size=clean_data["land_size"],
             max_land_size=clean_data["max_land_size"],
-            min_plot_size=clean_data["min_plot_size"],
+            plot_size=clean_data["plot_size"],
             max_plot_size=clean_data["max_plot_size"],
             price_per_sqft=clean_data["price_per_sqft"],
             price_per_acre=clean_data["price_per_acre"],
@@ -98,8 +92,9 @@ def add_client():
     return render_template("addclient.html")
 
 
-@properties.route("/search", methods=["GET", "POST"])
-def search():
+
+@properties.route("/searchtest", methods=["GET", "POST"])
+def search2():
     if request.method == "POST":
         property_type = request.form.get("property_type")
         # city = request.form.get("city")
@@ -217,55 +212,92 @@ def fetch():
         Property_id = request.form.get("property_id")
         current_property = Properties.query.filter_by(id=Property_id).first()
         property_type = current_property.property_type
-        min_price = current_property.min_price 
-        max_price = current_property.max_price 
-        min_sqft = current_property.min_sqft
+        price = current_property.price
+        max_price = current_property.max_price
+        sqft = current_property.sqft
         max_sqft = current_property.max_sqft
         bedrooms = current_property.bedrooms
         purpose = current_property.purpose
-        min_land_size = current_property.min_land_size
+        land_size = current_property.land_size
         max_land_size = current_property.max_land_size
-        min_plot_size = current_property.min_plot_size
+        plot_size = current_property.plot_size
         max_plot_size = current_property.max_plot_size
         agent_role = current_property.agent_role
 
         query = Properties.query.filter(
-        Properties.id != Property_id,
-        Properties.property_type == property_type,
-        Properties.min_price <= max_price,
-        Properties.max_price >= min_price,
-        Properties.agent_role != agent_role,
-        Properties.purpose == purpose
+            Properties.id != Property_id,
+            Properties.property_type == property_type,
+            Properties.agent_role != agent_role,
+            Properties.purpose == purpose
         )
-        if property_type in ["Apartment", "Villa"]:
+
+        if agent_role == "Buyer":
+            max_price = current_property.max_price
             query = query.filter(
-                Properties.bedrooms == bedrooms,
-                Properties.min_sqft <= max_sqft,
-                Properties.max_sqft >= min_sqft
+                Properties.price <= max_price,
+                Properties.max_price >= price
             )
-        elif property_type == "Commercial":
+            if property_type in ["Apartment", "Villa"]:
+                max_sqft = current_property.max_sqft
+                query = query.filter(
+                    Properties.bedrooms == bedrooms,
+                    Properties.sqft <= max_sqft,
+                    Properties.max_sqft >= sqft
+                )
+            elif property_type == "Commercial":
+                max_sqft = current_property.max_sqft
+                query = query.filter(
+                    Properties.sqft <= max_sqft,
+                    Properties.max_sqft >= sqft
+                )
+            elif property_type == "Plot":
+                max_plot_size = current_property.max_plot_size
+                query = query.filter(
+                    Properties.plot_size <= max_plot_size,
+                    Properties.max_plot_size >= plot_size
+                )
+            elif property_type == "Land":
+                max_land_size = current_property.max_land_size
+                query = query.filter(
+                    Properties.land_size <= max_land_size,
+                    Properties.max_land_size >= land_size
+                )
+
+        elif agent_role == "Seller":
             query = query.filter(
-            Properties.min_sqft <= max_sqft,
-            Properties.max_sqft >= min_sqft
+                Properties.price <= price,
+                Properties.max_price >= price
             )
-        elif property_type == "Plot":
-            query = query.filter(
-            Properties.min_plot_size <= max_plot_size,
-            Properties.max_plot_size >= min_plot_size
-            )    
-        elif property_type == "Land":
-            query = query.filter(
-            Properties.min_land_size <= max_land_size,
-            Properties.max_land_size >= min_land_size
-            )
+            if property_type in ["Apartment", "Villa"]:
+                query = query.filter(
+                    Properties.bedrooms == bedrooms,
+                    Properties.sqft <= sqft,
+                    Properties.max_sqft >= sqft
+                )
+            elif property_type == "Commercial":
+                query = query.filter(
+                    Properties.sqft <= sqft,
+                    Properties.max_sqft >= sqft
+                )
+            elif property_type == "Plot":
+                query = query.filter(
+                    Properties.plot_size <= plot_size,
+                    Properties.max_plot_size >= plot_size
+                )
+            elif property_type == "Land":
+                query = query.filter(
+                    Properties.land_size <= land_size,
+                    Properties.max_land_size >= land_size
+                )
+
         matching_properties = query.all()
         if agent_role == 'Seller':
             return render_template("match-clients.html", results = matching_properties)
         elif agent_role == 'Buyer':
             return render_template("match-properties.html", results = matching_properties)
 
-@properties.route("/searchtest", methods=["GET", "POST"])
-def searchtest():
+@properties.route("/search", methods=["GET", "POST"])
+def search():
     if request.method == "POST":
         def safe_search(value):
             try:
@@ -320,84 +352,3 @@ def searchtest():
         return render_template("test-results.html", results=results)
 
     return render_template("test1.html")
-
-@properties.route("/addproptest", methods=["GET", "POST"])
-@login_required
-def add_properties2():
-    if request.method == "POST":
-        property_data = dict(request.form)
-        clean_data = validate_data(property_data)
-        new_property = Properties(
-            # address1=clean_data["address1"],
-            property_type=clean_data["property_type"],
-            city=clean_data["city"],
-            project_name=clean_data["project_name"],
-            price=clean_data["price"],
-            # max price 
-            bedrooms=clean_data["bedrooms"],
-            bathrooms=clean_data["bathrooms"],
-            facing_direction=clean_data["facing_direction"],
-            sqft=clean_data["sqft"],
-            # max sqft 
-            price_per_sqft=clean_data["price_per_sqft"],
-            possession=clean_data["possession"],
-            is_gated=clean_data["is_gated"],
-            uds=clean_data["uds"],
-            plot_size=clean_data["plot_size"],
-            # Plot size 
-            land_size=clean_data["land_size"],
-            # max_land_size=clean_data["min_land_size"],
-            price_per_acre=clean_data["price_per_acre"],
-            price_per_sqyd=clean_data["price_per_sqyd"],
-            type_of_ownership=clean_data["type_of_ownership"],
-            # multiple_properties=clean_data["multiple_properties"],
-            location=clean_data["location"],
-            purpose=clean_data["purpose"],
-            agent_name=session["agent_name"],
-            agent_phone=session["agent_phone"],
-            agent_role=clean_data["agent_role"],
-            user_id=session["user_id"],
-        )
-        # print(property_data)
-        db.session.add(new_property)
-        db.session.commit()
-        return redirect("/property/dashboard-properties")
-    return render_template("addproptest.html", locations = hyderabad_locations)
-
-@properties.route("/addclientest", methods=["GET", "POST"])
-@login_required
-def add_client2():
-    if request.method == "POST":
-        client_data = dict(request.form)
-        clean_data = validate_data(client_data)
-        new_client = Properties(
-            property_type=clean_data["property_type"],
-            project_name=clean_data["project_name"],
-            city=clean_data["city"],
-            price=clean_data["price"],
-            # max_price=clean_data["max_price"],
-            bedrooms=clean_data["bedrooms"],
-            bathrooms=clean_data["bathrooms"],
-            facing_direction=clean_data["facing_direction"],
-            sqft=clean_data["sqft"],
-            # max_sqft=clean_data["max_sqft"],
-            possession=clean_data["possession"],
-            is_gated=clean_data["is_gated"],
-            land_size=clean_data["land_size"],
-            # max_land_size=clean_data["max_land_size"],
-            plot_size=clean_data["plot_size"],
-            # max_plot_size=clean_data["max_plot_size"],
-            price_per_sqft=clean_data["price_per_sqft"],
-            price_per_acre=clean_data["price_per_acre"],
-            type_of_ownership=clean_data["type_of_ownership"],
-            purpose=clean_data["purpose"],
-            agent_name=session["agent_name"],
-            agent_phone=session["agent_phone"],
-            agent_role=clean_data["agent_role"],
-            user_id=session["user_id"],
-        )
-        db.session.add(new_client)
-        db.session.commit()
-        return redirect("/property/dashboard-clients")
-    return render_template("addclientest.html")
-
